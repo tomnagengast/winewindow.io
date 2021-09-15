@@ -27,6 +27,11 @@
                 <jet-input id="name" type="text" class="block w-full mt-1" v-model="form.name" autofocus />
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="type" value="Team Type" />
+                <jet-input id="type" type="text" class="block w-full mt-1" v-model="form.type"/>
+                <jet-input-error :message="form.errors.type" class="mt-2" />
+            </div>
         </template>
 
         <template #actions>
@@ -58,6 +63,7 @@
             return {
                 form: this.$inertia.form({
                     name: '',
+                    type: '',
                 })
             }
         },

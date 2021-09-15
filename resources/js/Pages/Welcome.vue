@@ -189,8 +189,6 @@
         props: {
             canLogin: Boolean,
             canRegister: Boolean,
-            laravelVersion: String,
-            phpVersion: String,
         }
     })
 </script>

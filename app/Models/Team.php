@@ -29,6 +29,7 @@ class Team extends JetstreamTeam
     protected $fillable = [
         'name',
         'personal_team',
+        'type',
     ];
 
     /**
@@ -41,4 +42,15 @@ class Team extends JetstreamTeam
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
     ];
+
+    public function bottles()
+    {
+        // should be a winery to check this, or maybe ownedBottles vs followedBottles?
+        return $this->hasMany(Bottle::class);
+    }
+
+    public function collections()
+    {
+        return $this->hasMany(Collection::class);
+    }
 }

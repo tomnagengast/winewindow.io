@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBottlesTable extends Migration
+class CreateCollectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateBottlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bottles', function (Blueprint $table) {
+        Schema::create('collections', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->index();
-            $table->string('varietal');
-            $table->string('vintage');
-            $table->string('description')->nullable();
-            $table->string('rating')->nullable();
+            $table->string('name', 255);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateBottlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bottles');
+        Schema::dropIfExists('collections');
     }
 }

@@ -1,5 +1,19 @@
 # winewindow.io
 
+## Current
+- [x] How can I get the bottles for a winery team to show on the dashboard?
+
+
+Notify followers
+- Followed bottle awards
+- New releases from followed bottle wineries
+
+Collections
+- Event tastings
+- Competition entries
+- New releases
+- Updated tasting notes
+
 ## Tests
 - As a user, I can create a Winery Team
 - As a user, I can create a Cellar Team

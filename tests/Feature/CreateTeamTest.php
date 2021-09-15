@@ -16,9 +16,11 @@ class CreateTeamTest extends TestCase
 
         $response = $this->post('/teams', [
             'name' => 'Test Team',
+            'type' => 'winery',
         ]);
 
         $this->assertCount(2, $user->fresh()->ownedTeams);
         $this->assertEquals('Test Team', $user->fresh()->ownedTeams()->latest('id')->first()->name);
+        $this->assertEquals('winery', $user->fresh()->ownedTeams()->latest('id')->first()->type);
     }
 }

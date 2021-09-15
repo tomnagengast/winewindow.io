@@ -26,6 +26,21 @@ class TeamFactory extends Factory
             'name' => $this->faker->unique()->company(),
             'user_id' => User::factory(),
             'personal_team' => true,
+            'type' => $this->faker->randomElement(['cellar', 'winery'])
         ];
+    }
+
+    public function asWinery()
+    {
+        return $this->state(function (array $attributes) {
+            return ['type' => 'winery'];
+        });
+    }
+
+    public function asCellar()
+    {
+        return $this->state(function (array $attributes) {
+            return ['type' => 'cellar'];
+        });
     }
 }
