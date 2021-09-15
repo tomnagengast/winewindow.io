@@ -10,7 +10,10 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div v-for="bottle in $page.props.collection.bottles">
-                        <bottle :bottle="bottle"/>
+                        <a :href="route('bottles.show', bottle.id)">
+                            {{ bottle.vintage }} {{ bottle.varietal }}
+                            <div>{{ bottle.description }}</div>
+                        </a>
                     </div>
 
                     <div class="flex">

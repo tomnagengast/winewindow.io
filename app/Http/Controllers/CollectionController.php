@@ -14,7 +14,6 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        // $collections->bottles->pluck('name');
         return Inertia::render('Collections/Index', [
             'collections' => auth()->user()->currentTeam->collections->load('bottles'),
         ]);

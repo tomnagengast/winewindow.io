@@ -1,3 +1,24 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.rating-1 {
+    @apply bg-purple-500 text-white;
+}
+
+.rating-2 {
+    @apply bg-blue-500 text-white;
+}
+
+.rating-3 {
+    @apply bg-green-500 text-white;
+}
+
+.rating-4 {
+    @apply bg-yellow-500 text-white;
+}
+
+.rating-5 {
+    @apply bg-red-500 text-white;
+}

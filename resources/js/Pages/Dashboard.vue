@@ -6,11 +6,9 @@
             </h2>
         </template>
 
-
-        <div class="py-12">
-
-            <div class="overflow-x-scroll max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="mx-auto bg-white">
+        <div class="py-12 flex flex-col">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b bg-white border-gray-200 sm:rounded-lg">
                     <table class="table-auto">
                         <thead>
                         <tr>
@@ -22,30 +20,26 @@
                         <tr v-for="(val, key) in chart.body">
                             <th class="">{{ key }}</th>
                             <td v-for="(v, k) in val">
-                                    <span v-for="(data, rating) in v">
-                                        <em v-if="data.id === '#'" class="rating-na">{{ rating }}</em>
-                                        <span v-else>
-                                            <a :href="route('bottles.show', data.id)">
-<!--                                               data-hint='@{{id.bottle}} \u000A @{{id.key}}'-->
-                                                <strong class="rating-{{ rating }}">{{ rating }}</strong>
-                                            </a>
-                                        </span>
+                                <span v-for="(data, rating) in v">
+                                    <span v-if="data.id === '#'" >
+                                        <div :class="'rating-' + rating + ' flex items-center justify-center'">
+                                            <em class="opacity-50">–</em>
+                                        </div>
                                     </span>
+                                    <span v-else>
+                                        <a :href="route('bottles.show', data.id)">
+                                        <div :class="'rating-' + rating + ' flex items-center justify-center'">
+                                                <strong>{{ rating }}</strong>
+                                        </div>
+                                    </a>
+                                    </span>
+                                </span>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-<!--            <div>-->
-<!--                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">-->
-<!--                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">-->
-<!--                        <div v-for="bottle in $page.props.team.bottles">-->
-<!--                            <bottle :bottle="bottle"/>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
     </app-layout>
 </template>

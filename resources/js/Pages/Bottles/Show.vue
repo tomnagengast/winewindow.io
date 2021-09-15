@@ -2,7 +2,7 @@
     <app-layout title="Collections">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight flex">
-                <span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-sm font-bold leading-none text-green-100 bg-green-500 rounded-full">{{ bottle.rating }}</span>
+                <span :class="'inline-flex items-center justify-center px-2 py-1 mr-2 text-sm font-bold leading-none text-green-100 bg-green-500 rounded-full rating-' + bottle.rating">{{ bottle.rating }}</span>
                 {{ bottle.vintage }} {{ bottle.varietal }}
             </h2>
         </template>
