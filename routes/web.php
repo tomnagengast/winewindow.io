@@ -46,7 +46,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $vintages = collect($team->bottles->pluck('vintage')->unique()->sort()->values()->all());
     $varietals = collect($team->bottles->pluck('varietal')->unique()->sort()->values()->all());
     $groups = $team->bottles->groupBy('varietal')->sortkeys();
-
+    $groupsVintages = $team->bottles->groupBy('vintage')->sortkeys();
+//    return $groupsVintages;
 
     $data = $groups->map(function ($groups) use ($vintages) {
         return $vintages->map(function ($vintage) use ($groups) {
@@ -56,14 +57,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
             return setData($nullBottles)->keyBy('rating');
         });
     });
-
-// [
-//   [ { text} ]
-//   []
-//   ...
-// ]
-
-    $dataV2 =
 
     $chart = [
         'header' => $vintages,

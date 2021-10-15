@@ -16,6 +16,7 @@ class CreateBottlesTable extends Migration
         Schema::create('bottles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->index();
+            $table->string('winery');
             $table->string('varietal');
             $table->string('vintage');
             $table->string('description')->nullable();

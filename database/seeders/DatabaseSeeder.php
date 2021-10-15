@@ -28,9 +28,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // default teams
-        Team::factory()->asCellar()->create(['user_id' => $user->id, 'name' => 'Tom\'s Team']);
-        Team::factory()->asWinery()->hasBottles(15)->create(['user_id' => $user->id, 'name' => 'Bajka Wine Company']);
-        $team = Team::factory()->asWinery()->hasBottles(32)->hasCollections(4)->create(['user_id' => $user->id, 'name' => 'Cinquain Cellars']);
+        $cellar = Team::factory()->asCellar()->create(['user_id' => $user->id, 'name' => 'Tom\'s Team']);
+        Team::factory()->asWinery()
+            ->has(Bottle::factory()->count(15)->state(function (array $attributes, Team $team) {
+                return ['winery' => $team->name];
+            }))
+            ->create(['user_id' => $user->id, 'name' => 'Bajka Wine Company']);
+
+        $team = Team::factory()->asWinery()->hasCollections(4)
+            ->has(Bottle::factory()->count(32)->state(function (array $attributes, Team $team) {
+                return ['winery' => $team->name];
+            }))
+            ->create(['user_id' => $user->id, 'name' => 'Cinquain Cellars']);
 
         // default colections
         $team->collections->each(function ($collection, $key) use ($team) {
