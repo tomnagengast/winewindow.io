@@ -9,6 +9,10 @@ class Bottle extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'vintage' => 'integer',
+    ];
+
     public function team()
     {
         return $this->belongsTo(Team::class);
