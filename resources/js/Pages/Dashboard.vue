@@ -27,7 +27,7 @@
                                 <div v-else class="py-1" >
                                     <a :href="route('bottles.show', bottle)">
                                         <div :class="'rounded rating-' + bottle.rating">
-                                                <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
+                                            <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
                                         </div>
                                     </a>
                                 </div>
@@ -49,7 +49,6 @@ import {range, sortedUniq} from "lodash";
 export default defineComponent({
     props: {
         team: Object,
-        chart: Object,
     },
 
     data() {

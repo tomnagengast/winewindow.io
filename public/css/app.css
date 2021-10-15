@@ -1144,15 +1144,16 @@ select {
 .col-span-6 {
 	grid-column: span 6 / span 6;
 }
-.m-10 {
-	margin: 2.5rem;
-}
 .m-4 {
 	margin: 1rem;
 }
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
+}
+.mx-2 {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
 }
 .ml-3 {
 	margin-left: 0.75rem;
@@ -1334,14 +1335,20 @@ select {
 .max-w-6xl {
 	max-width: 72rem;
 }
+.max-w-5xl {
+	max-width: 64rem;
+}
+.max-w-4xl {
+	max-width: 56rem;
+}
+.max-w-2xl {
+	max-width: 42rem;
+}
 .flex-1 {
 	flex: 1 1 0%;
 }
 .flex-shrink-0 {
 	flex-shrink: 0;
-}
-.table-auto {
-	table-layout: auto;
 }
 .origin-top-left {
 	transform-origin: top left;
@@ -1400,9 +1407,6 @@ select {
 .flex-wrap {
 	flex-wrap: wrap;
 }
-.flex-nowrap {
-	flex-wrap: nowrap;
-}
 .items-center {
 	align-items: center;
 }
@@ -1442,24 +1446,15 @@ select {
 .overflow-hidden {
 	overflow: hidden;
 }
-.overflow-scroll {
-	overflow: scroll;
-}
 .overflow-y-auto {
 	overflow-y: auto;
 }
 .overflow-y-hidden {
 	overflow-y: hidden;
 }
-.overflow-x-scroll {
-	overflow-x: scroll;
-}
 .truncate {
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-.whitespace-nowrap {
 	white-space: nowrap;
 }
 .rounded-md {
@@ -1611,8 +1606,11 @@ select {
 .p-4 {
 	padding: 1rem;
 }
-.p-10 {
-	padding: 2.5rem;
+.p-5 {
+	padding: 1.25rem;
+}
+.p-3 {
+	padding: 0.75rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1703,9 +1701,6 @@ select {
 .pt-8 {
 	padding-top: 2rem;
 }
-.pt-10 {
-	padding-top: 2.5rem;
-}
 .text-left {
 	text-align: left;
 }
@@ -1714,9 +1709,6 @@ select {
 }
 .text-right {
 	text-align: right;
-}
-.align-middle {
-	vertical-align: middle;
 }
 .font-sans {
 	font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -2389,6 +2381,10 @@ select {
 
 	.lg\:col-span-4 {
 		grid-column: span 4 / span 4;
+	}
+
+	.lg\:max-w-4xl {
+		max-width: 56rem;
 	}
 
 	.lg\:px-8 {

@@ -19,7 +19,7 @@ class CreateBottlesTable extends Migration
             $table->string('winery');
             $table->string('varietal');
             $table->string('vintage');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('rating')->nullable();
             $table->timestamps();
         });
