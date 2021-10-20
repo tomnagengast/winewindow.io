@@ -39,13 +39,13 @@ class DatabaseSeeder extends Seeder
 
         $csvFile = fopen(base_path('database/data/bajka_bottles.csv'), 'r');
         $firstline = true;
-        while (($data = fgetcsv($csvFile)) !== false) {
+        while (($row = fgetcsv($csvFile)) !== false) {
             if (!$firstline) {
                 Bottle::factory()->for($bajka)
                     ->create([
-                        'varietal' => $data['0'],
-                        'vintage' => $data['1'],
-                        'rating' => $data['2'],
+                        'varietal' => $row[0],
+                        'vintage' => $row[1],
+                        'rating' => $row[2],
                         'winery' => 'Cinquain Cellars'
                     ]);
             }
@@ -64,13 +64,13 @@ class DatabaseSeeder extends Seeder
 
         $csvFile = fopen(base_path('database/data/cinquain_cellars_bottles.csv'), 'r');
         $firstline = true;
-        while (($data = fgetcsv($csvFile)) !== false) {
+        while (($row = fgetcsv($csvFile)) !== false) {
             if (!$firstline) {
                 Bottle::factory()->for($cinquain)
                     ->create([
-                        'varietal' => $data['0'],
-                        'vintage' => $data['1'],
-                        'rating' => $data['2'],
+                        'varietal' => $row[0],
+                        'vintage' => $row[1],
+                        'rating' => $row[2],
                         'winery' => 'Cinquain Cellars'
                     ]);
             }
