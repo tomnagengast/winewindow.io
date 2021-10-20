@@ -9,9 +9,8 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex">
-                <a :href="route('bottles.show', [bottle.team_id, bottle.id])">
-                    <div>{{ bottle.description }}</div>
-                </a>
+                <div>Notes</div>
+                <div>{{ bottle.description }}</div>
             </div>
         </div>
     </app-layout>
