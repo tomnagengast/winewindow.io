@@ -23,7 +23,7 @@ class BottleFactory extends Factory
     {
         return [
             'winery' => $this->faker->company,
-            'vintage' => $this->faker->unique()->year('now'),
+            'vintage' => $this->faker->year('now'), // ->unique()
             'varietal' => $this->faker->randomElement(['Syrah', 'Merlot', 'Cabernet Sauvignon', 'Fiano', 'Chardonnay']),
             'description' => $this->faker->paragraph(4),
             'rating' => $this->faker->numberBetween(1, 5),
