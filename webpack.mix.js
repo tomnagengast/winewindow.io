@@ -16,11 +16,11 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('postcss-import'),
         require('tailwindcss'),
     ])
-    .browserSync('winewindow.io.test')
-    // .browserSync({
-    //     proxy: 'winewindow.io.test',
-    //     open: false,
-    // })
+    // .browserSync('winewindow.io.test')
+    .browserSync({
+        proxy: 'winewindow.io.test',
+        open: false,
+    })
     // .sourceMaps(true, 'source-map')
     .webpackConfig(require('./webpack.config'));
 
