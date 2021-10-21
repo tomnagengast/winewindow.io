@@ -6,30 +6,32 @@
             </h2>
         </template>
 
-        <div class="max-w-7xl mx-auto mt-10 text-center" :style="showDefaultChart ? '' : 'overflow-x: scroll'"> <!-- container -->
-            <div ref="chart" class="inline-block mx-auto bg-white border-b shadow rounded-lg" style="padding: 1em"> <!-- reset for greedy width -->
+        <div class="max-w-7xl mx-auto mt-10 text-center" :style="showDefaultChart ? '' : 'overflow-x: scroll'">
+            <!-- container -->
+            <div ref="chart" class="inline-block mx-auto bg-white border-b shadow rounded-lg" style="padding: 1em">
+                <!-- reset for greedy width -->
                 <div class="flex m-4">
                     <div v-for="(v, header) in chartHeader" class="px-2">
-                        <div class="py-2">{{header}}</div>
+                        <div class="py-2">{{ header }}</div>
                         <div v-for="(varietals, header) in v" class="py-1" style="white-space: nowrap">
-                            <strong class="py-2">{{varietals}}</strong>
+                            <strong class="py-2">{{ varietals }}</strong>
                         </div>
                     </div>
                     <div v-for="col in chartData" class="px-2">
                         <div v-for="(data, header) in col" class="">
-                            <div class="py-2">{{header}}</div>
+                            <div class="py-2">{{ header }}</div>
                             <span v-for="bottle in data">
-                                <div v-if="bottle.id === '#'" class="py-1" >
+                                <div v-if="bottle.id === '#'" class="py-1">
                                     <div :class="'rating-' + bottle.rating">
                                         <em class="opacity-50">–</em>
                                     </div>
                                 </div>
-                                <div v-else class="py-1" >
-                                    <a :href="route('bottles.show', bottle)">
+                                <div v-else class="py-1">
+                                    <Link :href="route('bottles.show', bottle)">
                                         <div :class="'rounded rating-' + bottle.rating">
                                             <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                             </span>
                         </div>
@@ -45,6 +47,7 @@ import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Bottle from '@/Pages/Bottles/Show.vue'
 import {range, sortedUniq} from "lodash";
+import {Link} from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
     props: {
@@ -63,6 +66,7 @@ export default defineComponent({
     components: {
         AppLayout,
         Bottle,
+        Link,
     },
 
     mounted() {
@@ -112,7 +116,7 @@ export default defineComponent({
                 this.chartData.push(obj);
             })
             this.chartHeader = this.chartData.shift();
-            this.$nextTick(function() {
+            this.$nextTick(function () {
                 this.defaultChartWidth = this.$refs.chart.clientWidth;
             })
         },
