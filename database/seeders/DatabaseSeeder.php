@@ -20,28 +20,29 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-         User::factory()->count(50)->create();
+        User::factory()->count(50)->create();
 
         // default user
-        $tom = User::factory()->create([
-            'name' => 'Tom Nagengast',
-            'email' => 'tnagengast@gmail.com'
-        ]);
+        $tom = User::factory()
+            ->withPersonalTeam()
+            ->create([
+                'name' => 'Tom Nagengast',
+                'email' => 'tnagengast@gmail.com'
+            ]);
 
-        // default teams
-        Team::factory()->asCellar()->create(['user_id' => $tom->id, 'name' => 'Tom\'s Team']);
         $bajka = Team::factory()
             ->asWinery()
-//            ->has(Bottle::factory()->count(15)->state(function (array $attributes, Team $team) {
-//                return ['winery' => $team->name];
-//            }))
-            ->create(['user_id' => $tom->id, 'name' => 'Bajka Wine Company']);
+            ->create([
+                'user_id' => $tom->id,
+                'name' => 'Bajka Wine Company'
+            ]);
 
         $csvFile = fopen(base_path('database/data/bajka_bottles.csv'), 'r');
         $firstline = true;
         while (($row = fgetcsv($csvFile)) !== false) {
             if (!$firstline) {
-                Bottle::factory()->for($bajka)
+                Bottle::factory()
+
                     ->create([
                         'varietal' => $row[0],
                         'vintage' => $row[1],
@@ -53,14 +54,15 @@ class DatabaseSeeder extends Seeder
         }
         fclose($csvFile);
 
-
-
-
+        $beth = User::factory()->withPersonalTeam()->create([
+            'name' => 'Beth Nagengast',
+            'email' => 'beth@cinquaincellars.com'
+        ]);
 
         $cinquain = Team::factory()
             ->asWinery()
             ->hasCollections(4)
-            ->create(['user_id' => $tom->id, 'name' => 'Cinquain Cellars']);
+            ->create(['user_id' => $beth->id, 'name' => 'Cinquain Cellars']);
 
         $csvFile = fopen(base_path('database/data/cinquain_cellars_bottles.csv'), 'r');
         $firstline = true;
@@ -78,24 +80,20 @@ class DatabaseSeeder extends Seeder
         }
         fclose($csvFile);
 
-
-        // default colections
         $cinquain->collections->each(function ($collection, $key) use ($cinquain) {
-            $bottleIds = $cinquain->bottles->take(rand(3, 10))->pluck('id');
+            $bottleIds = $cinquain->ownedBottles()->take(rand(3, 10))->pluck('id');
             $collection->bottles()->attach($bottleIds);
         });
 
-        // add cinquain for examples
-        $beth = User::factory()->create([
-            'name' => 'Beth Nagengast',
-            'email' => 'beth@cinquaincellars.com'
-        ]);
-        Team::factory()->asCellar()->create(['user_id' => $beth->id, 'name' => 'Beth\'s Team']);
-        $cinquain->users()->attach(
-            $beth, ['role' => 'admin']
-        );
-        $bajka->users()->attach(
-            $beth, ['role' => 'admin']
-        );
+        $bajka->ownedBottles()->take(2)->get()->each(function ($bottle) use ($tom) {
+            $bottle->followers()->save($tom->currentTeam);
+        });
+
+        $cinquain->ownedBottles()->take(4)->get()->each(function ($bottle) use ($tom) {
+            $bottle->followers()->save($tom->currentTeam);
+        });
+
+        $bajka->users()->attach($beth, ['role' => 'admin']);
+        $cinquain->users()->attach($tom, ['role' => 'admin']);
     }
 }

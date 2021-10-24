@@ -52,6 +52,7 @@ import {Link} from "@inertiajs/inertia-vue3";
 export default defineComponent({
     props: {
         team: Object,
+        bottles: Object,
     },
 
     data() {
@@ -70,6 +71,7 @@ export default defineComponent({
     },
 
     mounted() {
+        console.log(this.team)
         this.$nextTick(() => {
             window.addEventListener('resize', this.onResize);
             this.setChartData()
@@ -99,7 +101,7 @@ export default defineComponent({
 
         setChartData() {
             const nullBottle = {id: '#', rating: "NA", varietal: "NA", vintage: null}
-            const bottles = this.team.bottles;
+            const bottles = this.bottles;
             const vintages = this.getVintages(bottles);
             const varietals = this.getVarietals(bottles);
             this.chartData = [{'Varietals': varietals}];
@@ -107,6 +109,7 @@ export default defineComponent({
                 let col = [];
                 varietals.forEach(varietal => {
                     let b = bottles.filter(bottle => {
+                        // const wineryVarietal = this.isWinery ? bottle.varietal : `{bottle.varietal} {bottle.team.name}`
                         return bottle.vintage === vintage && bottle.varietal === varietal;
                     })
                     col.push(b.length > 0 ? b[0] : nullBottle);
@@ -126,6 +129,9 @@ export default defineComponent({
         showDefaultChart() {
             return this.defaultChartWidth < this.windowWidth;
         },
+        isWinery() {
+            return this.team.type === 'winery'
+        }
     }
 })
 </script>

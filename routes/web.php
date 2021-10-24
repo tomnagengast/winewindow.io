@@ -15,8 +15,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    $team = auth()->user()->currentTeam;
     return Inertia::render('Dashboard', [
-        'team' => auth()->user()->currentTeam->load('bottles')
+        'team' => $team,
+        'bottles' => $team->isWinery()
+            ? $team->ownedBottles()->get()
+            : $team->followedBottles()->get()
     ]);
 })->name('dashboard');
 

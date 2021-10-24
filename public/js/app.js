@@ -21757,7 +21757,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
-    team: Object
+    team: Object,
+    bottles: Object
   },
   data: function data() {
     return {
@@ -21775,6 +21776,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   mounted: function mounted() {
     var _this = this;
 
+    console.log(this.team);
     this.$nextTick(function () {
       window.addEventListener('resize', _this.onResize);
 
@@ -21813,7 +21815,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         varietal: "NA",
         vintage: null
       };
-      var bottles = this.team.bottles;
+      var bottles = this.bottles;
       var vintages = this.getVintages(bottles);
       var varietals = this.getVarietals(bottles);
       this.chartData = [{
@@ -21823,6 +21825,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         var col = [];
         varietals.forEach(function (varietal) {
           var b = bottles.filter(function (bottle) {
+            // const wineryVarietal = this.isWinery ? bottle.varietal : `{bottle.varietal} {bottle.team.name}`
             return bottle.vintage === vintage && bottle.varietal === varietal;
           });
           col.push(b.length > 0 ? b[0] : nullBottle);
@@ -21841,6 +21844,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   computed: {
     showDefaultChart: function showDefaultChart() {
       return this.defaultChartWidth < this.windowWidth;
+    },
+    isWinery: function isWinery() {
+      return this.team.type === 'winery';
     }
   }
 }));

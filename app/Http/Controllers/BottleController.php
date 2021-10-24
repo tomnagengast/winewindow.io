@@ -16,7 +16,9 @@ class BottleController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        return Inertia::render('Bottles/Index', [
+            'bottles' => Bottle::all(),
+        ]);
     }
 
     /**
@@ -26,7 +28,7 @@ class BottleController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Bottles/Create');
     }
 
     /**
@@ -36,7 +38,16 @@ class BottleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'quantity' => 'required',
+        ]);
+
+        Bottle::create($request->all());
+
+        return redirect()->route('bottles.index');
     }
 
     /**
@@ -58,7 +69,9 @@ class BottleController extends Controller
      */
     public function edit(Bottle $bottle)
     {
-        //
+        return Inertia::render('Bottles/Edit', [
+            'bottle' => $bottle,
+        ]);
     }
 
     /**
@@ -69,7 +82,16 @@ class BottleController extends Controller
      */
     public function update(Request $request, Bottle $bottle)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'quantity' => 'required',
+        ]);
+
+        $bottle->update($request->all());
+
+        return redirect()->route('bottles.index');
     }
 
     /**
@@ -79,6 +101,20 @@ class BottleController extends Controller
      */
     public function destroy(Bottle $bottle)
     {
-        //
+        $bottle->delete();
+
+        return redirect()->route('bottles.index');
+    }
+
+    /**
+     * Follow the specified resource.
+     *
+     * @param  \App\Models\Bottle  $bottle
+     */
+    public function follow(Bottle $bottle)
+    {
+        $bottle->follow();
+
+        return redirect()->route('bottles.show', $bottle);
     }
 }

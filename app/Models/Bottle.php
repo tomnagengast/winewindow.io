@@ -13,6 +13,8 @@ class Bottle extends Model
         'vintage' => 'integer',
     ];
 
+     protected $with = ['team'];
+
     public function team()
     {
         return $this->belongsTo(Team::class);
@@ -21,5 +23,20 @@ class Bottle extends Model
     public function collections()
     {
         return $this->belongsToMany(Bottle::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(Team::class);
+    }
+
+    public function follow()
+    {
+        return $this->followers()->save(auth()->user()->currentTeam);
+    }
+
+    public function unfollow()
+    {
+        return $this->followers()->detach(auth()->user()->currentTeam);
     }
 }

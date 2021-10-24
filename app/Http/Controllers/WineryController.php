@@ -12,7 +12,7 @@ class WineryController extends Controller
     public function index(Request $request)
     {
         $wineries = Team::query()
-            ->with('bottles')
+            ->with('ownedBottles')
             ->where('type', '=', 'winery')
             ->limit(25)
             ->get();

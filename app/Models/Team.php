@@ -21,6 +21,8 @@ class Team extends JetstreamTeam
         'personal_team' => 'boolean',
     ];
 
+    protected $guarded = [];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -43,10 +45,19 @@ class Team extends JetstreamTeam
         'deleted' => TeamDeleted::class,
     ];
 
-    public function bottles()
+    public function isWinery()
     {
-        // should be a winery to check this, or maybe ownedBottles vs followedBottles?
+        return $this->type == 'winery';
+    }
+
+    public function ownedBottles()
+    {
         return $this->hasMany(Bottle::class);
+    }
+
+    public function followedBottles()
+    {
+        return $this->belongsToMany(Bottle::class);
     }
 
     public function collections()
