@@ -30,7 +30,9 @@
                                     Wineries
                                 </jet-nav-link>
                                 <ais-instant-search :search-client="searchClient" index-name="teams">
-                                    <ais-search-box></ais-search-box>
+                                    <ais-search-box>
+                                        <input type="text">
+                                    </ais-search-box>
                                     <ais-hits class="absolute">
                                         <template v-slot:item="{ item }">
                                             <h2>{{ item.name }}</h2>
@@ -317,9 +319,10 @@ export default defineComponent({
     data() {
         return {
             showingNavigationDropdown: false,
+
             searchClient: algoliasearch(
                 'YSXU5Z8F6N',
-                '' // See .env
+                '1f88afcb9483681a37cab9d8155ca034'
             ),
         }
     },
