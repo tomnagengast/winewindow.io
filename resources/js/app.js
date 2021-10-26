@@ -3,6 +3,7 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
+import InstantSearch from 'vue-instantsearch/vue3/es';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -10,10 +11,13 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}.vue`),
     setup({ el, app, props, plugin }) {
-        return createApp({ render: () => h(app, props) })
+        const newApp = createApp({ render: () => h(app, props) });
+        newApp.use(InstantSearch);
+        newApp
             .use(plugin)
             .mixin({ methods: { route } })
             .mount(el);
+        return newApp;
     },
 });
 
