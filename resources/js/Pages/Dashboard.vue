@@ -1,14 +1,14 @@
 <template>
     <app-layout title="Dashboard">
         <template #header>
-            <div class="flex justify-between content-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <div class="flex justify-between items-center">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight py-2">
                     Dashboard
                 </h2>
-                <div class="relative inline-block text-left">
+                <div class="relative inline-block text-left" v-if="!isWinery">
                     <div>
                         <button type="button" @click="updateSort" v-click-away="away"
-                                class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                                class="inline-flex justify-center w-full rounded-md bg-gray-200 py-2 px-4 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-300"
                                 id="menu-button" aria-expanded="true" aria-haspopup="true">
                             {{ sortByWinery ? 'Sort by Winery' : 'Sort by Varietal' }}
                             <!-- Heroicon name: solid/chevron-down -->
@@ -49,7 +49,7 @@
                 <div class="flex m-4">
                     <div v-for="(v, header) in chartHeader" class="px-2">
                         <div class="py-2">{{ header }}</div>
-                        <div v-for="varietal in v.detail" class="text-left" style="white-space: nowrap">
+                        <div v-for="varietal in v" class="text-left" style="white-space: nowrap">
                             <div class="py-1">
                                 <div><strong>{{ varietal.varietal }}</strong></div>
                                 <div class="text-xs" v-if="!isWinery">{{ varietal.winery }}</div>
@@ -77,7 +77,6 @@
                     </div>
                 </div>
             </div>
-            <div>{{bottleList}}</div>
         </div>
     </app-layout>
 </template>
@@ -102,7 +101,6 @@ export default defineComponent({
         return {
             windowWidth: window.innerWidth,
             defaultChartWidth: null,
-            chartData: null,
             chartHeader: null,
             sortByWinery: true,
             showSortDropdown: false,
@@ -116,9 +114,9 @@ export default defineComponent({
     },
 
     mounted() {
-        this.setChartData()
         this.$nextTick(() => {
             window.addEventListener('resize', this.onResize);
+            this.defaultChartWidth = this.$refs.chart.clientWidth;
         })
     },
 
@@ -138,57 +136,6 @@ export default defineComponent({
         updateSort() {
             this.showSortDropdown = !this.showSortDropdown
         },
-
-        getVintages() {
-            const vintages = [...new Set(this.bottles.map((bottle) => (bottle.vintage)))];
-            return sortedUniq(vintages.sort((a, b) => a - b))
-        },
-
-        getVarietals() {
-            const varietals = this.sortByWinery
-                ? [...new Set(this.bottles.map((bottle) => (`${bottle.team.name} ${bottle.varietal}`)))]
-                : [...new Set(this.bottles.map((bottle) => (`${bottle.varietal} ${bottle.team.name}`)))];
-            const sorted = sortedUniq(varietals.sort());
-
-            const detail = this.bottles.map(bottle => {
-                sorted.filter(item => {
-                    return item === this.sortByWinery
-                        ? `${bottle.team.name} ${bottle.varietal}`
-                        : `${bottle.varietal} ${bottle.team.name}`;
-                })
-                return {'winery': bottle.team.name, 'varietal': bottle.varietal}
-            })
-            return {
-                'names': sorted,
-                'detail': [...new Set(detail.map((object) => JSON.stringify(object)))]
-                    .map((string) => JSON.parse(string))
-            };
-        },
-
-        setChartData() {
-            const nullBottle = {id: '#', rating: "NA", varietal: "NA", vintage: null}
-            const vintages = this.getVintages();
-            const varietals = this.getVarietals();
-            this.chartHeader = {'Varietals': varietals};
-            this.chartData = [];
-            vintages.forEach(vintage => {
-                let col = [];
-                varietals.names.forEach(varietal => {
-                    let b = this.bottles.filter(bottle => {
-                        return this.sortByWinery
-                            ? bottle.vintage === vintage && `${bottle.team.name} ${bottle.varietal}` === varietal
-                            : bottle.vintage === vintage && `${bottle.varietal} ${bottle.team.name}` === varietal;
-                    })
-                    col.push(b.length > 0 ? b[0] : nullBottle);
-                })
-                let obj = {}
-                obj[vintage] = col
-                this.chartData.push(obj);
-            })
-            this.$nextTick(function () {
-                this.defaultChartWidth = this.$refs.chart.clientWidth;
-            })
-        },
     },
 
     computed: {
@@ -202,7 +149,41 @@ export default defineComponent({
 
         bottleList() {
             return this.bottles.slice(0, 4);
-        }
+        },
+
+        vintages() {
+            const vintages = [...new Set(this.bottles.map(bottle => bottle.vintage))];
+            return sortedUniq(vintages.sort((a, b) => a - b))
+        },
+
+        varietals() {
+            let first = this.sortByWinery ? 'winery' : 'varietal'
+            let second = this.sortByWinery ? 'winery' : 'varietal'
+
+            const bottles = [...new Set(this.bottles.map(bottle => ({'winery': bottle.team.name, 'varietal': bottle.varietal})))]
+            return [...new Set(bottles.map((object) => JSON.stringify(object)))]
+                .map((string) => JSON.parse(string))
+                .sort((a, b) => (a[first] === b[first]) ? b[second] - a[second] : a[first] > b[first] ? 1 : -1)
+        },
+
+        chartData() {
+            const nullBottle = {id: '#', rating: "NA", varietal: "NA", vintage: null}
+            this.chartHeader = {'Varietals': this.varietals};
+            let chartData = [];
+            this.vintages.forEach(vintage => {
+                let col = [];
+                this.varietals.forEach(varietal => {
+                    let b = this.bottles.filter(bottle => {
+                        return bottle.vintage === vintage && bottle.team.name === varietal.winery && bottle.varietal === varietal.varietal
+                    })
+                    col.push(b.length > 0 ? b[0] : nullBottle);
+                })
+                let obj = {}
+                obj[vintage] = col
+                chartData.push(obj);
+            })
+            return chartData;
+        },
     }
 })
 </script>

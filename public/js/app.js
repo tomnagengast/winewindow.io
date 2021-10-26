@@ -21759,7 +21759,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return {
       windowWidth: window.innerWidth,
       defaultChartWidth: null,
-      chartData: null,
       chartHeader: null,
       sortByWinery: true,
       showSortDropdown: false
@@ -21773,9 +21772,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   mounted: function mounted() {
     var _this = this;
 
-    this.setChartData();
     this.$nextTick(function () {
       window.addEventListener('resize', _this.onResize);
+      _this.defaultChartWidth = _this.$refs.chart.clientWidth;
     });
   },
   beforeUnmount: function beforeUnmount() {
@@ -21790,75 +21789,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     updateSort: function updateSort() {
       this.showSortDropdown = !this.showSortDropdown;
-    },
-    getVintages: function getVintages() {
-      var vintages = _toConsumableArray(new Set(this.bottles.map(function (bottle) {
-        return bottle.vintage;
-      })));
-
-      return (0,lodash__WEBPACK_IMPORTED_MODULE_3__.sortedUniq)(vintages.sort(function (a, b) {
-        return a - b;
-      }));
-    },
-    getVarietals: function getVarietals() {
-      var _this2 = this;
-
-      var varietals = this.sortByWinery ? _toConsumableArray(new Set(this.bottles.map(function (bottle) {
-        return "".concat(bottle.team.name, " ").concat(bottle.varietal);
-      }))) : _toConsumableArray(new Set(this.bottles.map(function (bottle) {
-        return "".concat(bottle.varietal, " ").concat(bottle.team.name);
-      })));
-      var sorted = (0,lodash__WEBPACK_IMPORTED_MODULE_3__.sortedUniq)(varietals.sort());
-      var detail = this.bottles.map(function (bottle) {
-        sorted.filter(function (item) {
-          return item === _this2.sortByWinery ? "".concat(bottle.team.name, " ").concat(bottle.varietal) : "".concat(bottle.varietal, " ").concat(bottle.team.name);
-        });
-        return {
-          'winery': bottle.team.name,
-          'varietal': bottle.varietal
-        };
-      });
-      return {
-        'names': sorted,
-        'detail': _toConsumableArray(new Set(detail.map(function (object) {
-          return JSON.stringify(object);
-        }))).map(function (string) {
-          return JSON.parse(string);
-        })
-      };
-    },
-    setChartData: function setChartData() {
-      var _this3 = this;
-
-      var nullBottle = {
-        id: '#',
-        rating: "NA",
-        varietal: "NA",
-        vintage: null
-      };
-      var vintages = this.getVintages();
-      var varietals = this.getVarietals();
-      this.chartHeader = {
-        'Varietals': varietals
-      };
-      this.chartData = [];
-      vintages.forEach(function (vintage) {
-        var col = [];
-        varietals.names.forEach(function (varietal) {
-          var b = _this3.bottles.filter(function (bottle) {
-            return _this3.sortByWinery ? bottle.vintage === vintage && "".concat(bottle.team.name, " ").concat(bottle.varietal) === varietal : bottle.vintage === vintage && "".concat(bottle.varietal, " ").concat(bottle.team.name) === varietal;
-          });
-
-          col.push(b.length > 0 ? b[0] : nullBottle);
-        });
-        var obj = {};
-        obj[vintage] = col;
-
-        _this3.chartData.push(obj);
-      });
-      this.$nextTick(function () {
-        this.defaultChartWidth = this.$refs.chart.clientWidth;
-      });
     }
   },
   computed: {
@@ -21870,6 +21800,64 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     bottleList: function bottleList() {
       return this.bottles.slice(0, 4);
+    },
+    vintages: function vintages() {
+      var vintages = _toConsumableArray(new Set(this.bottles.map(function (bottle) {
+        return bottle.vintage;
+      })));
+
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_3__.sortedUniq)(vintages.sort(function (a, b) {
+        return a - b;
+      }));
+    },
+    varietals: function varietals() {
+      var first = this.sortByWinery ? 'winery' : 'varietal';
+      var second = this.sortByWinery ? 'winery' : 'varietal';
+
+      var bottles = _toConsumableArray(new Set(this.bottles.map(function (bottle) {
+        return {
+          'winery': bottle.team.name,
+          'varietal': bottle.varietal
+        };
+      })));
+
+      return _toConsumableArray(new Set(bottles.map(function (object) {
+        return JSON.stringify(object);
+      }))).map(function (string) {
+        return JSON.parse(string);
+      }).sort(function (a, b) {
+        return a[first] === b[first] ? b[second] - a[second] : a[first] > b[first] ? 1 : -1;
+      });
+    },
+    chartData: function chartData() {
+      var _this2 = this;
+
+      var nullBottle = {
+        id: '#',
+        rating: "NA",
+        varietal: "NA",
+        vintage: null
+      };
+      this.chartHeader = {
+        'Varietals': this.varietals
+      };
+      var chartData = [];
+      this.vintages.forEach(function (vintage) {
+        var col = [];
+
+        _this2.varietals.forEach(function (varietal) {
+          var b = _this2.bottles.filter(function (bottle) {
+            return bottle.vintage === vintage && bottle.team.name === varietal.winery && bottle.varietal === varietal.varietal;
+          });
+
+          col.push(b.length > 0 ? b[0] : nullBottle);
+        });
+
+        var obj = {};
+        obj[vintage] = col;
+        chartData.push(obj);
+      });
+      return chartData;
     }
   }
 }));
@@ -24188,7 +24176,7 @@ var _hoisted_62 = {
   "class": "bg-white shadow"
 };
 var _hoisted_63 = {
-  "class": "max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8"
+  "class": "max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
@@ -26128,16 +26116,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "flex justify-between content-center"
+  "class": "flex justify-between items-center"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
+  "class": "font-semibold text-xl text-gray-800 leading-tight py-2"
 }, " Dashboard ", -1
 /* HOISTED */
 );
 
 var _hoisted_3 = {
+  key: 0,
   "class": "relative inline-block text-left"
 };
 
@@ -26223,12 +26212,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Dashboard"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, !_ctx.isWinery ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         type: "button",
         onClick: _cache[0] || (_cache[0] = function () {
           return _ctx.updateSort && _ctx.updateSort.apply(_ctx, arguments);
         }),
-        "class": "inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50",
+        "class": "inline-flex justify-center w-full rounded-md bg-gray-200 py-2 px-4 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-300",
         id: "menu-button",
         "aria-expanded": "true",
         "aria-haspopup": "true"
@@ -26256,7 +26245,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, "Sort by Varietal")])], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.showSortDropdown]])])])])];
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.showSortDropdown]])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -26265,7 +26254,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" reset for greedy width "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.chartHeader, function (v, header) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(header), 1
         /* TEXT */
-        ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(v.detail, function (varietal) {
+        ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(v, function (varietal) {
           return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(varietal.varietal), 1
           /* TEXT */
           )]), !_ctx.isWinery ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(varietal.winery), 1
@@ -26323,8 +26312,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* UNKEYED_FRAGMENT */
       ))])], 512
       /* NEED_PATCH */
-      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.bottleList), 1
-      /* TEXT */
       )], 4
       /* STYLE */
       )];
