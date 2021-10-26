@@ -12,17 +12,16 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    // .extract() // uncomment vendor.js and manifest.js in app.blade.php
     .vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
     ])
-    // .browserSync('winewindow.io.test')
     .browserSync({
         proxy: 'winewindow.io.test',
         open: false,
     })
+    // .extract() // uncomment vendor.js and manifest.js in app.blade.php
     .sourceMaps(true, 'source-map')
     .webpackConfig(require('./webpack.config'))
     .version();
