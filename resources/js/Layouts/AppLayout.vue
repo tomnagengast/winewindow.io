@@ -29,9 +29,19 @@
                                               :active="route().current('wineries.index')">
                                     Wineries
                                 </jet-nav-link>
+
                                 <ais-instant-search :search-client="searchClient" index-name="teams">
                                     <ais-search-box>
-                                        <input type="text">
+                                        <template v-slot="{ currentRefinement, indices, refine }">
+                                            <input
+                                                type="search"
+                                                placeholder="Search for an winery"
+                                                :showReset="false"
+                                                :value="currentRefinement"
+                                                @input="refine($event.currentTarget.value)"
+                                                class="ais-SearchBox-input rounded"
+                                            />
+                                        </template>
                                     </ais-search-box>
                                     <ais-hits class="absolute">
                                         <template v-slot:item="{ item }">
@@ -299,6 +309,7 @@ import JetNavLink from '@/Jetstream/NavLink.vue'
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
 import {Head, Link} from '@inertiajs/inertia-vue3';
 import algoliasearch from 'algoliasearch/lite';
+// import { AisInstantSearch, AisSearchBox } from 'vue-instantsearch';
 
 export default defineComponent({
     props: {
@@ -314,6 +325,8 @@ export default defineComponent({
         JetNavLink,
         JetResponsiveNavLink,
         Link,
+        // AisInstantSearch,
+        // AisSearchBox,
     },
 
     data() {

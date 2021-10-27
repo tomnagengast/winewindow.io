@@ -26669,6 +26669,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // import { AisInstantSearch, AisSearchBox } from 'vue-instantsearch';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
@@ -26682,7 +26683,9 @@ __webpack_require__.r(__webpack_exports__);
     JetDropdownLink: _Jetstream_DropdownLink_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     JetNavLink: _Jetstream_NavLink_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     JetResponsiveNavLink: _Jetstream_ResponsiveNavLink_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__.Link
+    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_7__.Link // AisInstantSearch,
+    // AisSearchBox,
+
   },
   data: function data() {
     return {
@@ -29629,12 +29632,7 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Wineries ");
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text"
-}, null, -1
-/* HOISTED */
-);
-
+var _hoisted_10 = ["value", "onInput"];
 var _hoisted_11 = {
   "class": "hidden sm:flex sm:items-center sm:ml-6"
 };
@@ -29927,8 +29925,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ais_search_box, null, {
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_10];
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
+          var currentRefinement = _ref.currentRefinement,
+              indices = _ref.indices,
+              refine = _ref.refine;
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+            type: "search",
+            placeholder: "Search for an winery",
+            showReset: false,
+            value: currentRefinement,
+            onInput: function onInput($event) {
+              return refine($event.currentTarget.value);
+            },
+            "class": "ais-SearchBox-input rounded"
+          }, null, 40
+          /* PROPS, HYDRATE_EVENTS */
+          , _hoisted_10)];
         }),
         _: 1
         /* STABLE */
@@ -29936,8 +29948,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ais_hits, {
         "class": "absolute"
       }, {
-        item: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
-          var item = _ref.item;
+        item: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref2) {
+          var item = _ref2.item;
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1
           /* TEXT */
           )];
@@ -34451,18 +34463,15 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
         app = _ref.app,
         props = _ref.props,
         plugin = _ref.plugin;
-    var newApp = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(app, props);
       }
-    });
-    newApp.use(vue_instantsearch_vue3_es__WEBPACK_IMPORTED_MODULE_3__["default"]);
-    newApp.use(plugin).mixin({
+    }).use(vue_instantsearch_vue3_es__WEBPACK_IMPORTED_MODULE_3__["default"]).use(plugin).mixin({
       methods: {
         route: route
       }
     }).mount(el);
-    return newApp;
   }
 });
 _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__.InertiaProgress.init({

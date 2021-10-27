@@ -11,13 +11,11 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}.vue`),
     setup({ el, app, props, plugin }) {
-        const newApp = createApp({ render: () => h(app, props) });
-        newApp.use(InstantSearch);
-        newApp
+        return createApp({ render: () => h(app, props) })
+            .use(InstantSearch)
             .use(plugin)
             .mixin({ methods: { route } })
             .mount(el);
-        return newApp;
     },
 });
 
