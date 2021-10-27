@@ -21,4 +21,10 @@ class WineryController extends Controller
             'wineries' => $wineries,
         ]);
     }
+    public function show(Team $winery)
+    {
+        return Inertia::render('Wineries/Show', [
+            'winery' => $winery,
+        ]);
+    }
 }

@@ -29,7 +29,7 @@ Route::get('bottles/{bottle}', [BottleController::class, 'show'])->name('bottles
 
 // Wineries
 Route::get('wineries', [WineryController::class, 'index'])->name('wineries.index');
-Route::get('wineries/{bottle}', [WineryController::class, 'show'])->name('wineries.show');
+Route::get('wineries/{winery}', [WineryController::class, 'show'])->name('wineries.show');
 
 // Collections
 Route::get('collections', [CollectionController::class, 'index'])->name('collections.index');
