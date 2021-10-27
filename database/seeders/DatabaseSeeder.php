@@ -42,12 +42,12 @@ class DatabaseSeeder extends Seeder
         while (($row = fgetcsv($csvFile)) !== false) {
             if (!$firstline) {
                 Bottle::factory()
-
+                    ->for($bajka)
                     ->create([
                         'varietal' => $row[0],
                         'vintage' => $row[1],
                         'rating' => $row[2],
-                        'winery' => 'Cinquain Cellars'
+                        'winery' => $bajka->name,
                     ]);
             }
             $firstline = false;
@@ -68,12 +68,13 @@ class DatabaseSeeder extends Seeder
         $firstline = true;
         while (($row = fgetcsv($csvFile)) !== false) {
             if (!$firstline) {
-                Bottle::factory()->for($cinquain)
+                Bottle::factory()
+                    ->for($cinquain)
                     ->create([
                         'varietal' => $row[0],
                         'vintage' => $row[1],
                         'rating' => $row[2],
-                        'winery' => 'Cinquain Cellars'
+                        'winery' => $cinquain->name,
                     ]);
             }
             $firstline = false;

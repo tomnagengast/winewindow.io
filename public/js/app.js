@@ -27411,6 +27411,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var vue3_click_away__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue3-click-away */ "./node_modules/vue3-click-away/dist/module.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -27491,8 +27499,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }));
     },
     varietals: function varietals() {
-      var first = this.sortByWinery ? 'winery' : 'varietal';
-      var second = this.sortByWinery ? 'winery' : 'varietal';
+      // TODO need to figure out why this isn't sorty winery > varietals correctly
+      var _ref = !this.isWinery && this.sortByWinery ? ['winery', 'varietal'] : ['varietal', 'winery'],
+          _ref2 = _slicedToArray(_ref, 2),
+          first = _ref2[0],
+          second = _ref2[1];
 
       var bottles = _toConsumableArray(new Set(this.bottles.map(function (bottle) {
         return {
@@ -28461,6 +28472,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
@@ -28468,7 +28481,8 @@ __webpack_require__.r(__webpack_exports__);
     wineries: Object
   },
   components: {
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link
   }
 }));
 
@@ -28487,14 +28501,141 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
-    winery: Object
+    winery: Object,
+    bottles: Object
+  },
+  data: function data() {
+    return {
+      windowWidth: window.innerWidth,
+      defaultChartWidth: null,
+      chartHeader: null
+    };
   },
   components: {
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$nextTick(function () {
+      window.addEventListener('resize', _this.onResize);
+      _this.defaultChartWidth = _this.$refs.chart.clientWidth;
+    });
+  },
+  beforeUnmount: function beforeUnmount() {
+    window.removeEventListener('resize', this.onResize);
+  },
+  methods: {
+    onResize: function onResize() {
+      this.windowWidth = window.innerWidth;
+    },
+    away: function away() {
+      this.showSortDropdown = false;
+    },
+    updateSort: function updateSort() {
+      this.showSortDropdown = !this.showSortDropdown;
+    }
+  },
+  computed: {
+    showDefaultChart: function showDefaultChart() {
+      return this.defaultChartWidth < this.windowWidth;
+    },
+    isWinery: function isWinery() {
+      return true;
+    },
+    bottleList: function bottleList() {
+      return this.bottles.slice(0, 4);
+    },
+    vintages: function vintages() {
+      var vintages = _toConsumableArray(new Set(this.bottles.map(function (bottle) {
+        return bottle.vintage;
+      })));
+
+      return (0,lodash__WEBPACK_IMPORTED_MODULE_3__.sortedUniq)(vintages.sort(function (a, b) {
+        return a - b;
+      }));
+    },
+    varietals: function varietals() {
+      var _ref = !this.isWinery && this.sortByWinery ? ['winery', 'varietal'] : ['varietal', 'winery'],
+          _ref2 = _slicedToArray(_ref, 2),
+          first = _ref2[0],
+          second = _ref2[1];
+
+      var bottles = _toConsumableArray(new Set(this.bottles.map(function (bottle) {
+        return {
+          'winery': bottle.team.name,
+          'varietal': bottle.varietal
+        };
+      })));
+
+      return _toConsumableArray(new Set(bottles.map(function (object) {
+        return JSON.stringify(object);
+      }))).map(function (string) {
+        return JSON.parse(string);
+      }).sort(function (a, b) {
+        return a[first] === b[first] ? b[second] - a[second] : a[first] > b[first] ? 1 : -1;
+      });
+    },
+    chartData: function chartData() {
+      var _this2 = this;
+
+      var nullBottle = {
+        id: '#',
+        rating: "NA",
+        varietal: "NA",
+        vintage: null
+      };
+      this.chartHeader = {
+        'Varietals': this.varietals
+      };
+      var chartData = [];
+      this.vintages.forEach(function (vintage) {
+        var col = [];
+
+        _this2.varietals.forEach(function (varietal) {
+          var b = _this2.bottles.filter(function (bottle) {
+            return bottle.vintage === vintage && bottle.team.name === varietal.winery && bottle.varietal === varietal.varietal;
+          });
+
+          col.push(b.length > 0 ? b[0] : nullBottle);
+        });
+
+        var obj = {};
+        obj[vintage] = col;
+        chartData.push(obj);
+      });
+      return chartData;
+    }
   }
 }));
 
@@ -34450,14 +34591,15 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_2 = {
   "class": "max-w-xl mx-auto mt-4 flex flex-col"
 };
-var _hoisted_3 = ["href"];
-var _hoisted_4 = {
+var _hoisted_3 = {
   "class": "text-2xl"
 };
-var _hoisted_5 = {
+var _hoisted_4 = {
   "class": "text-gray-500 font-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
+
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
@@ -34468,16 +34610,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.wineries, function (winery) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
           href: _ctx.route('wineries.show', winery),
           "class": "max-w-4xl bg-white mb-4 px-4 py-2 rounded shadow"
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(winery.name), 1
-        /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(winery.bottles.length) + " bottles", 1
-        /* TEXT */
-        )], 8
-        /* PROPS */
-        , _hoisted_3);
+        }, {
+          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(winery.name), 1
+            /* TEXT */
+            ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(winery.owned_bottles.length) + " bottles", 1
+            /* TEXT */
+            )];
+          }),
+          _: 2
+          /* DYNAMIC */
+
+        }, 1032
+        /* PROPS, DYNAMIC_SLOTS */
+        , ["href"]);
       }), 256
       /* UNKEYED_FRAGMENT */
       ))])];
@@ -34506,14 +34655,55 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "font-semibold text-xl text-gray-800 leading-tight"
 };
+var _hoisted_2 = {
+  ref: "chart",
+  "class": "inline-block mx-auto bg-white border-b shadow rounded-lg",
+  style: {
+    "padding": "1em"
+  }
+};
+var _hoisted_3 = {
+  "class": "flex m-4"
+};
+var _hoisted_4 = {
+  "class": "px-2"
+};
+var _hoisted_5 = {
+  "class": "py-2"
+};
+var _hoisted_6 = {
+  "class": "text-left",
+  style: {
+    "white-space": "nowrap"
+  }
+};
+var _hoisted_7 = {
+  "class": "py-1"
+};
+var _hoisted_8 = {
+  key: 0,
+  "class": "text-xs"
+};
+var _hoisted_9 = {
+  "class": "px-2"
+};
+var _hoisted_10 = {
+  "class": ""
+};
+var _hoisted_11 = {
+  "class": "py-2"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "max-w-xl mx-auto mt-4 flex flex-col"
-}, " Aging Chart ", -1
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", {
+  "class": "opacity-50"
+}, "–", -1
 /* HOISTED */
 );
 
+var _hoisted_13 = [_hoisted_12];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_Link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Link");
+
   var _component_app_layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("app-layout");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_app_layout, {
@@ -34525,7 +34715,73 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_2];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+        "class": "max-w-7xl mx-auto mt-10 text-center",
+        style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)(_ctx.showDefaultChart ? '' : 'overflow-x: scroll')
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" container "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" reset for greedy width "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.chartHeader, function (v, header) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(header), 1
+        /* TEXT */
+        ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(v, function (varietal) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(varietal.varietal), 1
+          /* TEXT */
+          )]), !_ctx.isWinery ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(varietal.winery), 1
+          /* TEXT */
+          )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+        }), 256
+        /* UNKEYED_FRAGMENT */
+        ))]);
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.chartData, function (col) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(col, function (data, header) {
+          return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(header), 1
+          /* TEXT */
+          ), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(data, function (bottle) {
+            return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", null, [bottle.id === '#' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+              key: 0,
+              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(_ctx.isWinery ? 'py-1' : 'py-3')
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('rating-' + bottle.rating)
+            }, _hoisted_13, 2
+            /* CLASS */
+            )], 2
+            /* CLASS */
+            )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+              key: 1,
+              "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(_ctx.isWinery ? 'py-1' : 'py-3')
+            }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
+              href: _ctx.route('bottles.show', bottle)
+            }, {
+              "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('rounded rating-' + bottle.rating)
+                }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(bottle.rating ? bottle.rating : bottle), 1
+                /* TEXT */
+                )], 2
+                /* CLASS */
+                )];
+              }),
+              _: 2
+              /* DYNAMIC */
+
+            }, 1032
+            /* PROPS, DYNAMIC_SLOTS */
+            , ["href"])], 2
+            /* CLASS */
+            ))]);
+          }), 256
+          /* UNKEYED_FRAGMENT */
+          ))]);
+        }), 256
+        /* UNKEYED_FRAGMENT */
+        ))]);
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      ))])], 512
+      /* NEED_PATCH */
+      )], 4
+      /* STYLE */
+      )];
     }),
     _: 1
     /* STABLE */

@@ -7,10 +7,10 @@
         </template>
 
         <div class="max-w-xl mx-auto mt-4 flex flex-col">
-            <a :href="route('wineries.show', winery)" v-for="winery in wineries" class="max-w-4xl bg-white mb-4 px-4 py-2 rounded shadow">
+            <Link :href="route('wineries.show', winery)" v-for="winery in wineries" class="max-w-4xl bg-white mb-4 px-4 py-2 rounded shadow">
                 <div class="text-2xl">{{ winery.name }}</div>
-                <div class="text-gray-500 font-bold">{{ winery.bottles.length }} bottles</div>
-            </a>
+                <div class="text-gray-500 font-bold">{{ winery.owned_bottles.length }} bottles</div>
+            </Link>
         </div>
     </app-layout>
 </template>
@@ -18,6 +18,7 @@
 <script>
 import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import {Link} from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
     props: {
@@ -25,6 +26,7 @@ export default defineComponent({
     },
     components: {
         AppLayout,
+        Link,
     },
 })
 </script>

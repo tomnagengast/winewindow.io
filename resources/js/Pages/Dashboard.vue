@@ -157,8 +157,8 @@ export default defineComponent({
         },
 
         varietals() {
-            let first = this.sortByWinery ? 'winery' : 'varietal'
-            let second = this.sortByWinery ? 'winery' : 'varietal'
+            // TODO need to figure out why this isn't sorty winery > varietals correctly
+            let [first, second] = (!this.isWinery && this.sortByWinery) ? ['winery', 'varietal'] : ['varietal', 'winery']
 
             const bottles = [...new Set(this.bottles.map(bottle => ({'winery': bottle.team.name, 'varietal': bottle.varietal})))]
             return [...new Set(bottles.map((object) => JSON.stringify(object)))]

@@ -13,7 +13,7 @@ class WineryController extends Controller
     {
         $wineries = Team::query()
             ->with('ownedBottles')
-            ->where('type', '=', 'winery')
+            ->where('type', 'winery')
             ->limit(25)
             ->get();
 
@@ -25,6 +25,7 @@ class WineryController extends Controller
     {
         return Inertia::render('Wineries/Show', [
             'winery' => $winery,
+            'bottles' => $winery->ownedBottles()->get()
         ]);
     }
 }

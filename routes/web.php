@@ -36,15 +36,5 @@ Route::get('collections', [CollectionController::class, 'index'])->name('collect
 Route::get('collections/{collection}', [CollectionController::class, 'show'])->name('collections.show');
 
 Route::get('debug', function () {
-    return Inertia::render('Collections/Show', [
-        'collection' => $collection->load('bottles'),
-        'qrCode' => QrCode::format('svg')
-            ->size(100)
-            ->style('round')
-            ->eye('circle')
-            ->encoding('UTF-8')
-            ->color(0, 0, 0, 85)
-            ->generate(request()->url())
-            ->toHtml(),
-    ]);
+    //
 });
