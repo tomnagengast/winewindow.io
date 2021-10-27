@@ -41,7 +41,7 @@
                                                     :value="currentRefinement"
                                                     @focus="searchFocus = true"
                                                     @input="refine($event.currentTarget.value)"
-                                                    class="ais-SearchBox-input rounded-full text-sm px-4 bg-gray-100 border-none placeholder-gray-500 focus:placeholder-gray-400"
+                                                    class="ais-SearchBox-input rounded-full text-md px-4 bg-gray-100 border-none placeholder-gray-500 focus:placeholder-gray-400"
                                                 />
                                             </template>
                                         </ais-search-box>
