@@ -1,17 +1,13 @@
 <template>
     <app-layout title="Dashboard">
         <template #header>
-            <div class="flex justify-between items-center">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight py-2">
-                    Dashboard
-                </h2>
+            <div class="flex flex-row-reverse justify-between items-center">
                 <div class="relative inline-block text-left" v-if="!isWinery">
                     <div>
                         <button type="button" @click="updateSort" v-click-away="away"
                                 class="inline-flex justify-center w-full rounded-md bg-gray-200 py-2 px-4 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-300"
                                 id="menu-button" aria-expanded="true" aria-haspopup="true">
                             {{ sortByWinery ? 'Sort by Winery' : 'Sort by Varietal' }}
-                            <!-- Heroicon name: solid/chevron-down -->
                             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                  fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd"
@@ -44,7 +40,7 @@
 
         <div class="max-w-7xl mx-auto mt-10 text-center" :style="showDefaultChart ? '' : 'overflow-x: scroll'">
             <!-- container -->
-            <div ref="chart" class="inline-block mx-auto bg-white border-b shadow rounded-lg" style="padding: 1em">
+            <div ref="chart" class="inline-block mx-auto border border-2 shadow-xl border-gray-100 rounded-lg" style="padding: 1em">
                 <!-- reset for greedy width -->
                 <div class="flex m-4">
                     <div v-for="(v, header) in chartHeader" class="px-2">

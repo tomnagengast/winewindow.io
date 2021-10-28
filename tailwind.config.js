@@ -16,6 +16,14 @@ module.exports = {
                 // sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
+            textColor: {
+                'brand-primary': '#1f2937', // '#292929'
+                'brand-secondary': '#ffffff',
+            },
+            backgroundColor: {
+                'brand-primary': '#1f2937',
+                'brand-secondary': '#ffffff',
+            },
         },
     },
 

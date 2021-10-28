@@ -4,8 +4,8 @@
 
         <jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen">
+            <nav class="">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -22,43 +22,11 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
-                                <!-- <jet-nav-link :href="route('collections.index')" :active="route().current('collections.index')">-->
-                                <!-- Collections-->
-                                <!-- </jet-nav-link>-->
                                 <jet-nav-link :href="route('wineries.index')"
                                     :active="route().current('wineries.index')">
                                     Wineries
                                 </jet-nav-link>
-                                <ais-instant-search :search-client="searchClient" index-name="teams">
-                                    <div class="relative px-4 py-2 rounded-t-lg"
-                                        :class="searchFocus ? 'shadow-xl' : ''"
-                                        v-click-away="away">
-                                        <ais-search-box>
-                                            <template v-slot="{ currentRefinement, indices, refine }">
-                                                <input
-                                                    type="search"
-                                                    placeholder="Search WineWindow"
-                                                    :value="currentRefinement"
-                                                    @focus="searchFocus = true"
-                                                    @input="refine($event.currentTarget.value)"
-                                                    class="ais-SearchBox-input rounded-full text-md px-4 bg-gray-100 border-none placeholder-gray-500 focus:placeholder-gray-400"
-                                                />
-                                            </template>
-                                        </ais-search-box>
-                                        <ais-hits class="absolute mt-2 bg-white rounded-b-lg shadow-xl -ml-4 w-full p-4"
-                                            v-if="searchFocus">
-                                            <template v-slot:item="{ item }">
-                                                <div class="py-1">
-                                                    <Link :href="route('wineries.show', item.id)">
-                                                        <div>{{ item.name }}</div>
-                                                        <div class="text-xs">Paso Robles, CA</div>
-                                                    </Link>
-                                                </div>
-
-                                            </template>
-                                        </ais-hits>
-                                    </div>
-                                </ais-instant-search>
+                                <SearchBar />
                             </div>
                         </div>
 
@@ -295,7 +263,7 @@
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
+            <header class="" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                     <slot name="header"></slot>
                 </div>
@@ -318,12 +286,9 @@ import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
 import JetNavLink from '@/Jetstream/NavLink.vue'
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
 import {Head, Link} from '@inertiajs/inertia-vue3';
-import algoliasearch from 'algoliasearch/lite';
-import {mixin as clickaway} from "vue3-click-away";
+import SearchBar from '@/Components/Search.vue';
 
 export default defineComponent({
-    mixins: [clickaway],
-
     props: {
         title: String,
     },
@@ -337,16 +302,12 @@ export default defineComponent({
         JetNavLink,
         JetResponsiveNavLink,
         Link,
+        SearchBar,
     },
 
     data() {
         return {
             showingNavigationDropdown: false,
-            searchFocus: false,
-            searchClient: algoliasearch(
-                'YSXU5Z8F6N',
-                '1f88afcb9483681a37cab9d8155ca034'
-            ),
         }
     },
 
