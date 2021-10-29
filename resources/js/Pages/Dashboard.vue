@@ -5,7 +5,7 @@
         <div class="flex flex-col items-center">
             <div class="mb-6 text-center">
                 <div class="font-black text-4xl text-gray-800">{{ team.name }}</div>
-                <div class="font-bold text-gray-500">{{ bottles.length }} bottles</div>
+                <div class="font-bold text-gray-500">{{ bottles.length }} bottles over {{ vintages.length }} vintages</div>
             </div>
             <div>
                 <div class="flex flex-row-reverse justify-between items-center">
