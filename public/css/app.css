@@ -1158,6 +1158,14 @@ select {
 	margin-left: -1rem;
 	margin-right: -1rem;
 }
+.my-2 {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+.my-6 {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
 .ml-3 {
 	margin-left: 0.75rem;
 }
@@ -1244,6 +1252,15 @@ select {
 }
 .mb-8 {
 	margin-bottom: 2rem;
+}
+.mt-24 {
+	margin-top: 6rem;
+}
+.mb-2 {
+	margin-bottom: 0.5rem;
+}
+.-mt-2 {
+	margin-top: -0.5rem;
 }
 .block {
 	display: block;
@@ -1368,6 +1385,12 @@ select {
 .max-w-4xl {
 	max-width: 56rem;
 }
+.max-w-3xl {
+	max-width: 48rem;
+}
+.max-w-2xl {
+	max-width: 42rem;
+}
 .flex-1 {
 	flex: 1 1 0%;
 }
@@ -1376,6 +1399,12 @@ select {
 }
 .flex-shrink-0 {
 	flex-shrink: 0;
+}
+.flex-grow {
+	flex-grow: 1;
+}
+.flex-grow-0 {
+	flex-grow: 0;
 }
 .origin-top-left {
 	transform-origin: top left;
@@ -1495,6 +1524,11 @@ select {
 	--tw-space-y-reverse: 0;
 	margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-y-reverse: 0;
+	margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+	margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 .overflow-hidden {
 	overflow: hidden;
@@ -1656,6 +1690,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(16, 185, 129, var(--tw-bg-opacity));
 }
+.bg-red-300 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(252, 165, 165, var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
 }
@@ -1736,6 +1774,18 @@ select {
 .py-10 {
 	padding-top: 2.5rem;
 	padding-bottom: 2.5rem;
+}
+.px-8 {
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+.px-10 {
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
+}
+.px-12 {
+	padding-left: 3rem;
+	padding-right: 3rem;
 }
 .pt-6 {
 	padding-top: 1.5rem;

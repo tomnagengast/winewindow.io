@@ -179,6 +179,9 @@
                         <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :href="route('wineries.index')" :active="route().current('wineries.index')">
+                            Wineries
+                        </jet-responsive-nav-link>
                     </div>
 
                     <!-- Responsive Settings Options -->
