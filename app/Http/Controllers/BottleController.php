@@ -39,10 +39,10 @@ class BottleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'varietal' => 'required',
+            'vintage' => 'required',
+            'rating' => 'required',
             'description' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
         ]);
 
         Bottle::create($request->all());
@@ -84,15 +84,24 @@ class BottleController extends Controller
     public function update(Request $request, Bottle $bottle)
     {
         $request->validate([
-            'name' => 'required',
+            'varietal' => 'required',
+            'vintage' => 'required',
+            'rating' => 'required',
             'description' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
         ]);
 
-        $bottle->update($request->all());
+//        if ($bottle->rating != $request->rating) {
+//            dd('rating has changed');
+//        }
 
-        return redirect()->route('bottles.index');
+        $bottle->update([
+            'varietal' => $request['varietal'],
+            'vintage' => $request['vintage'],
+            'rating' => $request['rating'],
+            'description' => $request['description'],
+        ]);
+
+        return redirect()->route('bottles.show', $bottle->id);
     }
 
     /**

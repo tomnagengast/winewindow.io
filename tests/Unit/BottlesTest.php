@@ -20,3 +20,7 @@ it('can be followed and unfollowed', function () {
     expect($this->user->currentTeam->followedBottles()->count())
         ->toBe(0);
 });
+
+it('a user is notified when a bottle they follow changes rating', function () {
+    // https://laracasts.com/series/lets-build-a-forum-with-laravel/episodes/56
+})->skip();

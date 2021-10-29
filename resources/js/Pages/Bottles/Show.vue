@@ -27,6 +27,13 @@
                 </div>
             </Link>
             </div>
+            <div v-else>
+                <Link as="button" type="button" :href="route('bottles.edit', bottle.id)">
+                    <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
+                        Edit
+                    </div>
+                </Link>
+            </div>
 
         </div>
         <div class="pt-4 pb-12">

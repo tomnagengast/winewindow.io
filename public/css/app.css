@@ -1299,6 +1299,9 @@ select {
 .min-h-screen {
 	min-height: 100vh;
 }
+.min-h-15 {
+	min-height: 15em;
+}
 .w-5 {
 	width: 1.25rem;
 }
@@ -1362,6 +1365,9 @@ select {
 .max-w-6xl {
 	max-width: 72rem;
 }
+.max-w-lg {
+	max-width: 32rem;
+}
 .max-w-md {
 	max-width: 28rem;
 }
@@ -1373,9 +1379,6 @@ select {
 }
 .max-w-4xl {
 	max-width: 56rem;
-}
-.max-w-lg {
-	max-width: 32rem;
 }
 .flex-1 {
 	flex: 1 1 0%;
@@ -1747,13 +1750,13 @@ select {
 	padding-top: 2.5rem;
 	padding-bottom: 2.5rem;
 }
-.px-12 {
-	padding-left: 3rem;
-	padding-right: 3rem;
-}
 .px-8 {
 	padding-left: 2rem;
 	padding-right: 2rem;
+}
+.px-12 {
+	padding-left: 3rem;
+	padding-right: 3rem;
 }
 .pt-6 {
 	padding-top: 1.5rem;
@@ -1793,9 +1796,6 @@ select {
 }
 .pb-12 {
 	padding-bottom: 3rem;
-}
-.pb-8 {
-	padding-bottom: 2rem;
 }
 .text-left {
 	text-align: left;

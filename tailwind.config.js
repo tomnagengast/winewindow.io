@@ -24,6 +24,9 @@ module.exports = {
                 'brand-primary': '#1f2937',
                 'brand-secondary': '#ffffff',
             },
+            minHeight: {
+                '15': '15em',
+            },
         },
     },
 

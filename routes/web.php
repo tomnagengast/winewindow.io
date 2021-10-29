@@ -28,6 +28,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('bottles/{bottle}', [BottleController::class, 'show'])->name('bottles.show');
 Route::post('bottles/{bottle}/follow', [BottleController::class, 'follow'])->name('bottles.follow');
 Route::post('bottles/{bottle}/unfollow', [BottleController::class, 'unfollow'])->name('bottles.unfollow');
+Route::get('bottles/{bottle}/edit', [BottleController::class, 'edit'])->name('bottles.edit');
+Route::post('bottles/{bottle}/update', [BottleController::class, 'update'])->name('bottles.update');
 
 // Wineries
 Route::get('wineries', [WineryController::class, 'index'])->name('wineries.index');
