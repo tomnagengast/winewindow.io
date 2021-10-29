@@ -5,10 +5,30 @@
         <div class="flex flex-col items-center">
             <div class="mb-6 text-center">
                 <div class="font-black text-4xl text-gray-800">{{ team.name }}</div>
-                <div class="font-bold text-gray-500">{{ bottles.length }} bottles over {{ vintages.length }} vintages</div>
+                <div v-if="hasBottles" class="font-bold text-gray-500">{{ bottles.length }} bottles over
+                    {{ vintages.length }} vintages
+                </div>
             </div>
-            <div>
-                <div class="flex flex-row-reverse justify-between items-center">
+            <div class="w-full max-w-lg">
+                <div v-if="! hasBottles" class="text-center">
+                    <div class="font-semibold text-gray-700 pb-4">You're not following any bottles yet!</div>
+                    <div class="pb-4">Here are some wineries you might be interested in</div>
+                    <div class="flex justify-between">
+                        <Link :href="route('wineries.show', 4)">
+                            <div class="border rounded px-8 py-4">
+                                <div>Cinquain Cellars</div>
+                                <div>Paso Robles, California</div>
+                            </div>
+                        </Link>
+                        <Link :href="route('wineries.show', 2)">
+                            <div class="border rounded px-8 py-4">
+                                <div>Bajka Wine Company</div>
+                                <div>Paso Robles, California</div>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+                <div v-if="hasBottles" class="flex flex-row-reverse justify-between items-center">
                     <div class="relative inline-block text-left" v-if="!isWinery">
                         <div>
                             <button type="button" @click="updateSort" v-click-away="away"
@@ -45,7 +65,8 @@
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto mt-10 text-center" :style="showDefaultChart ? '' : 'overflow-x: scroll'">
+        <div v-if="hasBottles" class="max-w-7xl mx-auto mt-10 text-center"
+            :style="showDefaultChart ? '' : 'overflow-x: scroll'">
             <!-- container -->
             <div ref="chart" class="inline-block mx-auto border border-2 shadow-xl border-gray-100 rounded-lg"
                 style="padding: 1em">
@@ -89,9 +110,9 @@
 import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Bottle from '@/Pages/Bottles/Show.vue'
-import {range, sortedUniq} from "lodash";
-import {Link} from "@inertiajs/inertia-vue3";
-import {mixin as clickaway} from "vue3-click-away";
+import {range, sortedUniq} from "lodash"
+import {Link} from "@inertiajs/inertia-vue3"
+import {mixin as clickaway} from "vue3-click-away"
 
 export default defineComponent({
     mixins: [clickaway],
@@ -119,22 +140,22 @@ export default defineComponent({
 
     mounted() {
         this.$nextTick(() => {
-            window.addEventListener('resize', this.onResize);
-            this.defaultChartWidth = this.$refs.chart.clientWidth;
+            window.addEventListener('resize', this.onResize)
+            this.defaultChartWidth = this.$refs.chart.clientWidth
         })
     },
 
     beforeUnmount() {
-        window.removeEventListener('resize', this.onResize);
+        window.removeEventListener('resize', this.onResize)
     },
 
     methods: {
         onResize() {
-            this.windowWidth = window.innerWidth;
+            this.windowWidth = window.innerWidth
         },
 
         away() {
-            this.showSortDropdown = false;
+            this.showSortDropdown = false
         },
 
         updateSort() {
@@ -144,7 +165,7 @@ export default defineComponent({
 
     computed: {
         showDefaultChart() {
-            return this.defaultChartWidth < this.windowWidth;
+            return this.defaultChartWidth < this.windowWidth
         },
 
         isWinery() {
@@ -152,11 +173,15 @@ export default defineComponent({
         },
 
         bottleList() {
-            return this.bottles.slice(0, 4);
+            return this.bottles.slice(0, 4)
+        },
+
+        hasBottles() {
+            return this.bottles.length > 0
         },
 
         vintages() {
-            const vintages = [...new Set(this.bottles.map(bottle => bottle.vintage))];
+            const vintages = [...new Set(this.bottles.map(bottle => bottle.vintage))]
             return sortedUniq(vintages.sort((a, b) => a - b))
         },
 
@@ -175,21 +200,21 @@ export default defineComponent({
 
         chartData() {
             const nullBottle = {id: '#', rating: "NA", varietal: "NA", vintage: null}
-            this.chartHeader = {'Varietals': this.varietals};
-            let chartData = [];
+            this.chartHeader = {'Varietals': this.varietals}
+            let chartData = []
             this.vintages.forEach(vintage => {
                 let col = [];
                 this.varietals.forEach(varietal => {
                     let b = this.bottles.filter(bottle => {
                         return bottle.vintage === vintage && bottle.team.name === varietal.winery && bottle.varietal === varietal.varietal
                     })
-                    col.push(b.length > 0 ? b[0] : nullBottle);
+                    col.push(b.length > 0 ? b[0] : nullBottle)
                 })
                 let obj = {}
                 obj[vintage] = col
-                chartData.push(obj);
+                chartData.push(obj)
             })
-            return chartData;
+            return chartData
         },
     }
 })
