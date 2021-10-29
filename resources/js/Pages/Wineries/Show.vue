@@ -90,8 +90,11 @@ import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import {Link} from "@inertiajs/inertia-vue3";
 import {sortedUniq} from "lodash";
+import {mixin as clickaway} from "vue3-click-away";
 
 export default defineComponent({
+    mixins: [clickaway],
+
     props: {
         winery: Object,
         bottles: Object,

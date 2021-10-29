@@ -27366,11 +27366,11 @@ __webpack_require__.r(__webpack_exports__);
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link
   },
   props: {
-    bottle: Object
+    bottle: Object,
+    following: Object
   },
   data: function data() {
-    return {
-      isFollowing: false
+    return {//
     };
   },
   computed: {
@@ -27384,14 +27384,17 @@ __webpack_require__.r(__webpack_exports__);
       };
       return mappings[this.bottle.rating];
     },
+    isFollowing: function isFollowing() {
+      var bottleIds = this.following.map(function (bottle) {
+        return bottle.id;
+      });
+      return bottleIds.includes(this.bottle.id);
+    },
     ownedByViewer: function ownedByViewer() {
       return this.$page.props.user.current_team.name === this.bottle.team.name;
     }
   },
-  methods: {
-    toggleFollow: function toggleFollow() {
-      this.isFollowing = !this.isFollowing;
-    }
+  methods: {//
   }
 }));
 
@@ -28571,6 +28574,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue3_click_away__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue3-click-away */ "./node_modules/vue3-click-away/dist/module.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -28595,7 +28599,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  mixins: [vue3_click_away__WEBPACK_IMPORTED_MODULE_4__.mixin],
   props: {
     winery: Object,
     bottles: Object
@@ -31997,9 +32003,25 @@ var _hoisted_3 = {
   "class": "font-black text-4xl text-gray-800 pt-2"
 };
 var _hoisted_4 = {
+  key: 0
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4"
+}, " Follow ", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200"
+}, " Following ", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = {
   "class": "pt-4 pb-12"
 };
-var _hoisted_5 = {
+var _hoisted_8 = {
   "class": "max-w-2xl mx-auto sm:px-6 lg:px-8 p-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -32034,16 +32056,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["href"])]), !_ctx.ownedByViewer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      , ["href"])]), !_ctx.ownedByViewer ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [!_ctx.isFollowing ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
         key: 0,
-        onClick: _cache[0] || (_cache[0] = function () {
-          return _ctx.toggleFollow && _ctx.toggleFollow.apply(_ctx, arguments);
-        })
-      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4", _ctx.isFollowing ? 'bg-gray-200' : ''])
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.isFollowing ? 'Following' : 'Follow'), 3
-      /* TEXT, CLASS */
-      )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.bottle.description), 1
+        method: "post",
+        as: "button",
+        type: "button",
+        href: _ctx.route('bottles.follow', _ctx.bottle.id)
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_5];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["href"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
+        key: 1,
+        method: "post",
+        as: "button",
+        type: "button",
+        href: _ctx.route('bottles.unfollow', _ctx.bottle.id)
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_6];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["href"]))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.bottle.description), 1
       /* TEXT */
       )])])];
     }),

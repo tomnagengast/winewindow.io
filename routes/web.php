@@ -26,6 +26,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 // Bottles
 Route::get('bottles/{bottle}', [BottleController::class, 'show'])->name('bottles.show');
+Route::post('bottles/{bottle}/follow', [BottleController::class, 'follow'])->name('bottles.follow');
+Route::post('bottles/{bottle}/unfollow', [BottleController::class, 'unfollow'])->name('bottles.unfollow');
 
 // Wineries
 Route::get('wineries', [WineryController::class, 'index'])->name('wineries.index');

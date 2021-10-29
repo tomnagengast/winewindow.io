@@ -15,12 +15,18 @@
                 </Link>
             </div>
 
-            <button @click="toggleFollow" v-if="! ownedByViewer">
-                <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4"
-                     :class="isFollowing ? 'bg-gray-200' : ''">
-                    {{ isFollowing ? 'Following' : 'Follow' }}
+            <div v-if="! ownedByViewer">
+            <Link method="post" as="button" type="button" :href="route('bottles.follow', bottle.id)" v-if="! isFollowing">
+                <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
+                    Follow
                 </div>
-            </button>
+            </Link>
+            <Link method="post" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
+                <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
+                    Following
+                </div>
+            </Link>
+            </div>
 
         </div>
         <div class="pt-4 pb-12">
@@ -43,10 +49,11 @@ export default defineComponent({
     },
     props: {
         bottle: Object,
+        following: Object,
     },
     data() {
         return {
-            isFollowing: false,
+            //
         }
     },
     computed: {
@@ -60,14 +67,16 @@ export default defineComponent({
             }
             return mappings[this.bottle.rating]
         },
+        isFollowing() {
+            const bottleIds = this.following.map(bottle => bottle.id)
+            return bottleIds.includes(this.bottle.id)
+        },
         ownedByViewer() {
             return this.$page.props.user.current_team.name === this.bottle.team.name
-        }
+        },
     },
     methods: {
-        toggleFollow() {
-            this.isFollowing = ! this.isFollowing
-        }
+        //
     },
 })
 </script>

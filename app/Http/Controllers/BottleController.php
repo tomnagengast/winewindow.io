@@ -59,6 +59,7 @@ class BottleController extends Controller
     {
         return Inertia::render('Bottles/Show', [
             'bottle' => $bottle,
+            'following' => auth()->user()->currentTeam->followedBottles()->get(),
         ]);
     }
 
@@ -114,6 +115,18 @@ class BottleController extends Controller
     public function follow(Bottle $bottle)
     {
         $bottle->follow();
+
+        return redirect()->route('bottles.show', $bottle);
+    }
+
+    /**
+     * Unfollow the specified resource.
+     *
+     * @param  \App\Models\Bottle  $bottle
+     */
+    public function unfollow(Bottle $bottle)
+    {
+        $bottle->unfollow();
 
         return redirect()->route('bottles.show', $bottle);
     }
