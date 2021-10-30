@@ -58,4 +58,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Hardcoding this to use for debugging notifications.
+     */
+    public function routeNotificationForSlack($notification)
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->phone;
+    }
 }

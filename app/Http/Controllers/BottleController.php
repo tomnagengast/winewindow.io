@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\NotifyBottleUpdated;
 use App\Models\Bottle;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -90,9 +91,11 @@ class BottleController extends Controller
             'description' => 'required',
         ]);
 
-//        if ($bottle->rating != $request->rating) {
-//            dd('rating has changed');
-//        }
+        if ($bottle->rating != $request->rating) {
+            // should send a job to notify all following users.
+            NotifyBottleUpdated::dispatch($bottle);
+            dd('rating has changed '.auth()->user()->phone);
+        }
 
         $bottle->update([
             'varietal' => $request['varietal'],
