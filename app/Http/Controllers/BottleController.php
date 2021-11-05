@@ -92,9 +92,7 @@ class BottleController extends Controller
         ]);
 
         if ($bottle->rating != $request->rating) {
-            // should send a job to notify all following users.
             NotifyBottleUpdated::dispatch($bottle);
-            dd('rating has changed '.auth()->user()->phone);
         }
 
         $bottle->update([

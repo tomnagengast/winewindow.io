@@ -20,9 +20,10 @@ class BottleWasUpdated extends Notification
      *
      * @return void
      */
-    public function __construct($bottle)
+    public function __construct($bottle, $user)
     {
         $this->bottle = $bottle;
+        $this->user = $user;
     }
 
     /**
@@ -49,7 +50,7 @@ class BottleWasUpdated extends Notification
     {
         return (new MailMessage)
             ->line('A bottle you follow just updated it\'s rating!')
-            ->action('Got to Bottle on Wine Window', url('/'))
+            ->action('View to Bottle on Wine Window', url('/bottles/'.$this->bottle->id))
             ->line('Thank you for using Wine Window!');
     }
 

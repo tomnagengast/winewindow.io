@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Models\Bottle;
+use App\Notifications\BottleWasUpdated;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,9 +20,9 @@ class NotifyBottleUpdated implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($bottle)
+    public function __construct(Bottle $bottle)
     {
-        $this->bottle = $bottle;
+        $this->teams = $bottle->followers();
     }
 
     /**
@@ -30,6 +32,11 @@ class NotifyBottleUpdated implements ShouldQueue
      */
     public function handle()
     {
-        new \App\Notifications\BottleWasUpdated($bottle, auth()->user());
+        dd($this->teams);
+        $this->teams->each(function ($cellar) {
+            $cellar->allUsers()->each(function ($user) {
+                new BottleWasUpdated($this->bottle, $user);
+            });
+        });
     }
 }
