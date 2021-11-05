@@ -104,7 +104,7 @@ return [
             'sslmode' => 'prefer',
             'sslcert' => env('DB_SSLCERT', 'client.crt'),
             'sslkey' => env('DB_SSLKEY', 'client.key'),
-            'sslrootcert' => preg_replace("/\\n/g", "\n", env('DB_SSLROOTCERT', 'ca.crt')),
+            'sslrootcert' => str_replace('\n', "\n", env('DB_SSLROOTCERT', 'ca.crt')),
         ],
 
     ],
