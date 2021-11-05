@@ -140,8 +140,10 @@ export default defineComponent({
 
     mounted() {
         this.$nextTick(() => {
-            window.addEventListener('resize', this.onResize)
-            this.defaultChartWidth = this.$refs.chart.clientWidth
+            if (this.bottles.length > 0) {
+                window.addEventListener('resize', this.onResize)
+                this.defaultChartWidth = this.$refs.chart.clientWidth
+            }
         })
     },
 

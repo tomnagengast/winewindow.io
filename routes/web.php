@@ -3,6 +3,8 @@
 use App\Http\Controllers\BottleController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\WineryController;
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,6 +18,17 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $team = auth()->user()->currentTeam;
+    // Testing for Cypress
+    if (!$team) {
+        $team = Team::factory()->make([
+            'user_id' => auth()->user()->id,
+            'name' => explode(' ', auth()->user()->name, 2)[0]."'s Team",
+            'personal_team' => true,
+            'type' => 'cellar'
+        ]);
+        auth()->user()->ownedTeams()->save($team);
+        auth()->user()->switchTeam($team);
+    }
     return Inertia::render('Dashboard', [
         'team' => $team,
         'bottles' => $team->isWinery()

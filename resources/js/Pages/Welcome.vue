@@ -12,7 +12,7 @@
 
                 <template v-else>
                     <Link :href="route('login')" class="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
-                        Log in
+                        Log In
                     </Link>
 
                     <Link v-if="canRegister" :href="route('register')" class="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">

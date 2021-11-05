@@ -27594,8 +27594,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var _this = this;
 
     this.$nextTick(function () {
-      window.addEventListener('resize', _this.onResize);
-      _this.defaultChartWidth = _this.$refs.chart.clientWidth;
+      if (_this.bottles.length > 0) {
+        window.addEventListener('resize', _this.onResize);
+        _this.defaultChartWidth = _this.$refs.chart.clientWidth;
+      }
     });
   },
   beforeUnmount: function beforeUnmount() {
@@ -35087,7 +35089,7 @@ var _hoisted_3 = {
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Dashboard ");
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log in ");
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log In ");
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Register ");
 
