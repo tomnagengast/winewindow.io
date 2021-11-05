@@ -22,6 +22,7 @@
         "laravel/scout": "^9.3",
         "laravel/slack-notification-channel": "^2.3",
         "laravel/tinker": "^2.5",
+        "nbj/cockroachdb-laravel": "dev-master",
         "nexmo/laravel": "^2.4",
         "simplesoftwareio/simple-qrcode": "~4",
         "tightenco/ziggy": "^1.0"

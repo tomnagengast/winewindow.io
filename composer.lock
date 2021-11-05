@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1074d73af01ad504a41c8c7dec1df97d",
+    "content-hash": "b41ad311fe5c04729d1f3a6344593e6d",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3177,6 +3177,60 @@
                 }
             ],
             "time": "2021-07-23T07:42:52+00:00"
+        },
+        {
+            "name": "nbj/cockroachdb-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nbj/cockroachdb-laravel.git",
+                "reference": "26061d7775281328911ab855b6db3f691b07559e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nbj/cockroachdb-laravel/zipball/26061d7775281328911ab855b6db3f691b07559e",
+                "reference": "26061d7775281328911ab855b6db3f691b07559e",
+                "shasum": ""
+            },
+            "require-dev": {
+                "illuminate/database": "^8.32",
+                "illuminate/support": "^8.32"
+            },
+            "default-branch": true,
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nbj\\Cockroach\\CockroachServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nbj\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nikolaj Boel Jensen",
+                    "email": "nbj@cego.dk"
+                }
+            ],
+            "description": "CockroachDB driver for Laravel 8",
+            "keywords": [
+                "cockroach",
+                "cockroachdb",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/nbj/cockroachdb-laravel/issues",
+                "source": "https://github.com/nbj/cockroachdb-laravel/tree/master"
+            },
+            "time": "2021-07-05T07:36:57+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -10109,7 +10163,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "nbj/cockroachdb-laravel": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

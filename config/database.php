@@ -91,6 +91,22 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'cockroach' => [
+            'driver' => 'cockroach',
+            'host' => env('DB_HOST', 'HOSTNAME-OF-COCKROACH-SERVER'),
+            'port' => env('DB_PORT', '26257'),
+            'database' => env('DB_DATABASE', 'DATABASE-NAME'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+            'sslcert' => env('DB_SSLCERT', 'client.crt'),
+            'sslkey' => env('DB_SSLKEY', 'client.key'),
+            'sslrootcert' => preg_replace("/\\n/g", "\n", env('DB_SSLROOTCERT', 'ca.crt')),
+        ],
+
     ],
 
     /*
