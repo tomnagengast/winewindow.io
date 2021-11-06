@@ -60,7 +60,8 @@ class BottleController extends Controller
     {
         return Inertia::render('Bottles/Show', [
             'bottle' => $bottle,
-            'following' => auth()->user()->currentTeam->followedBottles()->get(),
+            'following' => auth()->user() ?
+                auth()->user()->currentTeam->followedBottles()->get() : null,
         ]);
     }
 

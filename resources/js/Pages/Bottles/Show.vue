@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Collections">
+    <app-layout title="Bottle">
         <template #header></template>
 
 
@@ -16,20 +16,24 @@
             </div>
 
             <div v-if="! ownedByViewer">
-            <Link method="post" as="button" type="button" :href="route('bottles.follow', bottle.id)" v-if="! isFollowing">
-                <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
-                    Follow
-                </div>
-            </Link>
-            <Link method="post" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
-                <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
-                    Following
-                </div>
-            </Link>
+                <Link method="post" as="button" type="button" :href="route('bottles.follow', bottle.id)"
+                    v-if="! isFollowing">
+                    <div
+                        class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
+                        Follow
+                    </div>
+                </Link>
+                <Link method="post" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
+                    <div
+                        class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
+                        Following
+                    </div>
+                </Link>
             </div>
             <div v-else>
                 <Link as="button" type="button" :href="route('bottles.edit', bottle.id)">
-                    <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
+                    <div
+                        class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
                         Edit
                     </div>
                 </Link>
@@ -79,7 +83,9 @@ export default defineComponent({
             return bottleIds.includes(this.bottle.id)
         },
         ownedByViewer() {
-            return this.$page.props.user.current_team.name === this.bottle.team.name
+            return true
+            return this.$page.props.user &&
+                (this.$page.props.user.current_team.name === this.bottle.team.name)
         },
     },
     methods: {

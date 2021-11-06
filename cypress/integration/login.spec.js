@@ -6,15 +6,12 @@ describe('Login', function () {
 
         cy.refreshDatabase().seed('CypressUserSeeder')
 
-        // cy.create('App\\Models\\User', {
-        //     name: 'JohnDoe',
-        //     email: 'john@example.com',
-        // })
-
     })
 
     beforeEach(() => {
+
         cy.visit('/').contains('a', 'Log In').click()
+
     })
 
     context('with valid credentials', () => {
@@ -24,7 +21,7 @@ describe('Login', function () {
             cy.get('#password').type('password')
             cy.contains('button', 'Log in').click()
 
-            cy.contains("John Doe's Team").url().should('include', '/dashboard')
+            cy.url().should('include', '/dashboard')
         })
 
     })
@@ -33,8 +30,8 @@ describe('Login', function () {
 
         // handled by html form
         // enable with inertial form validation on blur
-        it('requires a valid email address')
-        it('requires a password')
+        // it('requires a valid email address')
+        // it('requires a password')
 
         it('requires an existing email and password', () => {
             cy.get('#email').type('foobar@example.com')

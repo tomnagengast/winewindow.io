@@ -493,7 +493,7 @@
   "bottles.follow": {
     "name": "bottles.follow",
     "domain": null,
-    "action": "App\\Http\\Controllers\\BottleController@follow",
+    "action": "\\App\\Http\\Controllers\\BottleController@follow",
     "uri": "bottles/{bottle}/follow",
     "method": [
       "POST"
@@ -502,7 +502,7 @@
   "bottles.unfollow": {
     "name": "bottles.unfollow",
     "domain": null,
-    "action": "App\\Http\\Controllers\\BottleController@unfollow",
+    "action": "\\App\\Http\\Controllers\\BottleController@unfollow",
     "uri": "bottles/{bottle}/unfollow",
     "method": [
       "POST"
@@ -511,7 +511,7 @@
   "bottles.edit": {
     "name": "bottles.edit",
     "domain": null,
-    "action": "App\\Http\\Controllers\\BottleController@edit",
+    "action": "\\App\\Http\\Controllers\\BottleController@edit",
     "uri": "bottles/{bottle}/edit",
     "method": [
       "GET",
@@ -521,7 +521,7 @@
   "bottles.update": {
     "name": "bottles.update",
     "domain": null,
-    "action": "App\\Http\\Controllers\\BottleController@update",
+    "action": "\\App\\Http\\Controllers\\BottleController@update",
     "uri": "bottles/{bottle}/update",
     "method": [
       "POST"
