@@ -14,7 +14,11 @@ describe('Bottle', function () {
 
         context('as a cellar', () => {
 
-            it('shows a sort dropdown')
+            it('shows a sort dropdown', () => {
+                cy.login()
+                    .visit('/dashboard')
+                    .should('contain')
+            })
 
             context('with no bottles', () => {
                 it('dispays suggested wineries')

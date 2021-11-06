@@ -1,5 +1,6 @@
 describe('Bottle', function () {
     it('can be created')
+    it('can be only be created by a winery')
     it('can be shown')
     it('can be updated')
     it('can be deleted')
