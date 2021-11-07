@@ -1756,13 +1756,13 @@ select {
 	padding-top: 2.5rem;
 	padding-bottom: 2.5rem;
 }
-.px-8 {
-	padding-left: 2rem;
-	padding-right: 2rem;
-}
 .px-12 {
 	padding-left: 3rem;
 	padding-right: 3rem;
+}
+.px-8 {
+	padding-left: 2rem;
+	padding-right: 2rem;
 }
 .pt-6 {
 	padding-top: 1.5rem;
@@ -2610,10 +2610,6 @@ select {
 
 	.md\:block {
 		display: block;
-	}
-
-	.md\:flex {
-		display: flex;
 	}
 
 	.md\:grid {

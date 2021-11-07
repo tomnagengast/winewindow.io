@@ -18,9 +18,11 @@ class CypressWineryWithBottleSeeder extends Seeder
     {
         User::factory()->withPersonalTeam()->create(['email' => 'cellar@example.com']);
         $user = User::factory()->withPersonalTeam()->create(['email' => 'winery@example.com']);
-        $winery = Team::factory()->asWinery()->create(['user_id' => $user->id]);
-        Bottle::factory()->count(10)->for($winery)->create();
-        Bottle::factory()->for($winery)->create(['vintage' => '1900', 'varietal' => 'A Super blend']);
-        $user->switchTeam($winery);
+        $winery1 = Team::factory()->asWinery()->create(['user_id' => $user->id]);
+        Bottle::factory()->count(10)->for($winery1)->create();
+        $winery2 = Team::factory()->asWinery()->create(['user_id' => $user->id]);
+        Bottle::factory()->count(10)->for($winery2)->create();
+        Bottle::factory()->for($winery2)->create(['vintage' => '1900', 'varietal' => 'Super blend']);
+        $user->switchTeam($winery2);
     }
 }

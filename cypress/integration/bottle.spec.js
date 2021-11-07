@@ -58,9 +58,11 @@ describe('Bottle', function () {
             cy.get('body').should('not.contain', 'Super blend')
         })
 
-        it('can not be followed by its owner', () => {
-            cy.visit('/dashboard').get('.active-bottle').first().click()
-                .get('body').should('not.contain', 'Follow')
+        it('can not be followed', () => {
+            cy.visit('dashboard').get('.active-bottle').first().click()
+                .get('body').should('not.contain', 'Follow').should('contain', 'Edit')
+            cy.visit('wineries/3').get('.active-bottle').first().click()
+                .get('body').should('not.contain', 'Follow').should('not.contain', 'Edit')
         })
 
     })
@@ -104,10 +106,9 @@ describe('Bottle', function () {
 
         it('can be followed and unfollowed', () => {
             cy.visit('dashboard').get('body').should('not.contain', 'Super blend')
-            cy.visit('wineries/3').get('.active-bottle').first().click().get('#follow').click()
+            cy.visit('wineries/4').get('.active-bottle').first().click().get('#follow').click()
             cy.visit('dashboard').get('body').should('contain', 'Super blend')
-            cy.visit('dashboard').get('.active-bottle').first().click()
-            cy.get('#unfollow').click().should('contain', 'Follow')
+            cy.visit('dashboard').get('.active-bottle').first().click().get('#unfollow').click()
             cy.visit('dashboard').get('body').should('not.contain', 'Super blend')
         })
 

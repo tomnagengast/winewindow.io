@@ -16,28 +16,32 @@
             </div>
 
             <div v-if="auth">
-                <div v-if="! ownedByViewer">
-                    <Link method="post" id="follow" as="button" type="button" :href="route('bottles.follow', bottle.id)"
-                        v-if="! isFollowing">
-                        <div
-                            class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
-                            Follow
-                        </div>
-                    </Link>
-                    <Link method="post" id="unfollow" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
-                        <div
-                            class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
-                            Following
-                        </div>
-                    </Link>
-                </div>
-                <div v-else>
+                <div v-if="ownedByViewer">
                     <Link as="button" id="edit" type="button" :href="route('bottles.edit', bottle.id)">
                         <div
                             class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
                             Edit
                         </div>
                     </Link>
+                </div>
+                <div v-else>
+                    <div v-if="auth.current_team.type !== 'winery'">
+                        <Link method="post" id="follow" as="button" type="button"
+                            :href="route('bottles.follow', bottle.id)"
+                            v-if="!isFollowing">
+                            <div
+                                class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
+                                Follow
+                            </div>
+                        </Link>
+                        <Link method="post" id="unfollow" as="button" type="button"
+                            :href="route('bottles.unfollow', bottle.id)" v-else>
+                            <div
+                                class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
+                                Following
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
 
