@@ -470,6 +470,16 @@
       "DELETE"
     ]
   },
+  "landing": {
+    "name": "landing",
+    "domain": null,
+    "action": "Closure",
+    "uri": "/",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
   "dashboard": {
     "name": "dashboard",
     "domain": null,
@@ -525,6 +535,35 @@
     "uri": "bottles/{bottle}/update",
     "method": [
       "POST"
+    ]
+  },
+  "bottles.create": {
+    "name": "bottles.create",
+    "domain": null,
+    "action": "\\App\\Http\\Controllers\\BottleController@create",
+    "uri": "wineries/{winery}/bottles/create",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "bottles.store": {
+    "name": "bottles.store",
+    "domain": null,
+    "action": "\\App\\Http\\Controllers\\BottleController@store",
+    "uri": "wineries/{winery}/bottles/store",
+    "method": [
+      "POST"
+    ]
+  },
+  "bottles.destroy": {
+    "name": "bottles.destroy",
+    "domain": null,
+    "action": "\\App\\Http\\Controllers\\BottleController@destroy",
+    "uri": "bottles/{bottle}/destroy",
+    "method": [
+      "GET",
+      "HEAD"
     ]
   },
   "wineries.index": {

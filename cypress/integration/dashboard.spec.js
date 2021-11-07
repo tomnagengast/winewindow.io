@@ -1,4 +1,4 @@
-describe('Bottle', function () {
+describe('Dashboard', function () {
 
     context('when not logged in', () => {
 
@@ -14,32 +14,70 @@ describe('Bottle', function () {
 
         context('as a cellar', () => {
 
-            it('shows a sort dropdown', () => {
-                cy.login()
-                    .visit('/dashboard')
-                    .should('contain')
-            })
-
             context('with no bottles', () => {
-                it('dispays suggested wineries')
+
+                it('dispays suggested wineries', () => {
+                    cy.refreshDatabase()
+                    cy.login({email: 'cellar@example.com'})
+                        .visit('/dashboard')
+                        .get('body').should('contain', 'You\'re not following any bottles yet!')
+                })
+
             })
 
             context('with bottles', () => {
-                it('dispays the aging chart')
+
+                beforeEach(() => {
+                    cy.refreshDatabase()
+
+                    cy.seed('CypressCellarWithBottleSeeder')
+                })
+
+                it('dispays the aging chart', () => {
+                    cy.login({email: 'cellar@example.com'})
+                        .visit('/dashboard')
+                        .get('body').should('contain', 'Varietals')
+                })
+
+                it('shows a sort dropdown', () => {
+                    cy.login({email: 'cellar@example.com'})
+                        .visit('/dashboard')
+                        .get('body').should('contain', 'Sort by Winery')
+                })
+
             })
 
         })
 
         context('as a winery', () => {
 
-            it('does not show a sort dropdown')
+            beforeEach(() => {
+                cy.refreshDatabase()
+            })
 
             context('with no bottles', () => {
-                it('display instructions on adding a bottle')
+
+                it('display instructions on adding a bottle', () => {
+                    cy.seed('CypressWineryWithoutBottleSeeder')
+                    cy.login({email: 'winery@example.com'})
+                        .visit('/dashboard')
+                        .get('body')
+                        .should('contain', 'You haven\'t added any bottles yet!')
+                        .should('not.contain', 'Varietals')
+                })
+
             })
 
             context('with bottles', () => {
-                it('dispays the aging chart')
+
+                it('dispays the aging chart without a sort dropdown', () => {
+                    cy.seed('CypressWineryWithBottleSeeder')
+                    cy.login({email: 'winery@example.com'})
+                        .visit('/dashboard')
+                        .get('body').should('not.contain', 'Sort by Winery')
+                        .should('contain', 'Varietals')
+                })
+
             })
 
         })

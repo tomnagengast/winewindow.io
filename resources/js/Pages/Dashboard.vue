@@ -8,10 +8,17 @@
                 <div v-if="hasBottles" class="font-bold text-gray-500">{{ bottles.length }} bottles over
                     {{ vintages.length }} vintages
                 </div>
+                <Link :href="route('bottles.create', team)" id="create-bottle" v-if="$props.team.type === 'winery'"
+                    class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 mt-4">
+                    Add bottle
+                </Link>
             </div>
             <div class="w-full max-w-lg">
                 <div v-if="! hasBottles" class="text-center">
-                    <div class="font-semibold text-gray-700 pb-4">You're not following any bottles yet!</div>
+                    <div class="font-semibold text-gray-700 pb-4">
+                        <span v-if="team.type === 'winery'">You haven't added any bottles yet!</span>
+                        <span v-else>You're not following any bottles yet!</span>
+                    </div>
                     <div class="pb-4">Here are some wineries you might be interested in</div>
                     <div class="flex justify-between">
                         <Link :href="route('wineries.show', 4)">
@@ -92,7 +99,7 @@
                                 </div>
                                 <div v-else :class="isWinery ? 'py-1' : 'py-3'">
                                     <Link :href="route('bottles.show', bottle)">
-                                        <div :class="'rounded rating-' + bottle.rating">
+                                        <div :class="'rounded active-bottle rating-' + bottle.rating">
                                             <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
                                         </div>
                                     </Link>

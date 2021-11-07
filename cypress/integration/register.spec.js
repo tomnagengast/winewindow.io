@@ -1,5 +1,3 @@
-
-
 describe('Register', function () {
 
     before(() => {

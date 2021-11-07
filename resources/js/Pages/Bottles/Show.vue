@@ -15,28 +15,30 @@
                 </Link>
             </div>
 
-            <div v-if="! ownedByViewer">
-                <Link method="post" as="button" type="button" :href="route('bottles.follow', bottle.id)"
-                    v-if="! isFollowing">
-                    <div
-                        class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
-                        Follow
-                    </div>
-                </Link>
-                <Link method="post" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
-                    <div
-                        class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
-                        Following
-                    </div>
-                </Link>
-            </div>
-            <div v-else>
-                <Link as="button" type="button" :href="route('bottles.edit', bottle.id)">
-                    <div
-                        class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
-                        Edit
-                    </div>
-                </Link>
+            <div v-if="auth">
+                <div v-if="! ownedByViewer">
+                    <Link method="post" id="follow" as="button" type="button" :href="route('bottles.follow', bottle.id)"
+                        v-if="! isFollowing">
+                        <div
+                            class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
+                            Follow
+                        </div>
+                    </Link>
+                    <Link method="post" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
+                        <div
+                            class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
+                            Following
+                        </div>
+                    </Link>
+                </div>
+                <div v-else>
+                    <Link as="button" id="edit" type="button" :href="route('bottles.edit', bottle.id)">
+                        <div
+                            class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
+                            Edit
+                        </div>
+                    </Link>
+                </div>
             </div>
 
         </div>
@@ -64,7 +66,7 @@ export default defineComponent({
     },
     data() {
         return {
-            //
+            auth: this.$page.props.user
         }
     },
     computed: {
@@ -79,13 +81,10 @@ export default defineComponent({
             return mappings[this.bottle.rating]
         },
         isFollowing() {
-            const bottleIds = this.following.map(bottle => bottle.id)
-            return bottleIds.includes(this.bottle.id)
+            return this.auth ? this.following.map(bottle => bottle.id).includes(this.bottle.id) : null
         },
         ownedByViewer() {
-            return true
-            return this.$page.props.user &&
-                (this.$page.props.user.current_team.name === this.bottle.team.name)
+            return this.auth && this.$page.props.user.current_team.name === this.bottle.team.name
         },
     },
     methods: {

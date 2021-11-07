@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Jobs\NotifyBottleUpdated;
 use App\Models\Bottle;
+use App\Models\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class BottleController extends Controller
@@ -24,12 +26,16 @@ class BottleController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Team $winery)
     {
-        return Inertia::render('Bottles/Create');
+        if (auth()->user()->currentTeam->type === 'cellar') {
+            return redirect('dashboard');
+        }
+
+        return Inertia::render('Bottles/Create', [
+//            'winery' => $bottle->findById()
+        ]);
     }
 
     /**
@@ -43,12 +49,14 @@ class BottleController extends Controller
             'varietal' => 'required',
             'vintage' => 'required',
             'rating' => 'required',
-            'description' => 'required',
+            'description' => '',
         ]);
+        $request['team_id'] = auth()->user()->currentTeam->id;
+        $request['winery'] = auth()->user()->currentTeam->name;
 
-        Bottle::create($request->all());
+        $bottle = Bottle::create($request->all());
 
-        return redirect()->route('bottles.index');
+        return redirect()->route('bottles.show', $bottle->id);
     }
 
     /**
@@ -72,6 +80,10 @@ class BottleController extends Controller
      */
     public function edit(Bottle $bottle)
     {
+        if (auth()->user()->currentTeam->type === 'cellar') {
+            return redirect('dashboard');
+        }
+        // $toUpdate = auth()->user()->currentTeam->bottles()->findOrFail($bottle);
         return Inertia::render('Bottles/Edit', [
             'bottle' => $bottle,
         ]);
@@ -113,9 +125,12 @@ class BottleController extends Controller
      */
     public function destroy(Bottle $bottle)
     {
+//        if (auth()->user()->currentTeam->type === 'cellar') {
+//            return redirect('dashboard');
+//        }
         $bottle->delete();
 
-        return redirect()->route('bottles.index');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -125,6 +140,10 @@ class BottleController extends Controller
      */
     public function follow(Bottle $bottle)
     {
+        if (auth()->user()->currentTeam->type === 'winery') {
+            return redirect('dashboard');
+        }
+
         $bottle->follow();
 
         return redirect()->route('bottles.show', $bottle);

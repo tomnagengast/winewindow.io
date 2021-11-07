@@ -13,7 +13,14 @@ class Bottle extends Model
         'vintage' => 'integer',
     ];
 
-    protected $guarded = [];
+    protected $fillable = [
+        'vintage',
+        'varietal',
+        'rating',
+        'description',
+        'team_id',
+        'winery',
+    ];
 
      protected $with = ['team'];
 

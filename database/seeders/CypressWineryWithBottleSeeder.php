@@ -7,7 +7,7 @@ use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class CypressUserWineryBottleSeeder extends Seeder
+class CypressWineryWithBottleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,9 +16,11 @@ class CypressUserWineryBottleSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::factory()->create();
-        $cellar = Team::factory()->asCellar()->create(['user_id' => $user->id]);
+        User::factory()->withPersonalTeam()->create(['email' => 'cellar@example.com']);
+        $user = User::factory()->withPersonalTeam()->create(['email' => 'winery@example.com']);
         $winery = Team::factory()->asWinery()->create(['user_id' => $user->id]);
         Bottle::factory()->count(10)->for($winery)->create();
+        Bottle::factory()->for($winery)->create(['vintage' => '1900', 'varietal' => 'A Super blend']);
+        $user->switchTeam($winery);
     }
 }

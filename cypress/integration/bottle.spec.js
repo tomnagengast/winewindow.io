@@ -1,43 +1,131 @@
 describe('Bottle', function () {
 
     beforeEach(() => {
-
         cy.refreshDatabase()
 
+        cy.seed('CypressWineryWithBottleSeeder')
     })
 
-    it('can be created', () => {
+    context('as a winery', () => {
+
+        beforeEach(() => {
+            cy.login({email: 'winery@example.com'});
+        })
+
+        it('can be viewed', () => {
+            cy.visit('/bottles/1')
+        })
+
+        it('can be created', () => {
+            const vintage = '2020'
+            const varietal = 'Super Blend'
+            cy.visit('/dashboard').get('#create-bottle').click()
+
+            cy.get('#vintage').type(vintage)
+            cy.get('#varietal').type(varietal)
+            cy.get('#rating').type('3')
+            cy.contains('button', 'Save').click()
+
+            cy.url().should('not.contain', '/bottles/create')
+            cy.get('body').should('contain', `${vintage} ${varietal}`)
+            cy.visit('dashboard').get('body')
+                .should('contain', vintage)
+                .should('contain', varietal)
+        })
+
+        it('can be updated', () => {
+            const varietal = 'Super blend'
+            cy.visit('/dashboard').get('.active-bottle').first().click()
+            cy.contains('button', 'Edit').click()
+
+            cy.get('#varietal').clear().type(varietal)
+            cy.contains('button', 'Save').click()
+            cy.get('body').should('contain', varietal)
+            cy.visit('dashboard').get('body').should('contain', varietal)
+        })
+
+        it.skip('can has rich text editing', () => {
+            //
+        })
+
+        it('can be deleted', () => {
+            cy.visit('/dashboard')
+            cy.get('body').should('contain', 'Super blend')
+            cy.get('.active-bottle').first().click()
+            cy.contains('button', 'Edit').click()
+            cy.get('#delete').click()
+            cy.url().should('contain', '/dashboard')
+            cy.get('body').should('not.contain', 'Super blend')
+        })
+
+        it('can not be followed by its owner', () => {
+            cy.visit('/dashboard').get('.active-bottle').first().click()
+                .get('body').should('not.contain', 'Follow')
+        })
 
     })
 
-    it('can be only be created by a winery', () => {
+    context('as a cellar', () => {
+
+        beforeEach(() => {
+            cy.login({email: 'cellar@example.com'});
+        })
+
+        it('can be viewed', () => {
+            cy.visit('/bottles/1')
+                .get('#settings').should('exist')
+                .get('#winery').should('not.exist')
+        })
+
+        it('can not be created', () => {
+            cy.visit('dashboard')
+                .get('#create-bottle').should('not.exist')
+            cy.visit('wineries/1/bottles/create')
+                .url().should('contain', '/dashboard')
+        })
+
+        it('can not be edited', () => {
+            cy.visit('/bottles/1')
+                .get('#edit').should('not.exist')
+
+            cy.visit('bottles/1/edit')
+                .url().should('contain', '/dashboard')
+        })
+
+        it.skip('can not be deleted', () => {
+            cy.visit('bottles/1/destroy')
+                .url().should('contain', '/dashboard')
+        })
+
+        it.skip('can be followed', () => {
+            //
+        })
+
+        it.skip('can be unfollowed', () => {
+            //
+        })
 
     })
 
-    it.only('can be shown', () => {
-        cy.seed('CypressUserWineryBottleSeeder')
-        cy.visit('/bottles/1')
-    })
+    context.only('as a guest', () => {
 
-    it('can be updated', () => {
+        it('can be viewed', () => {
+            cy.visit('/bottles/1')
+        })
 
-    })
+        it('can not be edited', () => {
+            cy.visit('/bottles/1')
+                .get('#edit').should('not.exist')
 
-    it('can be deleted', () => {
+            cy.visit('bottles/1/edit')
+                .url().should('contain', '/login')
+        })
 
-    })
-
-    it('can be followed', () => {
-
-    })
-
-    it('can be unfollowed', () => {
-
-    })
-
-    it('can has rich text editing', () => {
+        it('can not be followed', () => {
+            cy.visit('/bottles/1')
+                .get('#follow').should('not.exist')
+        })
 
     })
 
-    // notifications should be pest tests
 })

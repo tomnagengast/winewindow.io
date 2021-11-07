@@ -20,6 +20,7 @@ mix.js('resources/js/app.js', 'public/js')
     .browserSync({
         proxy: 'winewindow.io.test',
         open: false,
+        notify: false,
     })
     // .extract() // uncomment vendor.js and manifest.js in app.blade.php
     .sourceMaps(true, 'source-map')

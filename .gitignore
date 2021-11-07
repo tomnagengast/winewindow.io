@@ -3,10 +3,8 @@
 /public/storage
 /storage/*.key
 /vendor
-.env
-.env.local
-.env.production
-.env.backup
+.env*
+!.env.example
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
@@ -15,3 +13,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+cypress/videos
+cypress/screenshots

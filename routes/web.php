@@ -14,7 +14,7 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
-});
+})->name('landing');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $team = auth()->user()->currentTeam;
@@ -43,6 +43,9 @@ Route::middleware(['auth:sanctum', 'verified'])->post('bottles/{bottle}/follow',
 Route::middleware(['auth:sanctum', 'verified'])->post('bottles/{bottle}/unfollow', [BottleController::class, 'unfollow'])->name('bottles.unfollow');
 Route::middleware(['auth:sanctum', 'verified'])->get('bottles/{bottle}/edit', [BottleController::class, 'edit'])->name('bottles.edit');
 Route::middleware(['auth:sanctum', 'verified'])->post('bottles/{bottle}/update', [BottleController::class, 'update'])->name('bottles.update');
+Route::middleware(['auth:sanctum', 'verified'])->get('wineries/{winery}/bottles/create', [BottleController::class, 'create'])->name('bottles.create');
+Route::middleware(['auth:sanctum', 'verified'])->post('wineries/{winery}/bottles/store', [BottleController::class, 'store'])->name('bottles.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('bottles/{bottle}/destroy', [BottleController::class, 'destroy'])->name('bottles.destroy');
 
 // Wineries
 Route::get('wineries', [WineryController::class, 'index'])->name('wineries.index');
