@@ -92,22 +92,28 @@ describe('Bottle', function () {
                 .url().should('contain', '/dashboard')
         })
 
-        it.skip('can not be deleted', () => {
+        it('can not be deleted', () => {
+            cy.visit('/bottles/1')
+                .get('#edit').should('not.exist')
+
             cy.visit('bottles/1/destroy')
                 .url().should('contain', '/dashboard')
+
+            cy.visit('/bottles/1')
         })
 
-        it.skip('can be followed', () => {
-            //
-        })
-
-        it.skip('can be unfollowed', () => {
-            //
+        it('can be followed and unfollowed', () => {
+            cy.visit('dashboard').get('body').should('not.contain', 'Super blend')
+            cy.visit('wineries/3').get('.active-bottle').first().click().get('#follow').click()
+            cy.visit('dashboard').get('body').should('contain', 'Super blend')
+            cy.visit('dashboard').get('.active-bottle').first().click()
+            cy.get('#unfollow').click().should('contain', 'Follow')
+            cy.visit('dashboard').get('body').should('not.contain', 'Super blend')
         })
 
     })
 
-    context.only('as a guest', () => {
+    context('as a guest', () => {
 
         it('can be viewed', () => {
             cy.visit('/bottles/1')

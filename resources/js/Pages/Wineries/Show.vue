@@ -71,7 +71,7 @@
                                 </div>
                                 <div v-else :class="isWinery ? 'py-1' : 'py-3'">
                                     <Link :href="route('bottles.show', bottle)">
-                                        <div :class="'rounded rating-' + bottle.rating">
+                                        <div :class="'rounded active-bottle rating-' + bottle.rating">
                                             <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
                                         </div>
                                     </Link>

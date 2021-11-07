@@ -24,7 +24,7 @@
                             Follow
                         </div>
                     </Link>
-                    <Link method="post" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
+                    <Link method="post" id="unfollow" as="button" type="button" :href="route('bottles.unfollow', bottle.id)" v-else>
                         <div
                             class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
                             Following

@@ -32579,6 +32579,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["href"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
         key: 1,
         method: "post",
+        id: "unfollow",
         as: "button",
         type: "button",
         href: _ctx.route('bottles.unfollow', _ctx.bottle.id)
@@ -35752,7 +35753,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('rounded rating-' + bottle.rating)
+                  "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)('rounded active-bottle rating-' + bottle.rating)
                 }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(bottle.rating ? bottle.rating : bottle), 1
                 /* TEXT */
                 )], 2

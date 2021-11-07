@@ -125,9 +125,10 @@ class BottleController extends Controller
      */
     public function destroy(Bottle $bottle)
     {
-//        if (auth()->user()->currentTeam->type === 'cellar') {
-//            return redirect('dashboard');
-//        }
+        if (auth()->user()->currentTeam->id != $bottle->team->id) {
+            return redirect('dashboard');
+        }
+
         $bottle->delete();
 
         return redirect()->route('dashboard');
