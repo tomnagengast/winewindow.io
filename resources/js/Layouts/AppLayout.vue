@@ -19,7 +19,7 @@
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-10 sm:-my-px sm:ml-10 sm:flex items-center">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')" v-if="$props.user">
+                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')" v-if="$page.props.user">
                                     Dashboard
                                 </jet-nav-link>
                                 <jet-nav-link :href="route('wineries.index')"

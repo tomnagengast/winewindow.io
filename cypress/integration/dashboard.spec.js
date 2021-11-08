@@ -33,6 +33,8 @@ describe('Dashboard', function () {
                     cy.seed('CypressCellarWithBottleSeeder')
                 })
 
+                it.skip('can be sorted by winery or varietal')
+
                 it('dispays the aging chart', () => {
                     cy.login({email: 'cellar@example.com'})
                         .visit('/dashboard')
