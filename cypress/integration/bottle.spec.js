@@ -44,14 +44,6 @@ describe('Bottle', function () {
             cy.visit('dashboard').get('body').should('contain', varietal)
         })
 
-        it.only('can has rich text editing', () => {
-            //
-        })
-
-        it.skip('does not need a description', () => {
-            //
-        })
-
         it('can be deleted', () => {
             cy.visit('/dashboard')
             cy.get('body').should('contain', 'Super blend')
