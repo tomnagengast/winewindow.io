@@ -25961,13 +25961,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var trix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! trix */ "./node_modules/trix/dist/trix.js");
 /* harmony import */ var trix__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(trix__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var trix_dist_trix_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! trix/dist/trix.css */ "./node_modules/trix/dist/trix.css");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["id", "content", "placeholder"],
   data: function data() {
     return {
-      trixText: this.content
+      trixText: this.content,
+      host: 'https://d13txem1unpe48.cloudfront.net/'
     };
   },
   methods: {
@@ -25976,10 +25979,65 @@ __webpack_require__.r(__webpack_exports__);
     },
     emitDataBackToComponent: function emitDataBackToComponent() {
       this.$emit("dataFromTrix", this.trixText);
+    },
+    addTrixAttachment: function addTrixAttachment(e) {
+      console.log('Uploading image attachment');
+
+      if (e.attachment.file) {// this.uploadFileAttachment(e.attachment)
+      }
+    },
+    uploadFileAttachment: function uploadFileAttachment(attachment) {
+      this.uploadFile(attachment.file, setProgress, setAttributes);
+
+      function setProgress(progress) {
+        attachment.setUploadProgress(progress);
+      }
+
+      function setAttributes(attributes) {
+        attachment.setAttributes(attributes);
+      }
+    },
+    uploadFile: function uploadFile(file, progressCallback, successCallback) {
+      var key = this.createStorageKey(file);
+      var formData = this.createFormData(key, file);
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", this.host, true);
+      xhr.upload.addEventListener("progress", function (event) {
+        var progress = event.loaded / event.total * 100;
+        progressCallback(progress);
+      });
+      xhr.addEventListener("load", function (event) {
+        if (xhr.status === 204) {
+          var attributes = {
+            url: this.host + key,
+            href: this.host + key + "?content-disposition=attachment"
+          };
+          successCallback(attributes);
+        }
+      });
+      xhr.send(formData);
+    },
+    createStorageKey: function createStorageKey(file) {
+      var date = new Date();
+      var day = date.toISOString().slice(0, 10);
+      var name = date.getTime() + "-" + file.name;
+      return ["tmp", day, name].join("/");
+    },
+    createFormData: function createFormData(key, file) {
+      var data = new FormData();
+      data.append("key", key);
+      data.append("Content-Type", file.type);
+      data.append("file", file);
+      return data;
+    },
+    removeTrixAttachment: function removeTrixAttachment(e) {
+      console.log('Removing image attachment');
     }
   },
   mounted: function mounted() {
     document.addEventListener("trix-change", this.setTextToTrix);
+    document.addEventListener("trix-attachment-add", this.addTrixAttachment);
+    document.addEventListener("trix-attachment-remove", this.removeTrixAttachment);
   },
   beforeDestroy: function beforeDestroy() {
     document.removeEventListener("trix-change", this.setTextToTrix);
