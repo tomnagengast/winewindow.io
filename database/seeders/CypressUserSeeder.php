@@ -20,7 +20,7 @@ class CypressUserSeeder extends Seeder
             ->create([
                 'name' => 'John Doe',
                 'email' => 'john@example.com',
-                'password' => Hash::make('password'),
+                'password' => 'password',
             ]);
     }
 }

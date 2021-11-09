@@ -19,7 +19,7 @@
 }
 
 .rating-5 {
-    @apply bg-red-500 text-white;
+    @apply bg-gray-500 text-white;
 }
 
 .ais-SearchBox-input[type="search"]::-webkit-search-cancel-button,

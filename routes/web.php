@@ -56,7 +56,6 @@ Route::get('collections', [CollectionController::class, 'index'])->name('collect
 Route::get('collections/{collection}', [CollectionController::class, 'show'])->name('collections.show');
 
 Route::get('debug', function () {
-//    Bugsnag::notifyException(new RuntimeException("Test error"));
 
 //    $bottle = App\Models\Bottle::find(8);
 //    App\Jobs\NotifyBottleUpdated::dispatch($bottle);
