@@ -44,7 +44,11 @@ describe('Bottle', function () {
             cy.visit('dashboard').get('body').should('contain', varietal)
         })
 
-        it.skip('can has rich text editing', () => {
+        it.only('can has rich text editing', () => {
+            //
+        })
+
+        it.skip('does not need a description', () => {
             //
         })
 

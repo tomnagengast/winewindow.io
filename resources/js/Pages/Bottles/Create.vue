@@ -11,8 +11,8 @@
                 <input id="varietal" v-model="form.varietal" class="mb-4 border rounded px-2 py-3"/>
                 <label for="rating">Rating</label>
                 <input id="rating" v-model="form.rating" class="mb-4 border rounded px-2 py-3"/>
-                <label>Description</label>
-                <textarea id="description" v-model="form.description" class="mb-4 border rounded px-2 py-3 min-h-15"></textarea>
+<!--                <textarea id="description" v-model="form.description" class="mb-4 border rounded px-2 py-3 min-h-15"></textarea>-->
+                <TrixEditor id="description" :content="form.description" @dataFromTrix="getDataFromTrix" class="my-4" placeholder="Description" />
 
                 <div class="flex space-x-2 justify-center">
                     <button type="submit" id="save"
@@ -33,14 +33,16 @@
 <script>
 import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
-import {Link} from "@inertiajs/inertia-vue3";
-import ValidationErrors from "../../Jetstream/ValidationErrors";
+import {Link} from "@inertiajs/inertia-vue3"
+import ValidationErrors from "../../Jetstream/ValidationErrors"
+import TrixEditor from "@/Components/TrixEditor"
 
 export default defineComponent({
     components: {
         AppLayout,
         Link,
         ValidationErrors,
+        TrixEditor,
     },
     data() {
         return {
@@ -56,6 +58,9 @@ export default defineComponent({
         submit() {
             this.$inertia.post(`/wineries/${this.$page.props.user.current_team.id}/bottles/store`, this.form)
         },
+        getDataFromTrix: function(data) {
+            this.form.description = data;
+        }
     },
 })
 </script>

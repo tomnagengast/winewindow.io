@@ -101,12 +101,12 @@ class BottleController extends Controller
             'varietal' => 'required',
             'vintage' => 'required',
             'rating' => 'required',
-            'description' => 'required',
+            'description' => '',
         ]);
 
-        if ($bottle->rating != $request->rating) {
-            NotifyBottleUpdated::dispatch($bottle);
-        }
+//        if ($bottle->rating != $request->rating) {
+//            NotifyBottleUpdated::dispatch($bottle);
+//        }
 
         $bottle->update([
             'varietal' => $request['varietal'],

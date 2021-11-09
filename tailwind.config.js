@@ -9,7 +9,6 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
-
     theme: {
         extend: {
             fontFamily: {
@@ -27,8 +26,12 @@ module.exports = {
             minHeight: {
                 '15': '15em',
             },
+            borderWidth: {
+                '3': '3px',
+                '6': '6px',
+            }
         },
     },
-
+    // important: true,
     plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };

@@ -32,3 +32,34 @@
 .ais-SearchBox-input::-webkit-search-cancel-button, .ais-SearchBox-input::-webkit-search-decoration, .ais-SearchBox-input::-webkit-search-results-button, .ais-SearchBox-input::-webkit-search-results-decoration {
     display: none;
 }
+
+/* Trix styles */
+.trix-button-group-spacer,
+.trix-button-group--file-tools,
+.trix-button--icon-attach,
+.trix-button-group--history-tools,
+.trix-button--icon-undo,
+.trix-button--icon-redo {
+    display: none;
+    border: none !important;
+}
+
+trix-editor a, .trix-content a {
+    @apply underline text-indigo-600;
+}
+
+trix-editor h1, .trix-content h1 {
+    @apply font-black text-2xl mb-2;
+}
+
+trix-editor blockquote, .trix-content blockquote {
+    @apply border-l-6 border-gray-300 pl-2;
+}
+
+trix-editor ul, .trix-content ul {
+    @apply list-disc pl-4
+}
+
+trix-editor ol, .trix-content ol {
+    @apply list-decimal pl-4
+}

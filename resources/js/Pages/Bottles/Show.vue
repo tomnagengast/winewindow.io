@@ -48,7 +48,7 @@
         </div>
         <div class="pt-4 pb-12">
             <div class="max-w-2xl mx-auto sm:px-6 lg:px-8 p-4">
-                <div>{{ bottle.description }}</div>
+                <div class="trix-content" v-html="bottle.description"></div>
             </div>
         </div>
     </app-layout>

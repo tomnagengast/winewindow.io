@@ -5,13 +5,14 @@
         <form @submit.prevent="submit">
             <div class="flex flex-col mt-24 max-w-xl m-auto">
                 <label for="vintage">Vintage</label>
-                <input id="vintage" v-model="bottle.vintage" class="mb-4 border rounded px-2 py-3"/>
+                <input id="vintage" v-model="form.vintage" class="mb-4 border rounded px-2 py-3"/>
                 <label for="varietal">Varietal</label>
-                <input id="varietal" v-model="bottle.varietal" class="mb-4 border rounded px-2 py-3"/>
+                <input id="varietal" v-model="form.varietal" class="mb-4 border rounded px-2 py-3"/>
                 <label for="rating">Rating</label>
-                <input id="rating" v-model="bottle.rating" class="mb-4 border rounded px-2 py-3"/>
-                <label>Description</label>
-                <textarea id="description" v-model="bottle.description" class="mb-4 border rounded px-2 py-3 min-h-15"></textarea>
+                <input id="rating" v-model="form.rating" class="mb-4 border rounded px-2 py-3"/>
+                <TrixEditor id="description" :content="form.description" @dataFromTrix="getDataFromTrix" class="my-4" placeholder="Description" />
+
+
 
                 <div class="flex space-x-2 justify-between">
                     <div>
@@ -41,12 +42,14 @@
 <script>
 import {defineComponent} from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
-import {Link} from "@inertiajs/inertia-vue3";
+import {Link} from '@inertiajs/inertia-vue3'
+import TrixEditor from "@/Components/TrixEditor"
 
 export default defineComponent({
     components: {
         AppLayout,
         Link,
+        TrixEditor,
     },
     props: {
         bottle: Object,
@@ -54,12 +57,12 @@ export default defineComponent({
     },
     data() {
         return {
-            form: {
-                vintage: null,
-                varietal: null,
-                rating: null,
-                description: null,
-            },
+            form: this.$inertia.form({
+                vintage: this.bottle.vintage,
+                varietal: this.bottle.varietal,
+                rating: this.bottle.rating,
+                description: this.bottle.description,
+            }),
         }
     },
     computed: {
@@ -73,18 +76,17 @@ export default defineComponent({
             }
             return mappings[this.bottle.rating]
         },
-        isFollowing() {
-            const bottleIds = this.following.map(bottle => bottle.id)
-            return bottleIds.includes(this.bottle.id)
-        },
         ownedByViewer() {
             return this.$page.props.user.current_team.name === this.bottle.team.name
         },
     },
     methods: {
         submit() {
-            this.$inertia.post(`/bottles/${this.bottle.id}/update`, this.bottle)
+            this.$inertia.post(`/bottles/${this.bottle.id}/update`, this.form)
         },
+        getDataFromTrix: function(data) {
+            this.form.description = data;
+        }
     },
 })
 </script>
