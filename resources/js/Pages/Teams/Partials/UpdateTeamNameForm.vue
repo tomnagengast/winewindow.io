@@ -1,17 +1,17 @@
 <template>
     <jet-form-section @submitted="updateTeamName">
         <template #title>
-            Team Name
+            Cellar Name
         </template>
 
         <template #description>
-            The team's name and owner information.
+            The cellar's name and owner information.
         </template>
 
         <template #form>
             <!-- Team Owner Information -->
             <div class="col-span-6">
-                <jet-label value="Team Owner" />
+                <jet-label value="Cellar Owner" />
 
                 <div class="flex items-center mt-2">
                     <img class="w-12 h-12 rounded-full object-cover" :src="team.owner.profile_photo_url" :alt="team.owner.name">
@@ -25,7 +25,7 @@
 
             <!-- Team Name -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Team Name" />
+                <jet-label for="name" value="Cellar Name" />
 
                 <jet-input id="name"
                             type="text"

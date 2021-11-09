@@ -1,16 +1,16 @@
 <template>
     <jet-form-section @submitted="createTeam">
         <template #title>
-            Team Details
+            Cellar Details
         </template>
 
         <template #description>
-            Create a new team to collaborate with others on projects.
+            Create a new cellar to share with others.
         </template>
 
         <template #form>
             <div class="col-span-6">
-                <jet-label value="Team Owner" />
+                <jet-label value="Cellar Owner" />
 
                 <div class="flex items-center mt-2">
                     <img class="object-cover w-12 h-12 rounded-full" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name">
@@ -23,12 +23,12 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Team Name" />
+                <jet-label for="name" value="Cellar Name" />
                 <jet-input id="name" type="text" class="block w-full mt-1" v-model="form.name" autofocus />
                 <jet-input-error :message="form.errors.name" class="mt-2" />
             </div>
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="type" value="Team Type" />
+                <jet-label for="type" value="Cellar Type" />
                 <jet-input id="type" type="text" class="block w-full mt-1" v-model="form.type"/>
                 <jet-input-error :message="form.errors.type" class="mt-2" />
             </div>

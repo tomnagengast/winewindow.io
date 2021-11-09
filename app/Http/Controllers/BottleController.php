@@ -104,9 +104,9 @@ class BottleController extends Controller
             'description' => '',
         ]);
 
-//        if ($bottle->rating != $request->rating) {
-//            NotifyBottleUpdated::dispatch($bottle);
-//        }
+        if ($bottle->rating != $request->rating) {
+            NotifyBottleUpdated::dispatch($bottle);
+        }
 
         $bottle->update([
             'varietal' => $request['varietal'],

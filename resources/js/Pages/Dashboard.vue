@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div v-if="hasBottles" class="max-w-7xl mx-auto mt-10 text-center"
+        <div v-if="hasBottles" class="max-w-7xl mx-auto mt-4 text-center"
             :style="showDefaultChart ? '' : 'overflow-x: scroll'">
             <!-- container -->
             <div ref="chart" class="inline-block mx-auto border border-2 shadow-xl border-gray-100 rounded-lg"

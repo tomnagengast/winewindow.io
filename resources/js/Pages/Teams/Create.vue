@@ -1,8 +1,8 @@
 <template>
-    <app-layout title="Create Team">
+    <app-layout title="Create Cellar">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create Team
+                Create Cellar
             </h2>
         </template>
 

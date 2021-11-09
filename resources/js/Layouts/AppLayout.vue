@@ -75,25 +75,25 @@
                                             <!-- Team Management -->
                                             <template v-if="$page.props.jetstream.hasTeamFeatures">
                                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                                    Manage Team
+                                                    Manage Cellar
                                                 </div>
 
                                                 <!-- Team Settings -->
                                                 <jet-dropdown-link
                                                     :href="route('teams.show', $page.props.user.current_team)">
-                                                    Team Settings
+                                                    Cellar Settings
                                                 </jet-dropdown-link>
 
                                                 <jet-dropdown-link :href="route('teams.create')"
                                                     v-if="$page.props.jetstream.canCreateTeams">
-                                                    Create New Team
+                                                    Create New Cellar
                                                 </jet-dropdown-link>
 
                                                 <div class="border-t border-gray-100"></div>
 
                                                 <!-- Team Switcher -->
                                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                                    Switch Teams
+                                                    Switch Cellars
                                                 </div>
 
                                                 <template v-for="team in $page.props.user.all_teams" :key="team.id">
