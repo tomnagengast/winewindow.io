@@ -61,19 +61,7 @@ class BottleWasUpdated extends Notification implements ShouldQueue
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
-            ->content('A bottle you follow was just updated!');
-    }
-
-    /**
-     * Get the Vonage / SMS representation of the notification.
-     *
-     * @param mixed $notifiable
-     * @return NexmoMessage
-     */
-    public function toNexmo($notifiable)
-    {
-        return (new NexmoMessage)
-            ->content('A bottle you follow was just updated!');
+            ->content($notifiable->name.', a bottle you follow was just updated! See '.$this->bottle->varietal);
     }
 
 
@@ -87,7 +75,7 @@ class BottleWasUpdated extends Notification implements ShouldQueue
     {
         info('Notifying user that bottle was updated');
         return [
-            'message' => 'A bottle you follow was just updated! '.$this->bottle->varietal
+            'message' => $this->name.', a bottle you follow was just updated! '.$this->bottle->varietal
         ];
     }
 }
