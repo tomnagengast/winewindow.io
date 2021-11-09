@@ -15,6 +15,8 @@ class NotifyBottleUpdated implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $bottle;
+
     /**
      * Create a new job instance.
      *
@@ -22,7 +24,7 @@ class NotifyBottleUpdated implements ShouldQueue
      */
     public function __construct(Bottle $bottle)
     {
-        $this->teams = $bottle->followers();
+        $this->bottle = $bottle;
     }
 
     /**
@@ -32,11 +34,20 @@ class NotifyBottleUpdated implements ShouldQueue
      */
     public function handle()
     {
-        dd($this->teams);
-        $this->teams->each(function ($cellar) {
-            $cellar->allUsers()->each(function ($user) {
-                new BottleWasUpdated($this->bottle, $user);
+        $followingUsers = collect();
+
+        $this->bottle->followers()->each(function ($cellar) use($followingUsers) {
+            return $cellar->allUsers()->each(function ($user) use($followingUsers) {
+                if (!$followingUsers->contains($user)) {
+                    $followingUsers->push($user);
+                }
             });
+        });
+
+        info($followingUsers->pluck('email')->toJson());
+
+        $followingUsers->each(function ($user) {
+            $user->notify(new BottleWasUpdated($this->bottle));
         });
     }
 }

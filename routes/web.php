@@ -56,6 +56,9 @@ Route::get('collections', [CollectionController::class, 'index'])->name('collect
 Route::get('collections/{collection}', [CollectionController::class, 'show'])->name('collections.show');
 
 Route::get('debug', function () {
-//    return Inertia::render('Debug', [
-//    ]);
+    $bottle = App\Models\Bottle::find(8);
+    App\Jobs\NotifyBottleUpdated::dispatch($bottle);
+
+    return $bottle;
+//    return Inertia::render('Debug', []);
 });

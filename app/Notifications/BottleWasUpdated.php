@@ -11,19 +11,20 @@ use Illuminate\Notifications\Messages\NexmoMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-class BottleWasUpdated extends Notification
+class BottleWasUpdated extends Notification implements ShouldQueue
 {
     use Queueable;
+
+    protected $bottle;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($bottle, $user)
+    public function __construct($bottle)
     {
         $this->bottle = $bottle;
-        $this->user = $user;
     }
 
     /**
@@ -34,10 +35,7 @@ class BottleWasUpdated extends Notification
      */
     public function via($notifiable)
     {
-        // https://laracasts.com/series/laravel-6-from-scratch/episodes/48
-        // return $notifiable->prefers_sms ? ['nexmo'] : ['mail', 'database'];
-        // return ['mail', 'database', 'slack', 'nexmo'];
-        return ['mail', 'database'];
+        return ['database', 'slack', 'mail'];
     }
 
     /**
@@ -87,8 +85,9 @@ class BottleWasUpdated extends Notification
      */
     public function toArray($notifiable)
     {
+        info('Notifying user that bottle was updated');
         return [
-            'message' => 'A bottle you follow was just updated!'
+            'message' => 'A bottle you follow was just updated! '.$this->bottle->varietal
         ];
     }
 }
