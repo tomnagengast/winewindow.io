@@ -18,6 +18,7 @@ module.exports = {
             textColor: {
                 'brand-primary': '#1f2937', // '#292929'
                 'brand-secondary': '#ffffff',
+                'brand-highlight': '#ffffff',
             },
             backgroundColor: {
                 'brand-primary': '#1f2937',

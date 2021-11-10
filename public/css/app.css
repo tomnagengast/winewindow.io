@@ -2226,6 +2226,10 @@ trix-editor ol, .trix-content ol {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
+.hover\:text-indigo-600:hover {
+	--tw-text-opacity: 1;
+	color: rgba(79, 70, 229, var(--tw-text-opacity));
+}
 .focus\:z-10:focus {
 	z-index: 10;
 }
@@ -2292,6 +2296,10 @@ trix-editor ol, .trix-content ol {
 .focus\:text-indigo-400:focus {
 	--tw-text-opacity: 1;
 	color: rgba(129, 140, 248, var(--tw-text-opacity));
+}
+.focus\:text-indigo-600:focus {
+	--tw-text-opacity: 1;
+	color: rgba(79, 70, 229, var(--tw-text-opacity));
 }
 .focus\:placeholder-gray-400:focus::-moz-placeholder {
 	--tw-placeholder-opacity: 1;
