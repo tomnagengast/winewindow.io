@@ -35,6 +35,9 @@ class BottleWasUpdated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
+        if (env('APP_ENV') != 'production') {
+            return ['database', 'slack', 'mail'];
+        }
         return ['database', 'slack', 'mail', TwilioChannel::class];
     }
 
