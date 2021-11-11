@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Messages\NexmoMessage;
+use App\Channels\TwilioChannel;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
@@ -35,7 +35,17 @@ class BottleWasUpdated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database', 'slack', 'mail'];
+        return ['database', 'slack', 'mail', TwilioChannel::class];
+    }
+
+    /**
+     * Get the twilio representation of the notification.
+     *
+     * @param mixed $notifiable
+     */
+    public function toTwilio($notifiable)
+    {
+        return 'A bottle you follow updated updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id;
     }
 
     /**
@@ -61,7 +71,7 @@ class BottleWasUpdated extends Notification implements ShouldQueue
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
-            ->content($notifiable->name.', a bottle you follow was just updated! See '.$this->bottle->varietal);
+            ->content('A bottle you follow updated updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id);
     }
 
 
@@ -75,7 +85,7 @@ class BottleWasUpdated extends Notification implements ShouldQueue
     {
         info('Notifying user that bottle was updated');
         return [
-            'message' => $this->name.', a bottle you follow was just updated! '.$this->bottle->varietal
+            'message' => 'A bottle you follow updated updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id
         ];
     }
 }

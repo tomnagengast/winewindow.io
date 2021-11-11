@@ -4,7 +4,7 @@ use App\Http\Controllers\BottleController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\WineryController;
 use App\Models\Team;
-use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use App\Notifications\BottleWasUpdated;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -56,8 +56,10 @@ Route::get('collections', [CollectionController::class, 'index'])->name('collect
 Route::get('collections/{collection}', [CollectionController::class, 'show'])->name('collections.show');
 
 Route::get('debug', function () {
+    $bottle = App\Models\Bottle::find(8);
+    auth()->user()->notify(new BottleWasUpdated($bottle));
 
-//    $bottle = App\Models\Bottle::find(8);
+
 //    App\Jobs\NotifyBottleUpdated::dispatch($bottle);
 //    return $bottle;
 

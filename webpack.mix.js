@@ -27,10 +27,6 @@ mix.js('resources/js/app.js', 'public/js')
     .webpackConfig(require('./webpack.config'))
     .version();
 
-if (mix.inProduction()) {
-    mix.version();
-}
-
 mix.options({
     vue: {
         compilerOptions: {

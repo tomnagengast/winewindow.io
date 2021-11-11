@@ -67,10 +67,11 @@ class User extends Authenticatable
         return 'https://hooks.slack.com/services/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';
     }
 
-    public function routeNotificationForNexmo($notification)
-    {
-        return $this->phone;
-    }
+//    public function routeNotificationForTwilio($notification)
+//    {
+//        return '+18054238496';
+//        // return $this->phone;
+//    }
 
     public function setPasswordAttribute($value)
     {
