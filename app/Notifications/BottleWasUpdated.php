@@ -45,7 +45,7 @@ class BottleWasUpdated extends Notification implements ShouldQueue
      */
     public function toTwilio($notifiable)
     {
-        return 'A bottle you follow updated updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id;
+        return 'A bottle you follow just updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id;
     }
 
     /**
@@ -71,7 +71,7 @@ class BottleWasUpdated extends Notification implements ShouldQueue
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
-            ->content('A bottle you follow updated updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id);
+            ->content('A bottle you follow just updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id);
     }
 
 
@@ -85,7 +85,7 @@ class BottleWasUpdated extends Notification implements ShouldQueue
     {
         info('Notifying user that bottle was updated');
         return [
-            'message' => 'A bottle you follow updated updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id
+            'message' => 'A bottle you follow just updated it\'s rating! Go take a look 🍷 https://winewindow.io/bottles/'.$this->bottle->id
         ];
     }
 }
