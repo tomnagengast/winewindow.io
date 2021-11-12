@@ -1249,6 +1249,9 @@ select {
 .mb-8 {
 	margin-bottom: 2rem;
 }
+.mb-2 {
+	margin-bottom: 0.5rem;
+}
 .mt-24 {
 	margin-top: 6rem;
 }
@@ -1623,6 +1626,10 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(156, 163, 175, var(--tw-border-opacity));
 }
+.border-blue-600 {
+	--tw-border-opacity: 1;
+	border-color: rgba(37, 99, 235, var(--tw-border-opacity));
+}
 .bg-white {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -1703,6 +1710,12 @@ select {
 }
 .p-4 {
 	padding: 1rem;
+}
+.p-3 {
+	padding: 0.75rem;
+}
+.p-1 {
+	padding: 0.25rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1974,6 +1987,10 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(31, 41, 55, var(--tw-text-opacity));
 }
+.text-blue-600 {
+	--tw-text-opacity: 1;
+	color: rgba(37, 99, 235, var(--tw-text-opacity));
+}
 .underline {
 	text-decoration: underline;
 }
@@ -2162,6 +2179,35 @@ trix-editor ol, .trix-content ol {
 	list-style-type: decimal;
 	padding-left: 1rem;
 }
+.before\:absolute::before {
+	content: "";
+	position: absolute;
+}
+.before\:top-1\/2::before {
+	content: "";
+	top: 50%;
+}
+.before\:left-0::before {
+	content: "";
+	left: 0px;
+}
+.before\:-z-1::before {
+	content: "";
+	z-index: -1;
+}
+.before\:w-full::before {
+	content: "";
+	width: 100%;
+}
+.before\:border-b-2::before {
+	content: "";
+	border-bottom-width: 2px;
+}
+.before\:border-red-600::before {
+	content: "";
+	--tw-border-opacity: 1;
+	border-color: rgba(220, 38, 38, var(--tw-border-opacity));
+}
 .hover\:border-gray-300:hover {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
@@ -2194,6 +2240,10 @@ trix-editor ol, .trix-content ol {
 	--tw-bg-opacity: 1;
 	background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
 }
+.hover\:bg-blue-600:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(37, 99, 235, var(--tw-bg-opacity));
+}
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
@@ -2221,6 +2271,17 @@ trix-editor ol, .trix-content ol {
 .hover\:text-gray-600:hover {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
+}
+.hover\:text-white:hover {
+	--tw-text-opacity: 1;
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+.hover\:transition:hover {
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+	transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
 }
 .focus\:z-10:focus {
 	z-index: 10;

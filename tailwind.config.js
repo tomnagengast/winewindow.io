@@ -30,7 +30,12 @@ module.exports = {
             borderWidth: {
                 '3': '3px',
                 '6': '6px',
-            }
+            },
+            zIndex: {
+                '1': '1',
+                '-1': '-1',
+                '-10': '-10',
+            },
         },
     },
     // important: true,
