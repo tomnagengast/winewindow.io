@@ -35556,7 +35556,7 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
   "class": "text-4xl sm:text-6xl lg:text-7xl leading-none font-extrabold tracking-tight text-gray-800 mt-10 mb-8 sm:mt-14 sm:mb-10"
-}, " Connecting Wineries and Winos.", -1
+}, " Connecting Wineries with Winos", -1
 /* HOISTED */
 );
 
