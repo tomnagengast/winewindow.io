@@ -57,7 +57,6 @@ Route::get('collections', [CollectionController::class, 'index'])->name('collect
 Route::get('collections/{collection}', [CollectionController::class, 'show'])->name('collections.show');
 
 // Google OAuth
-// https://codyrigg.medium.com/how-to-add-a-google-login-using-socialite-on-laravel-8-with-jetstream-6153581e7dc9
 Route::get('auth/google/redirect', function () {
     return Socialite::driver('google')->redirect();
 })->name('auth.google');
@@ -82,9 +81,11 @@ Route::get('auth/google/callback', function () {
         // 'profile_photo_path' => $user->avatar,
     ]);
 
+    $first = explode(' ', $user->name, 2)[0];
+
     $newTeam = Team::forceCreate([
         'user_id' => $newUser->id,
-        'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+        'name' => "$first'" . ( \Illuminate\Support\Str::endsWith($first, ['s', 'S']) ? '' : 's' )." Cellar",
         'personal_team' => true,
         'type' => 'cellar',
     ]);
@@ -99,7 +100,6 @@ Route::get('auth/google/callback', function () {
 Route::get('debug', function () {
     $bottle = App\Models\Bottle::find(8);
     auth()->user()->notify(new BottleWasUpdated($bottle));
-
 
 //    App\Jobs\NotifyBottleUpdated::dispatch($bottle);
 //    return $bottle;

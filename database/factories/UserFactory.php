@@ -62,8 +62,9 @@ class UserFactory extends Factory
         return $this->has(
             Team::factory()
                 ->state(function (array $attributes, User $user) {
+                    $first = explode(' ', $user->name, 2)[0];
                     return [
-                        'name' => $user->name.'\'s Team',
+                        'name' => "$first'" . ( \Illuminate\Support\Str::endsWith($first, ['s', 'S']) ? '' : 's' )." Cellar",
                         'user_id' => $user->id,
                         'personal_team' => true,
                         'type' => 'cellar'
