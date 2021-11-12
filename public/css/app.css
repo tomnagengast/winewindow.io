@@ -1450,6 +1450,9 @@ select {
 .grid-cols-1 {
 	grid-template-columns: repeat(1, minmax(0, 1fr));
 }
+.grid-cols-2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .flex-row-reverse {
 	flex-direction: row-reverse;
 }
@@ -1523,6 +1526,25 @@ select {
 	margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
 	margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+	--tw-space-x-reverse: 0;
+	margin-right: calc(1rem * var(--tw-space-x-reverse));
+	margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.divide-x > :not([hidden]) ~ :not([hidden]) {
+	--tw-divide-x-reverse: 0;
+	border-right-width: calc(1px * var(--tw-divide-x-reverse));
+	border-left-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+}
+.divide-x-2 > :not([hidden]) ~ :not([hidden]) {
+	--tw-divide-x-reverse: 0;
+	border-right-width: calc(2px * var(--tw-divide-x-reverse));
+	border-left-width: calc(2px * calc(1 - var(--tw-divide-x-reverse)));
+}
+.divide-green-500 > :not([hidden]) ~ :not([hidden]) {
+	--tw-divide-opacity: 1;
+	border-color: rgba(16, 185, 129, var(--tw-divide-opacity));
+}
 .overflow-hidden {
 	overflow: hidden;
 }
@@ -1579,6 +1601,14 @@ select {
 	border-bottom-right-radius: 0.5rem;
 	border-bottom-left-radius: 0.5rem;
 }
+.rounded-l {
+	border-top-left-radius: 0.25rem;
+	border-bottom-left-radius: 0.25rem;
+}
+.rounded-r {
+	border-top-right-radius: 0.25rem;
+	border-bottom-right-radius: 0.25rem;
+}
 .border {
 	border-width: 1px;
 }
@@ -1599,6 +1629,12 @@ select {
 }
 .border-r {
 	border-right-width: 1px;
+}
+.border-r-0 {
+	border-right-width: 0px;
+}
+.border-l-0 {
+	border-left-width: 0px;
 }
 .border-none {
 	border-style: none;
@@ -1629,6 +1665,10 @@ select {
 .border-blue-600 {
 	--tw-border-opacity: 1;
 	border-color: rgba(37, 99, 235, var(--tw-border-opacity));
+}
+.border-indigo-600 {
+	--tw-border-opacity: 1;
+	border-color: rgba(79, 70, 229, var(--tw-border-opacity));
 }
 .bg-white {
 	--tw-bg-opacity: 1;
@@ -2212,6 +2252,22 @@ trix-editor ol, .trix-content ol {
 	--tw-border-opacity: 1;
 	border-color: rgba(209, 213, 219, var(--tw-border-opacity));
 }
+.hover\:border-indigo-200:hover {
+	--tw-border-opacity: 1;
+	border-color: rgba(199, 210, 254, var(--tw-border-opacity));
+}
+.hover\:border-indigo-400:hover {
+	--tw-border-opacity: 1;
+	border-color: rgba(129, 140, 248, var(--tw-border-opacity));
+}
+.hover\:border-indigo-500:hover {
+	--tw-border-opacity: 1;
+	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
+}
+.hover\:border-indigo-600:hover {
+	--tw-border-opacity: 1;
+	border-color: rgba(79, 70, 229, var(--tw-border-opacity));
+}
 .hover\:bg-indigo-600:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
@@ -2243,6 +2299,18 @@ trix-editor ol, .trix-content ol {
 .hover\:bg-blue-600:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(37, 99, 235, var(--tw-bg-opacity));
+}
+.hover\:bg-indigo-400:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(129, 140, 248, var(--tw-bg-opacity));
+}
+.hover\:bg-indigo-200:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(199, 210, 254, var(--tw-bg-opacity));
+}
+.hover\:bg-indigo-500:hover {
+	--tw-bg-opacity: 1;
+	background-color: rgba(99, 102, 241, var(--tw-bg-opacity));
 }
 .hover\:text-gray-500:hover {
 	--tw-text-opacity: 1;

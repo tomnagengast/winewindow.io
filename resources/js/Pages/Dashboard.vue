@@ -38,16 +38,20 @@
                 <div v-if="hasBottles" class="flex flex-row-reverse justify-between items-center">
                     <div class="relative inline-block text-left" v-if="!isWinery">
                         <div>
-                            <button type="button" @click="updateSort" v-click-away="away"
-                                class="inline-flex justify-center w-full rounded-md bg-gray-200 py-2 px-4 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-300"
-                                id="menu-button" aria-expanded="true" aria-haspopup="true">
-                                {{ sortByWinery ? 'Sort by Winery' : 'Sort by Varietal' }}
-                                <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path
-                                        d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
-                                </svg>
-                            </button>
+                            <div class="flex items-center">
+                                Sort by
+<!--                                grid grid-cols-2 divide-x divide-green-500 p-2 border-->
+                                <div class="ml-2">
+                                    <button class="p-2 border border border-r-0 rounded-l"
+                                        :class="sortByWinery ? 'bg-indigo-600 border-indigo-600 text-white': 'hover:bg-indigo-600 hover:border-indigo-600 hover:text-white'"
+                                        @click="sortByWinery = true"
+                                    >Winery</button>
+                                    <button class="p-2 border border border-l-0 rounded-r"
+                                        :class="!sortByWinery ? 'bg-indigo-600 border-indigo-600 text-white': 'hover:bg-indigo-600 hover:border-indigo-600 hover:text-white'"
+                                        @click="sortByWinery = false"
+                                    >Varietal</button>
+                                </div>
+                            </div>
 
                             <div
                                 class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"

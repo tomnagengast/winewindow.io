@@ -35,7 +35,6 @@ class CreateNewUser implements CreatesNewUsers
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
-                // 'password' => Hash::make($input['password']),
                 'password' => $input['password'],
             ]), function (User $user) {
                 $this->createTeam($user);
@@ -53,9 +52,15 @@ class CreateNewUser implements CreatesNewUsers
     {
         $user->ownedTeams()->save(Team::forceCreate([
             'user_id' => $user->id,
-            'name' => explode(' ', $user->name, 2)[0]."'s Team",
+            'name' => $this->parseName($user->name)." Cellar",
             'personal_team' => true,
             'type' => 'cellar'
         ]));
+    }
+
+    protected function parseName($name)
+    {
+        $first = explode(' ', $name, 2)[0];
+        return "$first'" . ( \Illuminate\Support\Str::endsWith($first, ['s', 'S']) ? '' : 's' );
     }
 }
