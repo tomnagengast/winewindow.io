@@ -32942,7 +32942,7 @@ var _hoisted_17 = {
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sort by ");
 
 var _hoisted_19 = {
-  "class": "ml-2"
+  "class": "mx-2"
 };
 var _hoisted_20 = {
   "class": "origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none",

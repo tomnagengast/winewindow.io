@@ -41,7 +41,7 @@
                             <div class="flex items-center">
                                 Sort by
 <!--                                grid grid-cols-2 divide-x divide-green-500 p-2 border-->
-                                <div class="ml-2">
+                                <div class="mx-2">
                                     <button class="p-2 border border border-r-0 rounded-l"
                                         :class="sortByWinery ? 'bg-indigo-600 border-indigo-600 text-white': 'hover:bg-indigo-600 hover:border-indigo-600 hover:text-white'"
                                         @click="sortByWinery = true"
