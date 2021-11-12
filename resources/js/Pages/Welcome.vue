@@ -31,8 +31,8 @@
                     Connecting Wineries with Winos
                 </h1>
                 <p class="max-w-screen-lg sm:text-xl sm:leading-8 font-medium text-gray-700 mb-10 sm:mb-11">
-                    With the first every interactive aging chart, wineries keep their customers informed
-                    as their wines age, when they win awards, and when they're at their best.
+                    With the first every interactive aging chart, wineries can keep their customers informed
+                    as their wines age, win awards, and when to enjoy them at their best.
                 </p>
                 <div class="flex flex-wrap space-y-4 sm:space-y-0 sm:space-x-4 text-center">
                     <a href="/dashboard"
