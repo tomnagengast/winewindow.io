@@ -63,42 +63,37 @@ Route::get('auth/google/redirect', function () {
 })->name('auth.google');
 
 Route::get('auth/google/callback', function () {
-    dd($user = Socialite::driver('google')->user());
-//    try {
-//        // create a user using socialite driver google
-//        $user = Socialite::driver('google')->user();
-//        // if the user exits, use that user and login
-//        $finduser = User::where('google_id', $user->id)->first();
-//        if ($finduser) {
-//            // if the user exists, login and show dashboard
-//            Auth::login($finduser);
-//            return redirect('/dashboard');
-//        }
-//        // user is not yet created, so create first
-//        $newUser = User::create([
-//            'name' => $user->name,
-//            'email' => $user->email,
-//            'google_id' => $user->id,
-//            'password' => encrypt('')
-//        ]);
-//        // every user needs a team for dashboard/jetstream to work.
-//        // create a personal team for the user
-//        $newTeam = Team::forceCreate([
-//            'user_id' => $newUser->id,
-//            'name' => explode(' ', $user->name, 2)[0] . "'s Team",
-//            'personal_team' => true,
-//            'type' => 'cellar',
-//        ]);
-//        // save the team and add the team to the user.
-//        $newTeam->save();
-//        $newUser->current_team_id = $newTeam->id;
-//        $newUser->save();
-//        // login as the new user
-//        Auth::login($newUser);
-//        return redirect('/dashboard');
-//    } catch (Exception $e) {
-//        dd($e->getMessage());
-//    }
+    $user = Socialite::driver('google')->user();
+    $existingUser = User::where('email', $user->email)->first();
+
+    if ($existingUser) {
+        $existingUser->google_id = $user->id;
+        // $existingUser->profile_photo_path = $user->avatar;
+        $existingUser->save();
+        auth()->login($existingUser, true);
+        return redirect()->route('dashboard');
+    }
+
+    $newUser = User::create([
+        'name' => $user->name,
+        'email' => $user->email,
+        'google_id' => $user->id,
+        'password' => encrypt(''),
+        // 'profile_photo_path' => $user->avatar,
+    ]);
+
+    $newTeam = Team::forceCreate([
+        'user_id' => $newUser->id,
+        'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+        'personal_team' => true,
+        'type' => 'cellar',
+    ]);
+
+    $newTeam->save();
+    $newUser->switchTeam($newTeam);
+
+    auth()->login($newUser, true);
+    return redirect()->route('dashboard');
 });
 
 Route::get('debug', function () {
