@@ -45,9 +45,9 @@
                 <img class="rounded" src="/img/hero-4.png" alt="Girl drinking wine surrounded by bubbles">
             </div>
         </div>
-        <div class="flex max-w-xl mx-auto my-24 justify-between">
-            <div>First ever interactive aging chart for wineries.</div>
-            <div>
+        <div class="flex max-w-xl mx-auto my-24 justify-between flex-col-reverse md:flex-row">
+            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">First ever interactive aging chart for wineries.</div>
+            <div class="mx-auto">
                 <!-- chart -->
                 <div class="border-gray-300  flex px-4 rounded-3xl space-x-2">
                     <!-- row -->
@@ -96,17 +96,18 @@
                 </div>
             </div>
         </div>
-        <div class="flex max-w-xl mx-auto my-24 justify-between">
-            <div>Instantly notify customer of new awards and updates to bottle ratings and notes.</div>
-            <div>
+        <div class="flex max-w-xl mx-auto my-24 justify-between flex-col-reverse md:flex-row">
+            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">Instantly notify customer of new awards and updates to bottle ratings and notes.</div>
+            <div class="mx-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
             </div>
         </div>
     </div>
+    <!-- footer -->
     <div class="bg-gray-800 text-white py-24 max-w-full">
-        <div class="max-w-7xl mx-auto flex justify-between px-8">
+        <div class="max-w-7xl mx-auto flex justify-between px-8 flex-col lg:flex-row">
             <div class="space-y-4 md:w-72">
                 <div class="flex text-lg sm:text-2xl sm:leading-10 font-medium items-center space-x-2 text-white">
                     <div class="w-6">
@@ -130,7 +131,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="flex space-x-12">
+            <div class="flex space-x-12 mt-8 lg:mt-0">
                 <div class="space-y-2 w-48">
                     <div class="font-semibold">Product</div>
                     <div>Features</div>
