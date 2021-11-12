@@ -1,13 +1,14 @@
 <?php
 
+use Inertia\Inertia;
+use App\Models\Team;
+use App\Models\User;
+use Illuminate\Support\Facades\Route;
+use App\Notifications\BottleWasUpdated;
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\WineryController;
 use App\Http\Controllers\BottleController;
 use App\Http\Controllers\CollectionController;
-use App\Http\Controllers\WineryController;
-use App\Models\Team;
-use App\Notifications\BottleWasUpdated;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -22,7 +23,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     if (!$team) {
         $team = Team::factory()->make([
             'user_id' => auth()->user()->id,
-            'name' => explode(' ', auth()->user()->name, 2)[0]."'s Team",
+            'name' => explode(' ', auth()->user()->name, 2)[0] . "'s Team",
             'personal_team' => true,
             'type' => 'cellar'
         ]);
@@ -54,6 +55,46 @@ Route::get('wineries/{winery}', [WineryController::class, 'show'])->name('wineri
 // Collections
 Route::get('collections', [CollectionController::class, 'index'])->name('collections.index');
 Route::get('collections/{collection}', [CollectionController::class, 'show'])->name('collections.show');
+
+// Google OAuth
+// https://codyrigg.medium.com/how-to-add-a-google-login-using-socialite-on-laravel-8-with-jetstream-6153581e7dc9
+Route::get('auth/google/redirect', function () {
+    return Socialite::driver('google')->redirect();
+})->name('auth.google');
+
+Route::get('auth/google/callback', function () {
+    $user = Socialite::driver('google')->user();
+    $existingUser = User::where('email', $user->email)->first();
+
+    if ($existingUser) {
+        $existingUser->google_id = $user->id;
+        // $existingUser->profile_photo_path = $user->avatar;
+        $existingUser->save();
+        auth()->login($existingUser, true);
+        return redirect()->route('dashboard');
+    }
+
+    $newUser = User::create([
+        'name' => $user->name,
+        'email' => $user->email,
+        'google_id' => $user->id,
+        'password' => encrypt(''),
+        // 'profile_photo_path' => $user->avatar,
+    ]);
+
+    $newTeam = Team::forceCreate([
+        'user_id' => $newUser->id,
+        'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+        'personal_team' => true,
+        'type' => 'cellar',
+    ]);
+
+    $newTeam->save();
+    $newUser->switchTeam($newTeam);
+
+    auth()->login($newUser, true);
+    return redirect()->route('dashboard');
+});
 
 Route::get('debug', function () {
     $bottle = App\Models\Bottle::find(8);

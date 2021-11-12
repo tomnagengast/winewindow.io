@@ -1,5 +1,5 @@
 <template>
-    <Head title="Log in" />
+    <Head title="Sign In" />
 
     <jet-authentication-card>
         <template #logo>
@@ -14,7 +14,7 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="email" value="Email" />
+                <jet-label for="email" value="Email Address" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
             </div>
 
@@ -23,23 +23,31 @@
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
             </div>
 
-            <div class="block mt-4">
+            <!-- <div class="block mt-4">
                 <label class="flex items-center">
                     <jet-checkbox name="remember" v-model:checked="form.remember" />
                     <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
-            </div>
+            </div> -->
 
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
-                </Link>
-
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
-                </jet-button>
+            <div class="mt-4">
+                <button :type="type" class="flex w-full items-center justify-center text-center p-3 bg-gray-800 border border-transparent rounded font-semibold text-white tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Sign In
+                </button>
             </div>
         </form>
+
+        <div class="block relative text-center my-4 before:border-b-2 before:absolute before:border-red-600 before:w-full before:top-1/2 before:left-0 before:-z-1">
+            <span class="font-bold text-gray-500 px-2 bg-white uppercase">OR</span>
+        </div>
+        <a href="/auth/google/redirect" class="text-center border-blue-600 border-2 mb-2 p-2 rounded font-semibold text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:transition">
+            <img class="mr-2 bg-white rounded p-1" src="/img/oauth-logo-google.svg"  alt="Google OAuth Logo"/>
+            <span>Sign In with Google</span>
+        </a>
+        <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+            Forgot your password?
+        </Link>
     </jet-authentication-card>
 </template>
 
@@ -77,7 +85,7 @@
                 form: this.$inertia.form({
                     email: '',
                     password: '',
-                    remember: false
+                    remember: true
                 })
             }
         },
