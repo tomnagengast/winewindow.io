@@ -38,7 +38,7 @@
                             </Link>
 
                             <Link :href="route('register')" class="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2 ml-4">
-                                Register
+                                Sign Up
                             </Link>
                         </div>
                         <div class="hidden sm:flex sm:items-center sm:ml-6" id="settings" v-else>
@@ -213,7 +213,7 @@
                             </Link>
 
                             <Link :href="route('register')" class="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
-                                Register
+                                Sign Up
                             </Link>
                         </div>
 
