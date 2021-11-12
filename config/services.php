@@ -33,4 +33,10 @@ return [
     'nexmo' => [
         'sms_from' => env('NEXMO_PHONE_NUMBER', '18054204400'),
     ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => '/auth/google/callback',
+    ],
 ];

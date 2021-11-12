@@ -12,6 +12,12 @@
             {{ status }}
         </div>
 
+        <div>
+            <Link :href="route('auth.google')" style="margin-top: 0px !important;background: green;color: #ffffff;padding: 5px;border-radius:7px;" class="ml-2 btn-google">
+                <strong>Login With Google</strong>
+            </Link>
+        </div>
+
         <form @submit.prevent="submit">
             <div>
                 <jet-label for="email" value="Email" />
