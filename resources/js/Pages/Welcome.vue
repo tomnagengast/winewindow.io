@@ -45,6 +45,13 @@
                 <img class="rounded" src="/img/hero-4.png" alt="Girl drinking wine surrounded by bubbles">
             </div>
         </div>
+        <div class="flex flex-col max-w-3xl w-full mx-auto items-center border-t border-b mt-20 py-8">
+            <div class="font-black mb-12 text-lg">Used by wineries who care</div>
+            <div class="flex space-x-10">
+                <img class="w-32" src="/img/logos/cinquain-cellars.webp" alt="Cinquain Cellars Logo">
+                <img class="w-40" src="/img/logos/bajka-wine-company.webp" alt="Bajka Wine Company Logo">
+            </div>
+        </div>
         <div class="flex max-w-xl mx-auto my-24 justify-between flex-col-reverse md:flex-row">
             <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">First-ever interactive aging chart for wineries.</div>
             <div class="mx-auto">
