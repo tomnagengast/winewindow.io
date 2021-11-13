@@ -31,7 +31,7 @@
                     Connecting Wineries with Winos
                 </h1>
                 <p class="max-w-screen-lg sm:text-xl sm:leading-8 font-medium text-gray-700 mb-10 sm:mb-11">
-                    With the first every interactive aging chart, wineries can keep their customers informed
+                    With the first-ever interactive aging chart, wineries can keep their customers informed
                     as their wines age, win awards, and when to enjoy them at their best.
                 </p>
                 <div class="flex flex-wrap space-y-4 sm:space-y-0 sm:space-x-4 text-center">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="flex max-w-xl mx-auto my-24 justify-between flex-col-reverse md:flex-row">
-            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">First ever interactive aging chart for wineries.</div>
+            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">First-ever interactive aging chart for wineries.</div>
             <div class="mx-auto">
                 <!-- chart -->
                 <div class="border-gray-300  flex px-4 rounded-3xl space-x-2">
@@ -122,7 +122,7 @@
                     </div>
                     <div>winewindow</div>
                 </div>
-                <div>Wine Window is the first ever interactive aging chart for wineries.</div>
+                <div>Wine Window is the first-ever interactive aging chart for wineries.</div>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
