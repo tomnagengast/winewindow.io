@@ -9,7 +9,7 @@
                     {{ ratingText }}
                 </div>
                 <div class="font-black text-4xl text-gray-800 pt-2">{{ bottle.vintage }} {{ bottle.varietal }}</div>
-                <Link :href="route('wineries.show', bottle.team_id)"
+                <Link :href="route('wineries.show', bottle.team)"
                     class="font-semibold text-2xl text-gray-600">
                     {{ bottle.winery }}
                 </Link>
@@ -17,7 +17,7 @@
 
             <div v-if="auth">
                 <div v-if="ownedByViewer">
-                    <Link as="button" id="edit" type="button" :href="route('bottles.edit', bottle.id)">
+                    <Link as="button" id="edit" type="button" :href="route('bottles.edit', bottle)">
                         <div
                             class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
                             Edit
@@ -27,7 +27,7 @@
                 <div v-else>
                     <div v-if="auth.current_team.type !== 'winery'">
                         <Link method="post" id="follow" as="button" type="button"
-                            :href="route('bottles.follow', bottle.id)"
+                            :href="route('bottles.follow', [bottle.team, bottle])"
                             v-if="!isFollowing">
                             <div
                                 class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
@@ -35,7 +35,7 @@
                             </div>
                         </Link>
                         <Link method="post" id="unfollow" as="button" type="button"
-                            :href="route('bottles.unfollow', bottle.id)" v-else>
+                            :href="route('bottles.unfollow', [bottle.team, bottle])" v-else>
                             <div
                                 class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 bg-gray-200">
                                 Following

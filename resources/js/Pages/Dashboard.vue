@@ -21,13 +21,13 @@
                     </div>
                     <div class="pb-4">Here are some wineries you might be interested in</div>
                     <div class="flex justify-between">
-                        <Link :href="route('wineries.show', 4)">
+                        <Link :href="route('wineries.show', 'cinquain-cellars')">
                             <div class="border rounded px-8 py-4">
                                 <div>Cinquain Cellars</div>
                                 <div>Paso Robles, California</div>
                             </div>
                         </Link>
-                        <Link :href="route('wineries.show', 2)">
+                        <Link :href="route('wineries.show', 'bajka-wine-company')">
                             <div class="border rounded px-8 py-4">
                                 <div>Bajka Wine Company</div>
                                 <div>Paso Robles, California</div>
@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                                 <div v-else :class="isWinery ? 'py-1' : 'py-3'">
-                                    <Link :href="route('bottles.show', bottle)">
+                                    <Link :href="route('bottles.show', [bottle.team.slug, bottle])">
                                         <div :class="'rounded active-bottle rating-' + bottle.rating">
                                             <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
                                         </div>
@@ -140,6 +140,7 @@ export default defineComponent({
             chartHeader: null,
             sortByWinery: true,
             showSortDropdown: false,
+            winery: this.team
         }
     },
 

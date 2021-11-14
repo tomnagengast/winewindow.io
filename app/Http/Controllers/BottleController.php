@@ -8,14 +8,15 @@ use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class BottleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Inertia\Response
+     * @param Request $request
+     * @return Response
      */
     public function index(Request $request)
     {
@@ -41,7 +42,7 @@ class BottleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      */
     public function store(Request $request)
     {
@@ -62,10 +63,11 @@ class BottleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bottle  $bottle
+     * @param Bottle $bottle
      */
-    public function show(Bottle $bottle)
+    public function show(Team $winery, Bottle $bottle)
     {
+        $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
         return Inertia::render('Bottles/Show', [
             'bottle' => $bottle,
             'following' => auth()->user() ?
@@ -76,7 +78,7 @@ class BottleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bottle  $bottle
+     * @param Bottle $bottle
      */
     public function edit(Bottle $bottle)
     {
@@ -92,8 +94,8 @@ class BottleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bottle  $bottle
+     * @param Request $request
+     * @param Bottle $bottle
      */
     public function update(Request $request, Bottle $bottle)
     {
@@ -121,7 +123,7 @@ class BottleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bottle  $bottle
+     * @param Bottle $bottle
      */
     public function destroy(Bottle $bottle)
     {
@@ -137,7 +139,7 @@ class BottleController extends Controller
     /**
      * Follow the specified resource.
      *
-     * @param  \App\Models\Bottle  $bottle
+     * @param Bottle $bottle
      */
     public function follow(Bottle $bottle)
     {
@@ -153,7 +155,7 @@ class BottleController extends Controller
     /**
      * Unfollow the specified resource.
      *
-     * @param  \App\Models\Bottle  $bottle
+     * @param Bottle $bottle
      */
     public function unfollow(Bottle $bottle)
     {

@@ -14,21 +14,21 @@ Route::get('/auth/google/redirect', [AuthController::class, 'googleRedirect'])->
 Route::get('/auth/google/callback', [AuthController::class, 'googleCallback'])->name('auth.google.callback');
 
 Route::get('wineries', [WineryController::class, 'index'])->name('wineries.index');
-Route::get('wineries/{winery}', [WineryController::class, 'show'])->name('wineries.show');
+Route::get('{winery}', [WineryController::class, 'show'])->name('wineries.show');
 
-Route::get('bottles/{bottle}', [BottleController::class, 'show'])->name('bottles.show');
+Route::get('{winery}/{bottle}', [BottleController::class, 'show'])->name('bottles.show');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::post('bottles/{bottle}/follow', [BottleController::class, 'follow'])->name('bottles.follow');
-    Route::post('bottles/{bottle}/unfollow', [BottleController::class, 'unfollow'])->name('bottles.unfollow');
-    Route::get('bottles/{bottle}/edit', [BottleController::class, 'edit'])->name('bottles.edit');
-    Route::post('bottles/{bottle}/update', [BottleController::class, 'update'])->name('bottles.update');
-    Route::get('bottles/{bottle}/destroy', [BottleController::class, 'destroy'])->name('bottles.destroy');
-    Route::get('wineries/{winery}/bottles/create', [BottleController::class, 'create'])->name('bottles.create');
-    Route::post('wineries/{winery}/bottles/store', [BottleController::class, 'store'])->name('bottles.store');
+    Route::post('{winery}/{bottle}/follow', [BottleController::class, 'follow'])->name('bottles.follow');
+    Route::post('{winery}/{bottle}/unfollow', [BottleController::class, 'unfollow'])->name('bottles.unfollow');
+    Route::get('{winery}/{bottle}/edit', [BottleController::class, 'edit'])->name('bottles.edit');
+    Route::post('{winery}/{bottle}/update', [BottleController::class, 'update'])->name('bottles.update');
+    Route::get('{winery}/{bottle}/destroy', [BottleController::class, 'destroy'])->name('bottles.destroy');
+    Route::get('{winery}/bottles/create', [BottleController::class, 'create'])->name('bottles.create');
+    Route::post('{winery}/bottles/store', [BottleController::class, 'store'])->name('bottles.store');
 });
 
-Route::get('collections', [CollectionController::class, 'index'])->name('collections.index');
-Route::get('collections/{collection}', [CollectionController::class, 'show'])->name('collections.show');
+Route::get('{winery}/collections', [CollectionController::class, 'index'])->name('collections.index');
+Route::get('{winery}/{collection}', [CollectionController::class, 'show'])->name('collections.show');
 
 Route::get('debug', function () {
     //

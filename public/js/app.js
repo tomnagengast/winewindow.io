@@ -27750,7 +27750,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       defaultChartWidth: null,
       chartHeader: null,
       sortByWinery: true,
-      showSortDropdown: false
+      showSortDropdown: false,
+      winery: this.team
     };
   },
   components: {
@@ -32722,7 +32723,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.bottle.vintage) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.bottle.varietal), 1
       /* TEXT */
       ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        href: _ctx.route('wineries.show', _ctx.bottle.team_id),
+        href: _ctx.route('wineries.show', _ctx.bottle.team),
         "class": "font-semibold text-2xl text-gray-600"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -32739,7 +32740,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "button",
         id: "edit",
         type: "button",
-        href: _ctx.route('bottles.edit', _ctx.bottle.id)
+        href: _ctx.route('bottles.edit', _ctx.bottle)
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_6];
@@ -32755,7 +32756,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "follow",
         as: "button",
         type: "button",
-        href: _ctx.route('bottles.follow', _ctx.bottle.id)
+        href: _ctx.route('bottles.follow', [_ctx.bottle.team, _ctx.bottle])
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_9];
@@ -32771,7 +32772,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "unfollow",
         as: "button",
         type: "button",
-        href: _ctx.route('bottles.unfollow', _ctx.bottle.id)
+        href: _ctx.route('bottles.unfollow', [_ctx.bottle.team, _ctx.bottle])
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_10];
@@ -33110,7 +33111,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8
       /* PROPS */
       , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [!_ctx.hasBottles ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_ctx.team.type === 'winery' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_9, "You haven't added any bottles yet!")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_10, "You're not following any bottles yet!"))]), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        href: _ctx.route('wineries.show', 4)
+        href: _ctx.route('wineries.show', 'cinquain-cellars')
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_13];
@@ -33121,7 +33122,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8
       /* PROPS */
       , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        href: _ctx.route('wineries.show', 2)
+        href: _ctx.route('wineries.show', 'bajka-wine-company')
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_14];
@@ -33201,7 +33202,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               key: 1,
               "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(_ctx.isWinery ? 'py-1' : 'py-3')
             }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-              href: _ctx.route('bottles.show', bottle)
+              href: _ctx.route('bottles.show', [bottle.team.slug, bottle])
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -35944,7 +35945,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               key: 1,
               "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(_ctx.isWinery ? 'py-1' : 'py-3')
             }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-              href: _ctx.route('bottles.show', bottle)
+              href: _ctx.route('bottles.show', [bottle.team, bottle])
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
