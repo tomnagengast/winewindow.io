@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddGoogleAuthToUsersTable extends Migration
+class AddSlugToTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddGoogleAuthToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('google_id')->unique()->nullable();
+        Schema::table('teams', function (Blueprint $table) {
+            $table->string('slug')->nullable();
         });
     }
 }

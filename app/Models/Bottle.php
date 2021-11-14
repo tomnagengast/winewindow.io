@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Bottle extends Model
 {
     use HasFactory;
+    use Sluggable;
 
     protected $casts = [
         'vintage' => 'integer',
@@ -20,9 +22,36 @@ class Bottle extends Model
         'description',
         'team_id',
         'winery',
+        'slug',
     ];
 
-     protected $with = ['team'];
+    protected $with = ['team'];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['vintage', 'varietal'],
+                'unique' => false,
+                'onUpdate' => true,
+            ]
+        ];
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 
     public function team()
     {
