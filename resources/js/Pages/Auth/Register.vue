@@ -6,9 +6,33 @@
             <jet-authentication-card-logo />
         </template>
 
+        <div v-if="!withEmail">
+            <button @click="withEmail = true" class="flex w-full text-center border-blue-600 border-2 mb-2 p-2 rounded font-semibold text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:transition">
+                <div class="mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <span>Sign Up with Email</span>
+            </button>
+            <a href="/auth/google/redirect" class="text-center border-blue-600 border-2 mb-2 p-2 rounded font-semibold text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:transition">
+                <img class="mr-2 bg-white rounded p-1" src="/img/oauth-logo-google.svg"  alt="Google OAuth Logo"/>
+                <span>Sign Up with Google</span>
+            </a>
+        </div>
+
         <jet-validation-errors class="mb-4" />
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" v-if="withEmail">
+            <div @click="withEmail = false" class="mb-2 inline-flex text-white font-semibold cursor-pointer bg-gray-800 rounded px-3 py-2 hover:bg-gray-600 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                </svg>
+                Back
+            </div>
+
             <div>
                 <jet-label for="name" value="Name" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
@@ -27,11 +51,6 @@
             <div class="mt-4">
                 <jet-label for="password_confirmation" value="Confirm Password" />
                 <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <jet-label for="key" value="Beta Key" />
-                <jet-input id="key" type="text" class="mt-1 block w-full" v-model="form.key" required />
             </div>
 
             <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
@@ -85,12 +104,12 @@
 
         data() {
             return {
+                withEmail: false,
                 form: this.$inertia.form({
                     name: '',
                     email: '',
                     password: '',
                     password_confirmation: '',
-                    key: '',
                     terms: false,
                 })
             }
