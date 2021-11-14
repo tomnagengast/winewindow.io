@@ -25920,9 +25920,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var algoliasearch_lite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! algoliasearch/lite */ "./node_modules/algoliasearch/dist/algoliasearch-lite.umd.js");
-/* harmony import */ var algoliasearch_lite__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(algoliasearch_lite__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var algoliasearch_lite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! algoliasearch/lite */ "./node_modules/algoliasearch/dist/algoliasearch-lite.umd.js");
+/* harmony import */ var algoliasearch_lite__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(algoliasearch_lite__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var vue3_click_away__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue3-click-away */ "./node_modules/vue3-click-away/dist/module.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -25935,10 +25938,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       searchFocus: false,
-      searchClient: algoliasearch_lite__WEBPACK_IMPORTED_MODULE_3___default()('YSXU5Z8F6N', '1f88afcb9483681a37cab9d8155ca034')
+      searchQuery: '',
+      searchClient: algoliasearch_lite__WEBPACK_IMPORTED_MODULE_4___default()('YSXU5Z8F6N', '1f88afcb9483681a37cab9d8155ca034')
     };
   },
   methods: {
+    refineSearch: lodash__WEBPACK_IMPORTED_MODULE_3___default().debounce(function (refine, value) {
+      this.searchQuery = value;
+      refine(value);
+    }, 400),
     away: function away() {
       this.searchFocus = false;
     }
@@ -28962,7 +28970,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["value", "onInput"];
+var _hoisted_1 = ["onInput"];
 var _hoisted_2 = {
   "class": "py-1"
 };
@@ -28993,23 +29001,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["relative px-4 py-2 rounded-t-lg", _ctx.searchFocus ? 'shadow-xl' : ''])
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ais_search_box, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
-          var currentRefinement = _ref.currentRefinement,
-              indices = _ref.indices,
-              refine = _ref.refine;
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+          var refine = _ref.refine;
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+            "class": "ais-SearchBox-input rounded-full text-md px-4 bg-gray-100 border-none placeholder-gray-500 focus:placeholder-gray-400",
             type: "search",
-            placeholder: "Search WineWindow",
-            value: currentRefinement,
+            placeholder: "Search Wine Window...",
             onFocus: _cache[0] || (_cache[0] = function ($event) {
               return _ctx.searchFocus = true;
             }),
+            "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+              return _ctx.searchQuery = $event;
+            }),
             onInput: function onInput($event) {
-              return refine($event.currentTarget.value);
-            },
-            "class": "ais-SearchBox-input rounded-full text-md px-4 bg-gray-100 border-none placeholder-gray-500 focus:placeholder-gray-400"
+              return _ctx.refineSearch(refine, $event.currentTarget.value);
+            }
           }, null, 40
           /* PROPS, HYDRATE_EVENTS */
-          , _hoisted_1)];
+          , _hoisted_1), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.searchQuery]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        :value=\"currentRefinement\""), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        @input=\"refine($event.currentTarget.value)\"")];
         }),
         _: 1
         /* STABLE */

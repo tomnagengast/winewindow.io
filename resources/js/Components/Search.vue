@@ -4,15 +4,17 @@
             :class="searchFocus ? 'shadow-xl' : ''"
             v-click-away="away">
             <ais-search-box>
-                <template v-slot="{ currentRefinement, indices, refine }">
+                <template v-slot="{ refine }">
                     <input
-                        type="search"
-                        placeholder="Search WineWindow"
-                        :value="currentRefinement"
-                        @focus="searchFocus = true"
-                        @input="refine($event.currentTarget.value)"
                         class="ais-SearchBox-input rounded-full text-md px-4 bg-gray-100 border-none placeholder-gray-500 focus:placeholder-gray-400"
+                        type="search"
+                        placeholder="Search Wine Window..."
+                        @focus="searchFocus = true"
+                        v-model="searchQuery"
+                        @input="refineSearch(refine, $event.currentTarget.value)"
                     />
+                    <!--                        :value="currentRefinement"-->
+                    <!--                        @input="refine($event.currentTarget.value)"-->
                 </template>
             </ais-search-box>
             <ais-hits class="absolute mt-2 bg-white rounded-b-lg shadow-xl -ml-4 w-full p-4"
@@ -34,9 +36,10 @@
 
 <script>
 import {defineComponent} from 'vue'
-import { Link} from '@inertiajs/inertia-vue3';
+import {Link} from '@inertiajs/inertia-vue3';
 import algoliasearch from 'algoliasearch/lite';
 import {mixin as clickaway} from "vue3-click-away";
+import _ from 'lodash';
 
 export default defineComponent({
     mixins: [clickaway],
@@ -48,6 +51,7 @@ export default defineComponent({
     data() {
         return {
             searchFocus: false,
+            searchQuery: '',
             searchClient: algoliasearch(
                 'YSXU5Z8F6N',
                 '1f88afcb9483681a37cab9d8155ca034'
@@ -56,6 +60,10 @@ export default defineComponent({
     },
 
     methods: {
+        refineSearch: _.debounce(function (refine, value) {
+            this.searchQuery = value
+            refine(value)
+        }, 400),
         away() {
             this.searchFocus = false;
         },
