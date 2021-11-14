@@ -18,13 +18,13 @@ Route::get('{winery}', [WineryController::class, 'show'])->name('wineries.show')
 
 Route::get('{winery}/{bottle}', [BottleController::class, 'show'])->name('bottles.show');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('{winery}/bottles/create', [BottleController::class, 'create'])->name('bottles.create');
+    Route::post('{winery}/bottles/store', [BottleController::class, 'store'])->name('bottles.store');
     Route::post('{winery}/{bottle}/follow', [BottleController::class, 'follow'])->name('bottles.follow');
     Route::post('{winery}/{bottle}/unfollow', [BottleController::class, 'unfollow'])->name('bottles.unfollow');
     Route::get('{winery}/{bottle}/edit', [BottleController::class, 'edit'])->name('bottles.edit');
     Route::post('{winery}/{bottle}/update', [BottleController::class, 'update'])->name('bottles.update');
     Route::get('{winery}/{bottle}/destroy', [BottleController::class, 'destroy'])->name('bottles.destroy');
-    Route::get('{winery}/bottles/create', [BottleController::class, 'create'])->name('bottles.create');
-    Route::post('{winery}/bottles/store', [BottleController::class, 'store'])->name('bottles.store');
 });
 
 Route::get('{winery}/collections', [CollectionController::class, 'index'])->name('collections.index');

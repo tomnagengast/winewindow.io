@@ -56,7 +56,7 @@ export default defineComponent({
     },
     methods: {
         submit() {
-            this.$inertia.post(`/wineries/${this.$page.props.user.current_team.id}/bottles/store`, this.form)
+            this.$inertia.post(`/${this.$page.props.user.current_team.slug}/bottles/store`, this.form)
         },
         getDataFromTrix: function(data) {
             this.form.description = data;

@@ -34,9 +34,7 @@ class BottleController extends Controller
             return redirect('dashboard');
         }
 
-        return Inertia::render('Bottles/Create', [
-//            'winery' => $bottle->findById()
-        ]);
+        return Inertia::render('Bottles/Create');
     }
 
     /**
@@ -44,7 +42,7 @@ class BottleController extends Controller
      *
      * @param Request $request
      */
-    public function store(Request $request)
+    public function store(Team $winery, Request $request)
     {
         $request->validate([
             'varietal' => 'required',
@@ -57,7 +55,7 @@ class BottleController extends Controller
 
         $bottle = Bottle::create($request->all());
 
-        return redirect()->route('bottles.show', $bottle->id);
+        return redirect()->route('bottles.show', [$winery, $bottle]);
     }
 
     /**
@@ -68,6 +66,7 @@ class BottleController extends Controller
     public function show(Team $winery, Bottle $bottle)
     {
         $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
+
         return Inertia::render('Bottles/Show', [
             'bottle' => $bottle,
             'following' => auth()->user() ?
@@ -80,12 +79,14 @@ class BottleController extends Controller
      *
      * @param Bottle $bottle
      */
-    public function edit(Bottle $bottle)
+    public function edit(Team $winery, Bottle $bottle)
     {
         if (auth()->user()->currentTeam->type === 'cellar') {
             return redirect('dashboard');
         }
-        // $toUpdate = auth()->user()->currentTeam->bottles()->findOrFail($bottle);
+
+        $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
+
         return Inertia::render('Bottles/Edit', [
             'bottle' => $bottle,
         ]);
@@ -97,7 +98,7 @@ class BottleController extends Controller
      * @param Request $request
      * @param Bottle $bottle
      */
-    public function update(Request $request, Bottle $bottle)
+    public function update(Request $request, Team $winery, Bottle $bottle)
     {
         $request->validate([
             'varietal' => 'required',
@@ -105,6 +106,8 @@ class BottleController extends Controller
             'rating' => 'required',
             'description' => '',
         ]);
+
+        $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
 
         if ($bottle->rating != $request->rating) {
             NotifyBottleUpdated::dispatch($bottle);
@@ -117,7 +120,7 @@ class BottleController extends Controller
             'description' => $request['description'],
         ]);
 
-        return redirect()->route('bottles.show', $bottle->id);
+        return redirect()->route('bottles.show', [$winery, $bottle]);
     }
 
     /**
@@ -125,11 +128,13 @@ class BottleController extends Controller
      *
      * @param Bottle $bottle
      */
-    public function destroy(Bottle $bottle)
+    public function destroy(Team $winery, Bottle $bottle)
     {
         if (auth()->user()->currentTeam->id != $bottle->team->id) {
             return redirect('dashboard');
         }
+
+        $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
 
         $bottle->delete();
 
@@ -141,15 +146,17 @@ class BottleController extends Controller
      *
      * @param Bottle $bottle
      */
-    public function follow(Bottle $bottle)
+    public function follow(Team $winery, Bottle $bottle)
     {
         if (auth()->user()->currentTeam->type === 'winery') {
             return redirect('dashboard');
         }
 
+        $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
+
         $bottle->follow();
 
-        return redirect()->route('bottles.show', $bottle);
+        return redirect()->route('bottles.show', [$winery, $bottle]);
     }
 
     /**
@@ -157,10 +164,12 @@ class BottleController extends Controller
      *
      * @param Bottle $bottle
      */
-    public function unfollow(Bottle $bottle)
+    public function unfollow(Team $winery, Bottle $bottle)
     {
+        $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
+
         $bottle->unfollow();
 
-        return redirect()->route('bottles.show', $bottle);
+        return redirect()->route('bottles.show', [$winery, $bottle]);
     }
 }

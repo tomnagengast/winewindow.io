@@ -20,14 +20,14 @@
                             class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 mr-4">
                             Save
                         </button>
-                        <Link as="button" type="button" :href="route('bottles.show', bottle.id)">
+                        <Link as="button" type="button" :href="route('bottles.show', [bottle.team.slug, bottle])">
                             <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
                                 Cancel
                             </div>
                         </Link>
                     </div>
                     <div>
-                        <Link as="button" type="button" id="delete" :href="route('bottles.destroy', bottle.id)">
+                        <Link as="button" type="button" id="delete" :href="route('bottles.destroy', [bottle.team.slug, bottle])">
                             <div class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
                                 Delete
                             </div>
@@ -82,7 +82,7 @@ export default defineComponent({
     },
     methods: {
         submit() {
-            this.$inertia.post(`/bottles/${this.bottle.id}/update`, this.form)
+            this.$inertia.post(`/${this.$page.props.user.current_team.slug}/${this.bottle.slug}/update`, this.form)
         },
         getDataFromTrix: function(data) {
             this.form.description = data;

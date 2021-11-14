@@ -17,7 +17,7 @@
 
             <div v-if="auth">
                 <div v-if="ownedByViewer">
-                    <Link as="button" id="edit" type="button" :href="route('bottles.edit', bottle)">
+                    <Link as="button" id="edit" type="button" :href="route('bottles.edit', [bottle.team.slug, bottle])">
                         <div
                             class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4">
                             Edit

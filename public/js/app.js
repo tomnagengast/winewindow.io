@@ -27501,7 +27501,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      this.$inertia.post("/wineries/".concat(this.$page.props.user.current_team.id, "/bottles/store"), this.form);
+      this.$inertia.post("/".concat(this.$page.props.user.current_team.slug, "/bottles/store"), this.form);
     },
     getDataFromTrix: function getDataFromTrix(data) {
       this.form.description = data;
@@ -27567,7 +27567,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
-      this.$inertia.post("/bottles/".concat(this.bottle.id, "/update"), this.form);
+      this.$inertia.post("/".concat(this.$page.props.user.current_team.slug, "/").concat(this.bottle.slug, "/update"), this.form);
     },
     getDataFromTrix: function getDataFromTrix(data) {
       this.form.description = data;
@@ -32607,7 +32607,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["content", "onDataFromTrix"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
         as: "button",
         type: "button",
-        href: _ctx.route('bottles.show', _ctx.bottle.id)
+        href: _ctx.route('bottles.show', [_ctx.bottle.team.slug, _ctx.bottle])
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_7];
@@ -32621,7 +32621,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "button",
         type: "button",
         id: "delete",
-        href: _ctx.route('bottles.destroy', _ctx.bottle.id)
+        href: _ctx.route('bottles.destroy', [_ctx.bottle.team.slug, _ctx.bottle])
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_8];
@@ -32740,7 +32740,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         as: "button",
         id: "edit",
         type: "button",
-        href: _ctx.route('bottles.edit', _ctx.bottle)
+        href: _ctx.route('bottles.edit', [_ctx.bottle.team.slug, _ctx.bottle])
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_6];
