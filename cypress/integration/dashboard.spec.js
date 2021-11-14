@@ -5,7 +5,7 @@ describe('Dashboard', function () {
         it('redirects to the login page', () => {
             cy.visit('/dashboard').get('body')
                 .should('not.contain', 'JohnDoe\'s Team')
-                .contains('button', 'Log in')
+                .contains('button', 'Sign In')
         })
 
     })

@@ -71,7 +71,7 @@
                 </Link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    Sign Up
                 </jet-button>
             </div>
         </form>

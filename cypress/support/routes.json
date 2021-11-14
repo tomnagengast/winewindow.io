@@ -473,7 +473,7 @@
   "landing": {
     "name": "landing",
     "domain": null,
-    "action": "Closure",
+    "action": "App\\Http\\Controllers\\AuthController@welcome",
     "uri": "/",
     "method": [
       "GET",
@@ -483,84 +483,28 @@
   "dashboard": {
     "name": "dashboard",
     "domain": null,
-    "action": "Closure",
+    "action": "\\App\\Http\\Controllers\\AuthController@dashboard",
     "uri": "dashboard",
     "method": [
       "GET",
       "HEAD"
     ]
   },
-  "bottles.show": {
-    "name": "bottles.show",
+  "auth.google": {
+    "name": "auth.google",
     "domain": null,
-    "action": "App\\Http\\Controllers\\BottleController@show",
-    "uri": "bottles/{bottle}",
+    "action": "App\\Http\\Controllers\\AuthController@googleRedirect",
+    "uri": "auth/google/redirect",
     "method": [
       "GET",
       "HEAD"
     ]
   },
-  "bottles.follow": {
-    "name": "bottles.follow",
+  "auth.google.callback": {
+    "name": "auth.google.callback",
     "domain": null,
-    "action": "\\App\\Http\\Controllers\\BottleController@follow",
-    "uri": "bottles/{bottle}/follow",
-    "method": [
-      "POST"
-    ]
-  },
-  "bottles.unfollow": {
-    "name": "bottles.unfollow",
-    "domain": null,
-    "action": "\\App\\Http\\Controllers\\BottleController@unfollow",
-    "uri": "bottles/{bottle}/unfollow",
-    "method": [
-      "POST"
-    ]
-  },
-  "bottles.edit": {
-    "name": "bottles.edit",
-    "domain": null,
-    "action": "\\App\\Http\\Controllers\\BottleController@edit",
-    "uri": "bottles/{bottle}/edit",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "bottles.update": {
-    "name": "bottles.update",
-    "domain": null,
-    "action": "\\App\\Http\\Controllers\\BottleController@update",
-    "uri": "bottles/{bottle}/update",
-    "method": [
-      "POST"
-    ]
-  },
-  "bottles.create": {
-    "name": "bottles.create",
-    "domain": null,
-    "action": "\\App\\Http\\Controllers\\BottleController@create",
-    "uri": "wineries/{winery}/bottles/create",
-    "method": [
-      "GET",
-      "HEAD"
-    ]
-  },
-  "bottles.store": {
-    "name": "bottles.store",
-    "domain": null,
-    "action": "\\App\\Http\\Controllers\\BottleController@store",
-    "uri": "wineries/{winery}/bottles/store",
-    "method": [
-      "POST"
-    ]
-  },
-  "bottles.destroy": {
-    "name": "bottles.destroy",
-    "domain": null,
-    "action": "\\App\\Http\\Controllers\\BottleController@destroy",
-    "uri": "bottles/{bottle}/destroy",
+    "action": "App\\Http\\Controllers\\AuthController@googleCallback",
+    "uri": "auth/google/callback",
     "method": [
       "GET",
       "HEAD"
@@ -584,6 +528,82 @@
     "method": [
       "GET",
       "HEAD"
+    ]
+  },
+  "bottles.show": {
+    "name": "bottles.show",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@show",
+    "uri": "bottles/{bottle}",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "bottles.follow": {
+    "name": "bottles.follow",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@follow",
+    "uri": "bottles/{bottle}/follow",
+    "method": [
+      "POST"
+    ]
+  },
+  "bottles.unfollow": {
+    "name": "bottles.unfollow",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@unfollow",
+    "uri": "bottles/{bottle}/unfollow",
+    "method": [
+      "POST"
+    ]
+  },
+  "bottles.edit": {
+    "name": "bottles.edit",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@edit",
+    "uri": "bottles/{bottle}/edit",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "bottles.update": {
+    "name": "bottles.update",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@update",
+    "uri": "bottles/{bottle}/update",
+    "method": [
+      "POST"
+    ]
+  },
+  "bottles.destroy": {
+    "name": "bottles.destroy",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@destroy",
+    "uri": "bottles/{bottle}/destroy",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "bottles.create": {
+    "name": "bottles.create",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@create",
+    "uri": "wineries/{winery}/bottles/create",
+    "method": [
+      "GET",
+      "HEAD"
+    ]
+  },
+  "bottles.store": {
+    "name": "bottles.store",
+    "domain": null,
+    "action": "App\\Http\\Controllers\\BottleController@store",
+    "uri": "wineries/{winery}/bottles/store",
+    "method": [
+      "POST"
     ]
   },
   "collections.index": {

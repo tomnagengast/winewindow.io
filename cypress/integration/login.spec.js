@@ -17,7 +17,7 @@ describe('Login', function () {
         it('allows a user to log in', () => {
             cy.get('#email').type('john@example.com')
             cy.get('#password').type('password')
-            cy.contains('button', 'Log in').click()
+            cy.contains('button', 'Sign In').click()
 
             cy.url().should('include', '/dashboard')
         })
@@ -34,7 +34,7 @@ describe('Login', function () {
         it('requires an existing email and password', () => {
             cy.get('#email').type('foobar@example.com')
             cy.get('#password').type('password')
-            cy.contains('button', 'Log in').click()
+            cy.contains('button', 'Sign In').click()
 
             cy.contains("These credentials do not match our records.")
                 .url().should('include', '/login')
