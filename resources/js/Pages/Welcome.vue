@@ -116,7 +116,7 @@
     <div class="bg-gray-800 text-white py-24 max-w-full">
         <div class="max-w-7xl mx-auto flex justify-between px-8 flex-col lg:flex-row">
             <div class="space-y-4 md:w-72">
-                <div class="flex text-lg sm:text-2xl sm:leading-10 font-medium items-center space-x-2 text-white">
+                <div class="flex text-lg sm:text-2xl sm:leading-10 font-medium items-center justify-center space-x-2 text-white">
                     <div class="w-6">
                         <svg viewBox="0 0 198 198" width="100%" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -127,7 +127,7 @@
                             </g>
                         </svg>
                     </div>
-                    <div>winewindow</div>
+                    <div class="pb-1">winewindow</div>
                 </div>
                 <div>Wine Window is the first-ever interactive aging chart for wineries.</div>
                 <div>

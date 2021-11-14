@@ -1,6 +1,6 @@
 <template>
     <!-- text-2xl sm:text-4xl -->
-    <div class="flex text-lg sm:text-2xl text-brand-primary sm:leading-10 font-medium items-center space-x-2">
+    <div class="flex text-lg sm:text-2xl text-brand-primary sm:leading-10 font-medium items-center justify-center space-x-2">
         <div class="w-6">
             <svg viewBox="0 0 198 198" width="100%" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -11,6 +11,6 @@
                 </g>
             </svg>
         </div>
-        <div>winewindow</div>
+        <div class="pb-1">winewindow</div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <Link href="/"
-        class="flex text-2xl sm:text-4xl sm:leading-10 font-medium mb-10 sm:mb-11 items-center space-x-2 text-white cursor-pointer">
+        class="flex text-2xl sm:text-4xl sm:leading-10 font-medium mb-10 sm:mb-11 items-center justify-center space-x-2 text-white cursor-pointer">
         <div class="w-8">
             <svg viewBox="0 0 198 198" width="100%">
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -10,7 +10,7 @@
                 </g>
             </svg>
         </div>
-        <div>winewindow</div>
+        <div class="pb-1">winewindow</div>
     </Link>
 </template>
 
