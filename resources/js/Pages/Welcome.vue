@@ -1,4 +1,5 @@
 <template>
+
     <Head title="Welcome" />
 
     <div class="px-4 sm:px-6 md:px-8 mb-14 sm:mb-20 xl:mb-8 max-w-7xl mx-auto text-gray-800">
@@ -9,26 +10,27 @@
 
                 <Link v-if="$page.props.user" :href="route('dashboard')"
                     class="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
-                    Dashboard
+                Dashboard
                 </Link>
 
                 <template v-else>
                     <Link :href="route('login')"
                         class="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
-                        Log In
+                    Log In
                     </Link>
 
                     <Link v-if="canRegister" :href="route('register')"
                         class="text-base leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
-                        Sign Up
+                    Sign Up
                     </Link>
                 </template>
             </div>
         </div>
         <div class="flex items-center justify-center mt-10 md:flex-row flex-col-reverse flex-col">
             <div class="w-full md:w-1/2 md:pl-10 md:pr-8 text-center md:text-left">
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-800 mb-8 sm:mt-14 sm:mb-10">
-                    Connecting Wineries with Winos
+                <h1
+                    class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-800 mb-8 sm:mt-14 sm:mb-10">
+                    Drink No Wine Past Its Prime
                 </h1>
                 <p class="max-w-screen-lg sm:text-xl sm:leading-8 font-medium text-gray-700 mb-10 sm:mb-11">
                     With the first-ever interactive aging chart, wineries can keep their customers informed
@@ -36,8 +38,8 @@
                 </p>
                 <div class="flex flex-wrap space-y-4 sm:space-y-0 sm:space-x-4 text-center">
                     <a href="/dashboard"
-                        class="w-full sm:w-auto flex-none bg-indigo-600 hover:bg-indigo-500 text-white text-lg leading-6 font-semibold py-3 px-6 border border-transparent rounded focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200"
-                    >Hop into your cellar
+                        class="w-full sm:w-auto flex-none bg-indigo-600 hover:bg-indigo-500 text-white text-lg leading-6 font-semibold py-3 px-6 border border-transparent rounded focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-900 focus:outline-none transition-colors duration-200">Hop
+                        into your cellar
                     </a>
                 </div>
             </div>
@@ -53,7 +55,8 @@
             </div>
         </div>
         <div class="flex max-w-xl mx-auto my-24 justify-between flex-col-reverse md:flex-row">
-            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">First-ever interactive aging chart for wineries.</div>
+            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">First-ever
+                interactive aging chart for wineries.</div>
             <div class="mx-auto">
                 <!-- chart -->
                 <div class="border-gray-300  flex px-4 rounded-3xl space-x-2">
@@ -104,10 +107,13 @@
             </div>
         </div>
         <div class="flex max-w-xl mx-auto my-24 justify-between flex-col-reverse md:flex-row">
-            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">Instantly notify customer of new awards and updates to bottle ratings and notes.</div>
+            <div class="text-center md:text-left mt-8 md:mt-0 sm:text-xl sm:leading-8 font-medium">Instantly notify
+                customer of new awards and updates to bottle ratings and notes.</div>
             <div class="mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
             </div>
         </div>
@@ -116,7 +122,8 @@
     <div class="bg-gray-800 text-white py-24 max-w-full">
         <div class="max-w-7xl mx-auto flex justify-between px-8 flex-col lg:flex-row">
             <div class="space-y-4 md:w-72">
-                <div class="flex text-lg sm:text-2xl sm:leading-10 font-medium items-center justify-center space-x-2 text-white">
+                <div
+                    class="flex text-lg sm:text-2xl sm:leading-10 font-medium items-center justify-center space-x-2 text-white">
                     <div class="w-6">
                         <svg viewBox="0 0 198 198" width="100%" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
