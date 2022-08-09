@@ -5,12 +5,14 @@
         <div class="flex flex-col items-center">
             <div class="mb-6 text-center">
                 <div class="font-black text-4xl text-gray-800">{{ team.name }}</div>
+                <div class="mb-4"><a class="text-md text-gray-400" :href="'https://winewindow.io/' + team.slug" target="_blank">https://winewindow.io/{{
+                        team.slug }}</a></div>
                 <div v-if="hasBottles" class="font-bold text-gray-500">{{ bottles.length }} bottles over
                     {{ vintages.length }} vintages
                 </div>
                 <Link :href="route('bottles.create', team)" id="create-bottle" v-if="$props.team.type === 'winery'"
                     class="inline-block text-sm border border-gray-200 text-gray-500 font-bold rounded-lg px-12 py-4 mt-4">
-                    Add bottle
+                Add bottle
                 </Link>
             </div>
             <div class="w-full max-w-lg">
@@ -22,16 +24,16 @@
                     <div class="pb-4">Here are some wineries you might be interested in</div>
                     <div class="flex justify-between">
                         <Link :href="route('wineries.show', 'cinquain-cellars')">
-                            <div class="border rounded px-8 py-4">
-                                <div>Cinquain Cellars</div>
-                                <div>Paso Robles, California</div>
-                            </div>
+                        <div class="border rounded px-8 py-4">
+                            <div>Cinquain Cellars</div>
+                            <div>Paso Robles, California</div>
+                        </div>
                         </Link>
                         <Link :href="route('wineries.show', 'bajka-wine-company')">
-                            <div class="border rounded px-8 py-4">
-                                <div>Bajka Wine Company</div>
-                                <div>Paso Robles, California</div>
-                            </div>
+                        <div class="border rounded px-8 py-4">
+                            <div>Bajka Wine Company</div>
+                            <div>Paso Robles, California</div>
+                        </div>
                         </Link>
                     </div>
                 </div>
@@ -40,34 +42,28 @@
                         <div>
                             <div class="flex items-center">
                                 Sort by
-<!--                                grid grid-cols-2 divide-x divide-green-500 p-2 border-->
+                                <!--                                grid grid-cols-2 divide-x divide-green-500 p-2 border-->
                                 <div class="mx-2">
                                     <button class="p-2 border border border-r-0 rounded-l"
                                         :class="sortByWinery ? 'bg-indigo-600 border-indigo-600 text-white': 'hover:bg-indigo-600 hover:border-indigo-600 hover:text-white'"
-                                        @click="sortByWinery = true"
-                                    >Winery</button>
+                                        @click="sortByWinery = true">Winery</button>
                                     <button class="p-2 border border border-l-0 rounded-r"
                                         :class="!sortByWinery ? 'bg-indigo-600 border-indigo-600 text-white': 'hover:bg-indigo-600 hover:border-indigo-600 hover:text-white'"
-                                        @click="sortByWinery = false"
-                                    >Varietal</button>
+                                        @click="sortByWinery = false">Varietal</button>
                                 </div>
                             </div>
 
-                            <div
-                                class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                v-show="showSortDropdown"
-                                role="menu" aria-orientation="vertical" aria-labelledby="menu-button"
-                                tabindex="-1">
+                            <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                v-show="showSortDropdown" role="menu" aria-orientation="vertical"
+                                aria-labelledby="menu-button" tabindex="-1">
                                 <div class="py-1" role="none">
                                     <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
                                     <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50"
-                                        role="menuitem"
-                                        tabindex="-1"
-                                        id="menu-item-0" @click="sortByWinery = true">Sort by Winery</a>
+                                        role="menuitem" tabindex="-1" id="menu-item-0" @click="sortByWinery = true">Sort
+                                        by Winery</a>
                                     <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-50"
-                                        role="menuitem"
-                                        tabindex="-1"
-                                        id="menu-item-1" @click="sortByWinery = false">Sort by Varietal</a>
+                                        role="menuitem" tabindex="-1" id="menu-item-1"
+                                        @click="sortByWinery = false">Sort by Varietal</a>
                                 </div>
                             </div>
                         </div>
@@ -103,9 +99,9 @@
                                 </div>
                                 <div v-else :class="isWinery ? 'py-1' : 'py-3'">
                                     <Link :href="route('bottles.show', [bottle.team.slug, bottle])">
-                                        <div :class="'rounded active-bottle rating-' + bottle.rating">
-                                            <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
-                                        </div>
+                                    <div :class="'rounded active-bottle rating-' + bottle.rating">
+                                        <strong>{{ bottle.rating ? bottle.rating : bottle }}</strong>
+                                    </div>
                                     </Link>
                                 </div>
                             </span>
