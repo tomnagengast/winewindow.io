@@ -18,7 +18,8 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ])
     .browserSync({
-        proxy: 'winewindow.io.test',
+        // proxy: 'winewindow.io.test',
+        proxy: 'localhost',
         open: false,
         notify: false,
     })
