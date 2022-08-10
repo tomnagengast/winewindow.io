@@ -21,7 +21,7 @@
                 v-if="searchFocus">
                 <template v-slot:item="{ item }">
                     <div class="py-1">
-                        <Link :href="route('wineries.show', item.id)">
+                        <Link :href="route('wineries.show', item.slug)">
                             <div>{{ item.name }}</div>
                             <div class="text-xs">Paso Robles, CA</div>
                         </Link>
