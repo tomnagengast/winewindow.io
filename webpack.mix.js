@@ -11,21 +11,20 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js("resources/js/app.js", "public/js")
     .vue()
-    .postCss('resources/css/app.css', 'public/css', [
-        require('postcss-import'),
-        require('tailwindcss'),
+    .postCss("resources/css/app.css", "public/css", [
+        require("postcss-import"),
+        require("tailwindcss"),
     ])
     .browserSync({
-        // proxy: 'winewindow.io.test',
-        proxy: 'localhost',
+        proxy: "localhost",
         open: false,
         notify: false,
     })
     // .extract() // uncomment vendor.js and manifest.js in app.blade.php
-    .sourceMaps(true, 'source-map')
-    .webpackConfig(require('./webpack.config'))
+    .sourceMaps(true, "source-map")
+    .webpackConfig(require("./webpack.config"))
     .version();
 
 mix.options({
