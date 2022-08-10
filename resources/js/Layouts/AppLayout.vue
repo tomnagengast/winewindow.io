@@ -5,7 +5,6 @@
             <!--<meta property="og:image" content="https://www.apple.com/v/iphone/home/t/images/home/og.png?201610171354" />-->
         </Head>
 
-
         <jet-banner/>
 
         <div class="min-h-screen">
