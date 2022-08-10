@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Bottle">
+    <app-layout :title="bottle.vintage + ' ' + bottle.varietal + ' - ' + bottle.winery">
         <template #header></template>
 
 

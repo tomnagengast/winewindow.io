@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Wineries">
+    <app-layout :title="team.name">
         <template #header></template>
 
         <div class="flex flex-col items-center">
