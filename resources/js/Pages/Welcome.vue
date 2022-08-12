@@ -137,6 +137,7 @@
                     <div class="pb-1">winewindow</div>
                 </div>
                 <div>Wine Window is the first-ever interactive aging chart for wineries.</div>
+                <div>Cheers! 🍷</div>
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
