@@ -14,9 +14,9 @@ Route::get('/auth/google/redirect', [AuthController::class, 'googleRedirect'])->
 Route::get('/auth/google/callback', [AuthController::class, 'googleCallback'])->name('auth.google.callback');
 
 Route::get('wineries', [WineryController::class, 'index'])->name('wineries.index');
-Route::get('{winery}', [WineryController::class, 'show'])->name('wineries.show');
+Route::get('{winery}', [WineryController::class, 'show'])->name('wineries.show')->middleware('iframe');
 
-Route::get('{winery}/{bottle}', [BottleController::class, 'show'])->name('bottles.show');
+Route::get('{winery}/{bottle}', [BottleController::class, 'show'])->name('bottles.show')->middleware('iframe');
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('{winery}/bottles/create', [BottleController::class, 'create'])->name('bottles.create');
     Route::post('{winery}/bottles/store', [BottleController::class, 'store'])->name('bottles.store');
