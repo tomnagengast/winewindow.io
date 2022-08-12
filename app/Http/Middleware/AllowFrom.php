@@ -22,7 +22,7 @@ class AllowFrom
         if ($request->routeIs('*.show')) {
             $response->header('X-Frame-Options', 'ALLOW-FROM https://bajkawine.com https://cinquaincellars.com');
         } else {
-            $response->header('X-Frame-Options', 'ALLOW-FROM SAMEORIGIN');
+            $response->header('X-Frame-Options', 'SAMEORIGIN');
         }
 
         return $response;
