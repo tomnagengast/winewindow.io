@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class XFrameOptions
+class AllowFrom
 {
     /**
      * Handle an incoming request.
@@ -19,8 +19,11 @@ class XFrameOptions
 
         $response = $next($request);
 
-        $response->header('X-Frame-Options', 'ALLOW-FROM https://bajkawine.com https://cinquaincellars.com');
-//        $response->header('X-Frame-Options', 'ALLOW-FROM SAMEORIGIN');
+        if ($request->routeIs('*.show')) {
+            $response->header('X-Frame-Options', 'ALLOW-FROM https://bajkawine.com https://cinquaincellars.com');
+        } else {
+            $response->header('X-Frame-Options', 'ALLOW-FROM SAMEORIGIN');
+        }
 
         return $response;
     }
