@@ -21,9 +21,18 @@ class WineryController extends Controller
             'wineries' => $wineries,
         ]);
     }
+
     public function show(Team $winery)
     {
         return Inertia::render('Wineries/Show', [
+            'winery' => $winery,
+            'bottles' => $winery->ownedBottles()->get()
+        ]);
+    }
+
+    public function embed(Team $winery)
+    {
+        return Inertia::render('Wineries/Embed', [
             'winery' => $winery,
             'bottles' => $winery->ownedBottles()->get()
         ]);

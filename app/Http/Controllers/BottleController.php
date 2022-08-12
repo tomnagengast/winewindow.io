@@ -75,6 +75,22 @@ class BottleController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param Bottle $bottle
+     */
+    public function embed(Team $winery, Bottle $bottle)
+    {
+        $bottle = Bottle::with('team')->where('slug', $bottle->slug)->where('winery', $winery->name)->first();
+
+        return Inertia::render('Bottles/Embed', [
+            'bottle' => $bottle,
+            'following' => auth()->user() ?
+                auth()->user()->currentTeam->followedBottles()->get() : null,
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param Bottle $bottle

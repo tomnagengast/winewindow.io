@@ -19,7 +19,7 @@ class AllowFrom
 
         $response = $next($request);
 
-        if ($request->routeIs('*.show')) {
+        if ($request->routeIs('*.embed')) {
             $response->header('X-Frame-Options', 'ALLOW-FROM https://bajkawine.com https://cinquaincellars.com');
         } else {
             $response->header('X-Frame-Options', 'SAMEORIGIN');
